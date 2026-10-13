@@ -397,6 +397,10 @@ function setupSeasonTabs() {
         summerPanel.style.width = '67%';
         winterPanel.style.width = '33%';
       }
+    } else {
+      // Mobile: switch active visible card smoothly
+      summerPanel.classList.remove('hidden');
+      winterPanel.classList.add('hidden');
     }
 
     // Active button styling
@@ -418,6 +422,10 @@ function setupSeasonTabs() {
         summerPanel.style.width = '33%';
         winterPanel.style.width = '67%';
       }
+    } else {
+      // Mobile: switch active visible card smoothly
+      summerPanel.classList.add('hidden');
+      winterPanel.classList.remove('hidden');
     }
 
     // Active button styling
@@ -449,7 +457,16 @@ function setupSeasonTabs() {
     if (window.innerWidth < 1024) {
       summerPanel.style.width = '100%';
       winterPanel.style.width = '100%';
+      if (currentActive === 'summer') {
+        summerPanel.classList.remove('hidden');
+        winterPanel.classList.add('hidden');
+      } else {
+        summerPanel.classList.add('hidden');
+        winterPanel.classList.remove('hidden');
+      }
     } else {
+      summerPanel.classList.remove('hidden');
+      winterPanel.classList.remove('hidden');
       if (currentActive === 'summer') {
         summerPanel.style.width = '67%';
         winterPanel.style.width = '33%';
