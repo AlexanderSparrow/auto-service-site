@@ -13,7 +13,7 @@ const CAR_DATA = {
     tag: 'Седан',
     volume: 4.4,
     filter: 850,
-    img: '/images/cars/toyota.jpg',
+    img: '/images/cars/toyota.webp',
     recommendation: '0W-20 / 5W-30 SP/GF-6'
   },
   bmw: {
@@ -22,7 +22,7 @@ const CAR_DATA = {
     tag: 'Премиум',
     volume: 6.5,
     filter: 1300,
-    img: '/images/cars/bmw.jpg',
+    img: '/images/cars/bmw.webp',
     recommendation: '5W-30 BMW Longlife-04'
   },
   audi: {
@@ -31,7 +31,7 @@ const CAR_DATA = {
     tag: 'Кроссовер',
     volume: 6.8,
     filter: 1400,
-    img: '/images/cars/audi.jpg',
+    img: '/images/cars/audi.webp',
     recommendation: '5W-30 VW 504.00 / 507.00'
   },
   kia: {
@@ -40,7 +40,7 @@ const CAR_DATA = {
     tag: 'Кроссовер',
     volume: 4.0,
     filter: 750,
-    img: '/images/cars/kia.jpg',
+    img: '/images/cars/kia.webp',
     recommendation: '5W-30 ACEA A5/B5 / C2'
   }
 };
@@ -547,14 +547,14 @@ function setupAntifakeSlider() {
 
   const DATA = {
     oil: {
-      origImg: '/images/antifake/oil-macro.jpg',
-      fakeImg: '/images/antifake/oil-macro.jpg',
+      origImg: '/images/antifake/oil-macro.webp',
+      fakeImg: '/images/antifake/oil-macro.webp',
       fakeDesc: 'Индустриальная база без присадок. При температуре 90°C теряет масляную пленку, вызывая задиры на шейках коленвала и залегание колец за 3 000 км.',
       origDesc: '100% синтетическая база с пакетом присадок Infineum. Входной контроль спектрометром каждой бочки. Официальный допуск автопроизводителя.'
     },
     filter: {
-      origImg: '/images/antifake/filter-macro.jpg',
-      fakeImg: '/images/antifake/filter-macro.jpg',
+      origImg: '/images/antifake/filter-macro.webp',
+      fakeImg: '/images/antifake/filter-macro.webp',
       fakeDesc: 'Рыхлая бумага без смоляной пропитки и деформированный резиновый клапан. На морозе клапан дубеет, пропуская неочищенный шлам напрямую в масляные каналы.',
       origDesc: 'Плотное синтетическое микроволокно Mann / Mahle. Эластичный силиконовый обратный клапан сохраняет герметичность до -45°C.'
     }

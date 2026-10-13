@@ -126,8 +126,8 @@
             <!-- Изображение автомобиля -->
             <div id="hero-car-wrapper" class="relative transition-transform duration-200 ease-out">
               <img 
-                id="hero-car-img"
-                src="/images/hero-car-engine.jpg" 
+                id="hero-car-img" fetchpriority="high" decoding="async"
+                src="/images/hero-car-engine.webp" 
                 alt="Рентген-вид автомобиля и двигателя" 
                 class="w-full h-auto object-contain rounded-2xl drop-shadow-[0_25px_40px_rgba(0,0,0,0.9)] relative z-10"
               />
@@ -246,7 +246,7 @@
           <!-- Car Card: Toyota Camry -->
           <div class="car-select-card p-4 rounded-2xl border-2 border-orange-500 bg-orange-500/10 glow-orange-sm cursor-pointer transition-all duration-300 group hover:scale-[1.02] flex flex-col justify-between" data-car="toyota">
             <div class="relative overflow-hidden rounded-xl bg-black/60 mb-3 aspect-[16/10] flex items-center justify-center">
-              <img src="/images/cars/toyota.jpg" alt="Toyota Camry" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <img loading="lazy" decoding="async" src="/images/cars/toyota.webp" alt="Toyota Camry" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
               <span class="absolute top-2 left-2 text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-black/80 text-orange-400 border border-orange-500/30">Седан</span>
             </div>
             <div>
@@ -259,7 +259,7 @@
           <!-- Car Card: BMW 5 Series -->
           <div class="car-select-card p-4 rounded-2xl border-2 border-white/10 bg-black/40 cursor-pointer transition-all duration-300 group hover:scale-[1.02] hover:border-orange-500/40 flex flex-col justify-between" data-car="bmw">
             <div class="relative overflow-hidden rounded-xl bg-black/60 mb-3 aspect-[16/10] flex items-center justify-center">
-              <img src="/images/cars/bmw.jpg" alt="BMW 5 Series" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <img loading="lazy" decoding="async" src="/images/cars/bmw.webp" alt="BMW 5 Series" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
               <span class="absolute top-2 left-2 text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-black/80 text-blue-400 border border-blue-500/30">Премиум</span>
             </div>
             <div>
@@ -272,7 +272,7 @@
           <!-- Car Card: Audi Q7 / Q5 -->
           <div class="car-select-card p-4 rounded-2xl border-2 border-white/10 bg-black/40 cursor-pointer transition-all duration-300 group hover:scale-[1.02] hover:border-orange-500/40 flex flex-col justify-between" data-car="audi">
             <div class="relative overflow-hidden rounded-xl bg-black/60 mb-3 aspect-[16/10] flex items-center justify-center">
-              <img src="/images/cars/audi.jpg" alt="Audi Q7" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <img loading="lazy" decoding="async" src="/images/cars/audi.webp" alt="Audi Q7" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
               <span class="absolute top-2 left-2 text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-black/80 text-amber-400 border border-amber-500/30">Кроссовер</span>
             </div>
             <div>
@@ -285,7 +285,7 @@
           <!-- Car Card: Kia Sportage -->
           <div class="car-select-card p-4 rounded-2xl border-2 border-white/10 bg-black/40 cursor-pointer transition-all duration-300 group hover:scale-[1.02] hover:border-orange-500/40 flex flex-col justify-between" data-car="kia">
             <div class="relative overflow-hidden rounded-xl bg-black/60 mb-3 aspect-[16/10] flex items-center justify-center">
-              <img src="/images/cars/kia.jpg" alt="Kia Sportage" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <img loading="lazy" decoding="async" src="/images/cars/kia.webp" alt="Kia Sportage" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
               <span class="absolute top-2 left-2 text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-black/80 text-purple-400 border border-purple-500/30">SUV</span>
             </div>
             <div>
@@ -308,7 +308,7 @@
           <div class="p-5 rounded-2xl bg-black/60 border border-white/10 space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-center gap-5">
               <div class="w-28 sm:w-36 aspect-[16/10] rounded-xl overflow-hidden bg-black shrink-0 border border-white/10 shadow-lg">
-                <img id="calc-active-car-img" src="/images/cars/toyota.jpg" alt="Выбранный автомобиль" class="w-full h-full object-cover">
+                <img loading="lazy" decoding="async" id="calc-active-car-img" src="/images/cars/toyota.webp" alt="Выбранный автомобиль" class="w-full h-full object-cover">
               </div>
               <div class="flex-1">
                 <div class="text-[10px] uppercase tracking-widest text-orange-400 font-extrabold">Выбранный автомобиль:</div>
@@ -559,7 +559,7 @@
             
             <!-- Слой 1 (Справа / Базовый): Оригинал PROMOTORS -->
             <div class="absolute inset-0 w-full h-full">
-              <img id="slider-img-orig" src="/images/antifake/oil-macro.jpg" alt="Оригинал PROMOTORS" class="w-full h-full object-cover">
+              <img loading="lazy" decoding="async" id="slider-img-orig" src="/images/antifake/oil-macro.webp" alt="Оригинал PROMOTORS" class="w-full h-full object-cover">
               
               <!-- Бейдж оригинала -->
               <div class="absolute top-4 right-4 z-10 bg-black/80 backdrop-blur-md border border-emerald-500/40 text-emerald-400 text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-lg flex items-center gap-1.5 shadow-lg">
@@ -570,7 +570,7 @@
 
             <!-- Слой 2 (Слева / Обрезаемый клипом): Контрафакт с рынка -->
             <div id="slider-fake-layer" class="absolute inset-0 w-full h-full overflow-hidden" style="clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);">
-              <img id="slider-img-fake" src="/images/antifake/oil-macro.jpg" alt="Контрафакт" class="w-full h-full object-cover grayscale contrast-125 brightness-75">
+              <img loading="lazy" decoding="async" id="slider-img-fake" src="/images/antifake/oil-macro.webp" alt="Контрафакт" class="w-full h-full object-cover grayscale contrast-125 brightness-75">
               
               <!-- Красный полупрозрачный градиент для опасной зоны -->
               <div class="absolute inset-0 bg-red-950/20 pointer-events-none"></div>
@@ -710,8 +710,8 @@
           <div>
             <!-- Изображение с эффектом зума -->
             <div class="relative aspect-[16/11] overflow-hidden bg-black">
-              <img 
-                src="/images/services/oil.jpg" 
+              <img loading="lazy" decoding="async" 
+                src="/images/services/oil.webp" 
                 alt="Экспресс-замена масла в двигателе" 
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 brightness-90 group-hover:brightness-100"
               />
@@ -766,8 +766,8 @@
           <div>
             <!-- Изображение с эффектом зума -->
             <div class="relative aspect-[16/11] overflow-hidden bg-black">
-              <img 
-                src="/images/services/maintenance.jpg" 
+              <img loading="lazy" decoding="async" 
+                src="/images/services/maintenance.webp" 
                 alt="Регламентное ТО и компьютерная диагностика" 
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 brightness-90 group-hover:brightness-100"
               />
@@ -822,8 +822,8 @@
           <div>
             <!-- Изображение с эффектом зума -->
             <div class="relative aspect-[16/11] overflow-hidden bg-black">
-              <img 
-                src="/images/services/tires.jpg" 
+              <img loading="lazy" decoding="async" 
+                src="/images/services/tires.webp" 
                 alt="3D лазерный шиномонтаж и балансировка" 
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 brightness-90 group-hover:brightness-100"
               />
@@ -878,8 +878,8 @@
           <div>
             <!-- Изображение с эффектом зума -->
             <div class="relative aspect-[16/11] overflow-hidden bg-black">
-              <img 
-                src="/images/services/season.jpg" 
+              <img loading="lazy" decoding="async" 
+                src="/images/services/season.webp" 
                 alt="Сезонный сервис и отель для шин" 
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 brightness-90 group-hover:brightness-100"
               />
@@ -971,8 +971,8 @@
         <!-- КАДР 1: Бесконтактный заезд и защита салона -->
         <div class="journey-slide w-[84vw] max-w-[700px] h-[450px] rounded-3xl glass-card-promotors border border-white/10 overflow-hidden flex flex-col sm:flex-row shadow-2xl relative shrink-0 group">
           <div class="sm:w-7/12 h-52 sm:h-full relative overflow-hidden bg-black shrink-0">
-            <img 
-              src="/images/journey/journey_01.jpg" 
+            <img loading="lazy" decoding="async" 
+              src="/images/journey/journey_01.webp" 
               alt="Защитные чехлы на руль и сиденье" 
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95"
             />
@@ -1001,8 +1001,8 @@
         <!-- КАДР 2: Прозрачный процесс и видеотрансляция -->
         <div class="journey-slide w-[84vw] max-w-[700px] h-[450px] rounded-3xl glass-card-promotors border border-white/10 overflow-hidden flex flex-col sm:flex-row shadow-2xl relative shrink-0 group">
           <div class="sm:w-7/12 h-52 sm:h-full relative overflow-hidden bg-black shrink-0">
-            <img 
-              src="/images/journey/journey_02.jpg" 
+            <img loading="lazy" decoding="async" 
+              src="/images/journey/journey_02.webp" 
               alt="Прямая трансляция из ремзоны в смартфон" 
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95"
             />
@@ -1031,8 +1031,8 @@
         <!-- КАДР 3: Лазерный контроль и точная протяжка -->
         <div class="journey-slide w-[84vw] max-w-[700px] h-[450px] rounded-3xl glass-card-promotors border border-white/10 overflow-hidden flex flex-col sm:flex-row shadow-2xl relative shrink-0 group">
           <div class="sm:w-7/12 h-52 sm:h-full relative overflow-hidden bg-black shrink-0">
-            <img 
-              src="/images/journey/journey_03.jpg" 
+            <img loading="lazy" decoding="async" 
+              src="/images/journey/journey_03.webp" 
               alt="3D лазерная балансировка и динамометрический ключ" 
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95"
             />
@@ -1061,8 +1061,8 @@
         <!-- КАДР 4: Выдача, сервисная книжка и гарантия -->
         <div class="journey-slide w-[84vw] max-w-[700px] h-[450px] rounded-3xl glass-card-promotors border border-white/10 overflow-hidden flex flex-col sm:flex-row shadow-2xl relative shrink-0 group">
           <div class="sm:w-7/12 h-52 sm:h-full relative overflow-hidden bg-black shrink-0">
-            <img 
-              src="/images/journey/journey_04.jpg" 
+            <img loading="lazy" decoding="async" 
+              src="/images/journey/journey_04.webp" 
               alt="Выдача ключей и паспорт гарантии" 
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95"
             />
@@ -1171,7 +1171,7 @@
 
             <!-- Контейнер с силуэтом и хотспотами -->
             <div class="relative w-full max-w-lg aspect-[21/9] rounded-2xl bg-black/60 border border-white/10 p-2 sm:p-3 flex items-center justify-center overflow-hidden">
-              <img src="/images/hero-car-engine.jpg" alt="Схема летней проверки" class="w-full h-full object-cover rounded-xl opacity-40 brightness-75">
+              <img loading="lazy" decoding="async" src="/images/hero-car-engine.webp" alt="Схема летней проверки" class="w-full h-full object-cover rounded-xl opacity-40 brightness-75">
               
               <!-- Hotspot 1: Климат-контроль (лобовое/капот) -->
               <div class="absolute top-[35%] left-[45%] group/spot cursor-pointer" data-spot="ac">
@@ -1279,7 +1279,7 @@
 
             <!-- Контейнер с силуэтом и хотспотами -->
             <div class="relative w-full max-w-lg aspect-[21/9] rounded-2xl bg-black/60 border border-white/10 p-2 sm:p-3 flex items-center justify-center overflow-hidden">
-              <img src="/images/hero-car-engine.jpg" alt="Схема зимней проверки" class="w-full h-full object-cover rounded-xl opacity-40 brightness-75 hue-rotate-180">
+              <img loading="lazy" decoding="async" src="/images/hero-car-engine.webp" alt="Схема зимней проверки" class="w-full h-full object-cover rounded-xl opacity-40 brightness-75 hue-rotate-180">
               
               <!-- Hotspot 1: АКБ и стартер (подкапотное) -->
               <div class="absolute top-[38%] left-[30%] group/spot cursor-pointer" data-spot="battery">

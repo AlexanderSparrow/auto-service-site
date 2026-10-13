@@ -153,13 +153,13 @@ html.lenis, html.lenis body {
 
 /* Season Forest Background Overlays */
 .bg-forest-summer {
-  background-image: url('/images/seasons/summer-forest.jpg');
+  background-image: url('/images/seasons/summer-forest.webp');
   background-size: cover;
   background-position: center;
 }
 
 .bg-forest-winter {
-  background-image: url('/images/seasons/winter-forest.jpg');
+  background-image: url('/images/seasons/winter-forest.webp');
   background-size: cover;
   background-position: center;
 }
