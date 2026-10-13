@@ -472,9 +472,14 @@ function setupBookingModal() {
   const srvInput = document.getElementById('modal-service-input');
   const bookCalcBtn = document.getElementById('calc-book-btn');
 
-  window.openBooking = function (serviceName = 'Экспресс-замена масла') {
+  const slotPost = document.getElementById('modal-slot-post');
+  const slotTime = document.getElementById('modal-slot-time');
+
+  window.openBooking = function (serviceName = 'Экспресс-замена масла', timeEstimate = '25 мин', postStatus = 'Пост №1 (Свободен)') {
     if (!modal) return;
     if (srvInput) srvInput.value = serviceName;
+    if (slotPost) slotPost.textContent = postStatus;
+    if (slotTime) slotTime.textContent = `Время работы: ~${timeEstimate}`;
     modal.classList.remove('hidden');
     modal.classList.add('flex');
     document.body.style.overflow = 'hidden';
@@ -503,7 +508,9 @@ function setupBookingModal() {
   document.querySelectorAll('.open-modal-trigger').forEach((btn) => {
     btn.addEventListener('click', () => {
       const srv = btn.dataset.service || 'Быстрая запись на СТО';
-      window.openBooking(srv);
+      const timeEst = btn.dataset.time || '30 мин';
+      const postSt = btn.dataset.post || 'Пост свободен';
+      window.openBooking(srv, timeEst, postSt);
     });
   });
 
@@ -511,7 +518,7 @@ function setupBookingModal() {
     bookCalcBtn.addEventListener('click', () => {
       const car = CAR_DATA[currentSelectedCar];
       const total = document.getElementById('calc-total')?.textContent || '';
-      window.openBooking(`Расчет: ${car.name} (${car.sub}) — ${total} (Работа 0 ₽)`);
+      window.openBooking(`Расчет: ${car.name} (${car.sub}) — ${total} (Работа 0 ₽)`, '25 мин', 'Пост №1 (Экспресс-замена масла)');
     });
   }
 

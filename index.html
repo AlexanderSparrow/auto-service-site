@@ -706,7 +706,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         
         <!-- Карточка 1: Экспресс-замена масла -->
-        <div class="glass-card-promotors rounded-3xl overflow-hidden flex flex-col justify-between reveal-card group hover:border-orange-500/50 transition-all duration-500">
+        <div class="glass-card-promotors rounded-3xl overflow-hidden flex flex-col justify-between reveal-card group hover:border-orange-500/50 transition-all duration-500 bg-black/50 border border-white/10">
           <div>
             <!-- Изображение с эффектом зума -->
             <div class="relative aspect-[16/11] overflow-hidden bg-black">
@@ -715,19 +715,29 @@
                 alt="Экспресс-замена масла в двигателе" 
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 brightness-90 group-hover:brightness-100"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#0d111a] via-[#0d111a]/30 to-transparent"></div>
-              <span class="absolute top-3 left-3 text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-emerald-500/90 text-black shadow-lg">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#090d14] via-[#090d14]/30 to-transparent"></div>
+              
+              <span class="absolute top-3 left-3 text-[10px] font-black uppercase px-2.5 py-1 rounded-full bg-emerald-500 text-black shadow-lg">
                 Работа 0 ₽
               </span>
-              <span class="absolute top-3 right-3 text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-black/80 text-orange-400 border border-orange-500/30">
-                25 минут
+              <span class="absolute top-3 right-3 text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-black/80 text-orange-400 border border-orange-500/30 backdrop-blur-md flex items-center gap-1">
+                <i data-lucide="clock" class="w-3 h-3 text-orange-400"></i> 25 минут
               </span>
+
+              <!-- Live статус окна записи -->
+              <div class="absolute bottom-2.5 left-3 right-3 z-10 bg-black/85 backdrop-blur-md border border-white/10 rounded-xl px-2.5 py-1.5 flex items-center justify-between text-[11px]">
+                <span class="flex items-center gap-1.5 text-slate-300">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Пост №1 свободен
+                </span>
+                <span class="text-orange-400 font-bold">Окно: сегодня 16:30</span>
+              </div>
             </div>
 
-            <div class="p-6 pt-3">
+            <div class="p-6 pt-4">
               <div class="flex items-center gap-2 mb-2 text-orange-400 text-xs font-bold uppercase tracking-wider">
                 <i data-lucide="droplets" class="w-4 h-4"></i>
-                <span>Флагман сети</span>
+                <span>Флагман техцентра</span>
               </div>
               <h3 class="text-xl font-black uppercase text-white mb-2 group-hover:text-orange-400 transition-colors">
                 Экспресс-замена масла
@@ -736,7 +746,7 @@
                 Слив или вакуумная откачка за 25 мин. Оригинальные масла из бочек с сертификатами (Motul, Liqui Moly, Mobil, Лукойл).
               </p>
               
-              <ul class="text-xs space-y-1.5 text-slate-300 py-3 border-y border-white/5">
+              <ul class="text-xs space-y-2 text-slate-300 py-3 border-y border-white/5">
                 <li class="flex items-center gap-2">
                   <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i> Замена масляного фильтра включена
                 </li>
@@ -744,7 +754,7 @@
                   <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i> Снятие защиты картера — 0 ₽
                 </li>
                 <li class="flex items-center gap-2">
-                  <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i> Сброс интервала ТО в ЭБУ
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i> Сброс сервисного интервала в ЭБУ
                 </li>
               </ul>
             </div>
@@ -752,17 +762,18 @@
 
           <div class="p-6 pt-0">
             <div class="flex items-center justify-between mb-3 text-xs">
-              <span class="text-slate-400">Стоимость работы:</span>
-              <span class="text-emerald-400 font-extrabold text-sm">0 ₽ (Бесплатно)</span>
+              <span class="text-slate-400">Работа мастера:</span>
+              <span class="text-emerald-400 font-black text-sm">0 ₽ (Бесплатно)</span>
             </div>
-            <button class="open-modal-trigger promotors-btn-orange w-full text-xs text-center cursor-pointer" data-service="Экспресс-замена масла за 0 ₽">
-              Записаться за 0 ₽
+            <button class="open-modal-trigger promotors-btn-orange w-full text-xs text-center cursor-pointer flex items-center justify-center gap-2" data-service="Экспресс-замена масла (Окно: сегодня 16:30)" data-time="25 мин" data-post="Пост №1 (Свободен)">
+              <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+              Занять слот на 16:30 (0 ₽)
             </button>
           </div>
         </div>
 
         <!-- Карточка 2: Регламентное ТО -->
-        <div class="glass-card-promotors rounded-3xl overflow-hidden flex flex-col justify-between reveal-card group hover:border-blue-500/50 transition-all duration-500">
+        <div class="glass-card-promotors rounded-3xl overflow-hidden flex flex-col justify-between reveal-card group hover:border-blue-500/50 transition-all duration-500 bg-black/50 border border-white/10">
           <div>
             <!-- Изображение с эффектом зума -->
             <div class="relative aspect-[16/11] overflow-hidden bg-black">
@@ -771,19 +782,29 @@
                 alt="Регламентное ТО и компьютерная диагностика" 
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 brightness-90 group-hover:brightness-100"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#0d111a] via-[#0d111a]/30 to-transparent"></div>
-              <span class="absolute top-3 left-3 text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-blue-500/90 text-white shadow-lg">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#090d14] via-[#090d14]/30 to-transparent"></div>
+              
+              <span class="absolute top-3 left-3 text-[10px] font-black uppercase px-2.5 py-1 rounded-full bg-blue-500 text-white shadow-lg">
                 36 точек ГОСТ
               </span>
-              <span class="absolute top-3 right-3 text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-black/80 text-blue-400 border border-blue-500/30">
-                Гарантия дилера
+              <span class="absolute top-3 right-3 text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-black/80 text-blue-400 border border-blue-500/30 backdrop-blur-md flex items-center gap-1">
+                <i data-lucide="clock" class="w-3 h-3 text-blue-400"></i> 45 минут
               </span>
+
+              <!-- Live статус окна записи -->
+              <div class="absolute bottom-2.5 left-3 right-3 z-10 bg-black/85 backdrop-blur-md border border-white/10 rounded-xl px-2.5 py-1.5 flex items-center justify-between text-[11px]">
+                <span class="flex items-center gap-1.5 text-slate-300">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Пост №2 свободен
+                </span>
+                <span class="text-blue-400 font-bold">Окно: сегодня 17:15</span>
+              </div>
             </div>
 
-            <div class="p-6 pt-3">
+            <div class="p-6 pt-4">
               <div class="flex items-center gap-2 mb-2 text-blue-400 text-xs font-bold uppercase tracking-wider">
                 <i data-lucide="clipboard-check" class="w-4 h-4"></i>
-                <span>Комплекс</span>
+                <span>Инспекция систем</span>
               </div>
               <h3 class="text-xl font-black uppercase text-white mb-2 group-hover:text-blue-400 transition-colors">
                 Регламентное ТО
@@ -792,7 +813,7 @@
                 Техническое обслуживание по картам завода-изготовителя. Компьютерный опрос ЭБУ, проверка подвески, свечей и тормозов.
               </p>
               
-              <ul class="text-xs space-y-1.5 text-slate-300 py-3 border-y border-white/5">
+              <ul class="text-xs space-y-2 text-slate-300 py-3 border-y border-white/5">
                 <li class="flex items-center gap-2">
                   <i data-lucide="check" class="w-3.5 h-3.5 text-blue-400"></i> Сканирование ошибок OBD2
                 </li>
@@ -800,7 +821,7 @@
                   <i data-lucide="check" class="w-3.5 h-3.5 text-blue-400"></i> Проверка износа колодок и дисков
                 </li>
                 <li class="flex items-center gap-2">
-                  <i data-lucide="check" class="w-3.5 h-3.5 text-blue-400"></i> Тестирование плотности жидкостей
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-blue-400"></i> Тестирование плотности антифриза и тормозной жидкости
                 </li>
               </ul>
             </div>
@@ -811,14 +832,15 @@
               <span class="text-slate-400">Инспекция от:</span>
               <span class="text-white font-extrabold text-sm">1 490 ₽</span>
             </div>
-            <button class="open-modal-trigger promotors-btn-orange w-full text-xs text-center cursor-pointer !bg-blue-600 hover:!bg-blue-500 shadow-blue-500/30" data-service="Регламентное ТО по ГОСТ">
-              Записаться на ТО
+            <button class="open-modal-trigger promotors-btn-orange w-full text-xs text-center cursor-pointer !bg-blue-600 hover:!bg-blue-500 shadow-blue-500/30 flex items-center justify-center gap-2" data-service="Регламентное ТО по ГОСТ (Окно: сегодня 17:15)" data-time="45 мин" data-post="Пост №2 (Диагностический стенд)">
+              <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+              Занять слот на 17:15
             </button>
           </div>
         </div>
 
         <!-- Карточка 3: 3D-Шиномонтаж -->
-        <div class="glass-card-promotors rounded-3xl overflow-hidden flex flex-col justify-between reveal-card group hover:border-purple-500/50 transition-all duration-500">
+        <div class="glass-card-promotors rounded-3xl overflow-hidden flex flex-col justify-between reveal-card group hover:border-purple-500/50 transition-all duration-500 bg-black/50 border border-white/10">
           <div>
             <!-- Изображение с эффектом зума -->
             <div class="relative aspect-[16/11] overflow-hidden bg-black">
@@ -827,36 +849,46 @@
                 alt="3D лазерный шиномонтаж и балансировка" 
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 brightness-90 group-hover:brightness-100"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#0d111a] via-[#0d111a]/30 to-transparent"></div>
-              <span class="absolute top-3 left-3 text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-purple-500/90 text-white shadow-lg">
-                Hofmann 3D
+              <div class="absolute inset-0 bg-gradient-to-t from-[#090d14] via-[#090d14]/30 to-transparent"></div>
+              
+              <span class="absolute top-3 left-3 text-[10px] font-black uppercase px-2.5 py-1 rounded-full bg-purple-500 text-white shadow-lg">
+                Hofmann Laser
               </span>
-              <span class="absolute top-3 right-3 text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-black/80 text-purple-400 border border-purple-500/30">
-                R14 – R24
+              <span class="absolute top-3 right-3 text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-black/80 text-purple-400 border border-purple-500/30 backdrop-blur-md flex items-center gap-1">
+                <i data-lucide="clock" class="w-3 h-3 text-purple-400"></i> 35 минут
               </span>
+
+              <!-- Live статус окна записи -->
+              <div class="absolute bottom-2.5 left-3 right-3 z-10 bg-black/85 backdrop-blur-md border border-white/10 rounded-xl px-2.5 py-1.5 flex items-center justify-between text-[11px]">
+                <span class="flex items-center gap-1.5 text-slate-300">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Пост №4 свободен
+                </span>
+                <span class="text-purple-400 font-bold">Окно: сегодня 18:00</span>
+              </div>
             </div>
 
-            <div class="p-6 pt-3">
+            <div class="p-6 pt-4">
               <div class="flex items-center gap-2 mb-2 text-purple-400 text-xs font-bold uppercase tracking-wider">
                 <i data-lucide="disc-3" class="w-4 h-4"></i>
-                <span>Колесный пост</span>
+                <span>Колесный пост R14–R24</span>
               </div>
               <h3 class="text-xl font-black uppercase text-white mb-2 group-hover:text-purple-400 transition-colors">
                 3D-Шиномонтаж
               </h3>
               <p class="text-xs text-slate-400 leading-relaxed mb-4">
-                Лазерная юстировка дисбаланса, пластиковые накладки станков без царапин на дисках, работа с низким профилем и RunFlat.
+                Лазерная юстировка дисбаланса, пластиковые накладки станков без царапин на дисках, бережная работа с низким профилем и RunFlat.
               </p>
               
-              <ul class="text-xs space-y-1.5 text-slate-300 py-3 border-y border-white/5">
+              <ul class="text-xs space-y-2 text-slate-300 py-3 border-y border-white/5">
                 <li class="flex items-center gap-2">
-                  <i data-lucide="check" class="w-3.5 h-3.5 text-purple-400"></i> Автоматическая мойка колес
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-purple-400"></i> Мойка колес в автоматической камере
                 </li>
                 <li class="flex items-center gap-2">
                   <i data-lucide="check" class="w-3.5 h-3.5 text-purple-400"></i> Протяжка динамометрическим ключом
                 </li>
                 <li class="flex items-center gap-2">
-                  <i data-lucide="check" class="w-3.5 h-3.5 text-purple-400"></i> Фирменные пакеты в подарок
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-purple-400"></i> Меднение ступиц и пакеты в подарок
                 </li>
               </ul>
             </div>
@@ -867,14 +899,15 @@
               <span class="text-slate-400">Комплекс от:</span>
               <span class="text-white font-extrabold text-sm">2 200 ₽ (4 шт)</span>
             </div>
-            <button class="open-modal-trigger promotors-btn-orange w-full text-xs text-center cursor-pointer !bg-purple-600 hover:!bg-purple-500 shadow-purple-500/30" data-service="3D-Шиномонтаж Hofmann">
-              Выбрать шиномонтаж
+            <button class="open-modal-trigger promotors-btn-orange w-full text-xs text-center cursor-pointer !bg-purple-600 hover:!bg-purple-500 shadow-purple-500/30 flex items-center justify-center gap-2" data-service="3D-Шиномонтаж Hofmann (Окно: сегодня 18:00)" data-time="35 мин" data-post="Пост №4 (Лазерный шиномонтаж)">
+              <i data-lucide="disc-3" class="w-3.5 h-3.5"></i>
+              Занять слот на 18:00
             </button>
           </div>
         </div>
 
         <!-- Карточка 4: Сезонный сервис & Хранение -->
-        <div class="glass-card-promotors rounded-3xl overflow-hidden flex flex-col justify-between reveal-card group hover:border-amber-500/50 transition-all duration-500">
+        <div class="glass-card-promotors rounded-3xl overflow-hidden flex flex-col justify-between reveal-card group hover:border-amber-500/50 transition-all duration-500 bg-black/50 border border-white/10">
           <div>
             <!-- Изображение с эффектом зума -->
             <div class="relative aspect-[16/11] overflow-hidden bg-black">
@@ -883,16 +916,26 @@
                 alt="Сезонный сервис и отель для шин" 
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 brightness-90 group-hover:brightness-100"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#0d111a] via-[#0d111a]/30 to-transparent"></div>
-              <span class="absolute top-3 left-3 text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-amber-500/90 text-black font-extrabold shadow-lg">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#090d14] via-[#090d14]/30 to-transparent"></div>
+              
+              <span class="absolute top-3 left-3 text-[10px] font-black uppercase px-2.5 py-1 rounded-full bg-amber-500 text-black shadow-lg">
                 Отель для шин
               </span>
-              <span class="absolute top-3 right-3 text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-black/80 text-amber-400 border border-amber-500/30">
-                Пакет -20%
+              <span class="absolute top-3 right-3 text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-black/80 text-amber-400 border border-amber-500/30 backdrop-blur-md flex items-center gap-1">
+                <i data-lucide="clock" class="w-3 h-3 text-amber-400"></i> 40 минут
               </span>
+
+              <!-- Live статус окна записи -->
+              <div class="absolute bottom-2.5 left-3 right-3 z-10 bg-black/85 backdrop-blur-md border border-white/10 rounded-xl px-2.5 py-1.5 flex items-center justify-between text-[11px]">
+                <span class="flex items-center gap-1.5 text-slate-300">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Склад и пост активны
+                </span>
+                <span class="text-amber-400 font-bold">Окно: сегодня 18:45</span>
+              </div>
             </div>
 
-            <div class="p-6 pt-3">
+            <div class="p-6 pt-4">
               <div class="flex items-center gap-2 mb-2 text-amber-400 text-xs font-bold uppercase tracking-wider">
                 <i data-lucide="sun-snow" class="w-4 h-4"></i>
                 <span>Сезон 2026</span>
@@ -904,15 +947,15 @@
                 Хранение колес в теплом складе, ультразвуковая дезинфекция кондиционера, проверка АКБ и регулировка сход-развала Hunter.
               </p>
               
-              <ul class="text-xs space-y-1.5 text-slate-300 py-3 border-y border-white/5">
+              <ul class="text-xs space-y-2 text-slate-300 py-3 border-y border-white/5">
                 <li class="flex items-center gap-2">
-                  <i data-lucide="check" class="w-3.5 h-3.5 text-amber-400"></i> Хранение с климат-контролем и QR
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-amber-400"></i> Хранение в отапливаемом складе с QR-биркой
                 </li>
                 <li class="flex items-center gap-2">
-                  <i data-lucide="check" class="w-3.5 h-3.5 text-amber-400"></i> Антибактериальная чистка климата
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-amber-400"></i> Антибактериальная очистка климата
                 </li>
                 <li class="flex items-center gap-2">
-                  <i data-lucide="check" class="w-3.5 h-3.5 text-amber-400"></i> Стенд сход-развала Hunter 3D
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-amber-400"></i> Стенд 3D сход-развала Hunter
                 </li>
               </ul>
             </div>
@@ -923,8 +966,9 @@
               <span class="text-slate-400">Хранение от:</span>
               <span class="text-white font-extrabold text-sm">2 500 ₽ (6 мес)</span>
             </div>
-            <button class="open-modal-trigger promotors-btn-orange w-full text-xs text-center cursor-pointer !bg-amber-600 hover:!bg-amber-500 shadow-amber-500/30" data-service="Сезонный сервис и хранение">
-              Сезонный пакет
+            <button class="open-modal-trigger promotors-btn-orange w-full text-xs text-center cursor-pointer !bg-amber-600 hover:!bg-amber-500 shadow-amber-500/30 flex items-center justify-center gap-2" data-service="Сезонный сервис и хранение (Окно: сегодня 18:45)" data-time="40 мин" data-post="Пост №5 (Климат и сход-развал)">
+              <i data-lucide="archive" class="w-3.5 h-3.5"></i>
+              Занять слот на 18:45
             </button>
           </div>
         </div>
@@ -1417,8 +1461,15 @@
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">Выбранная услуга / расчет</label>
-          <input type="text" id="modal-service-input" class="w-full px-4 py-2.5 rounded-xl modern-input text-xs" value="Экспресс-замена масла" readonly>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Выбранная услуга и слот</label>
+          <input type="text" id="modal-service-input" class="w-full px-4 py-2.5 rounded-xl modern-input text-xs font-medium text-white" value="Экспресс-замена масла" readonly>
+          <div id="modal-slot-info" class="mt-2 flex items-center justify-between text-[11px] bg-white/5 border border-white/10 rounded-lg px-3 py-1.5">
+            <span class="flex items-center gap-1.5 text-emerald-400 font-semibold">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span id="modal-slot-post">Пост №1 свободен</span>
+            </span>
+            <span class="text-orange-400 font-bold" id="modal-slot-time">Время работы: ~25 минут</span>
+          </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
