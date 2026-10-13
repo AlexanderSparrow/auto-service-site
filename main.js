@@ -141,7 +141,7 @@ function initScrollAnimations() {
   }
 
 
-  setupAntiFakeLaboratory();
+  setupAntifakeSlider();
 
   gsap.utils.toArray('.reveal-card').forEach((card) => {
     gsap.from(card, {
@@ -533,105 +533,103 @@ function setupBookingModal() {
   }
 }
 
-function setupAntiFakeLaboratory() {
-  const labBtns = document.querySelectorAll('.lab-item-btn');
-  const labImg = document.getElementById('lab-visual-img');
-  const fakePoints = document.getElementById('lab-fake-points');
-  const origPoints = document.getElementById('lab-orig-points');
-  const uvFlashlight = document.getElementById('lab-uv-flashlight');
-  const labZone = labImg?.closest('.group\\/lab');
+function setupAntifakeSlider() {
+  const sliderBox = document.getElementById('antifake-slider-box');
+  const fakeLayer = document.getElementById('slider-fake-layer');
+  const handle = document.getElementById('slider-handle');
+  const imgOrig = document.getElementById('slider-img-orig');
+  const imgFake = document.getElementById('slider-img-fake');
+  const fakeDesc = document.getElementById('slider-fake-desc');
+  const origDesc = document.getElementById('slider-orig-desc');
+  const tabBtns = document.querySelectorAll('.slider-tab-btn');
 
-  const LAB_DATA = {
+  if (!sliderBox || !fakeLayer || !handle) return;
+
+  const DATA = {
     oil: {
-      img: '/images/oil-service-bay.jpg',
-      fake: [
-        '• Нестабильная вязкость (разжижение при 90°C)',
-        '• Отсутствие люминесцентной маркировки на бочке',
-        '• Риск масляного голодания и заклинивания ДВС'
-      ],
-      orig: [
-        '• Прямые оптовые поставки из ЕС и заводов с паспортами',
-        '• Лазерная гравировка партии и светящийся QR в УФ',
-        '• Гарантия 12 месяцев на двигатель при замене у нас'
-      ]
+      origImg: '/images/antifake/oil-macro.jpg',
+      fakeImg: '/images/antifake/oil-macro.jpg',
+      fakeDesc: 'Индустриальная база без присадок. При температуре 90°C теряет масляную пленку, вызывая задиры на шейках коленвала и залегание колец за 3 000 км.',
+      origDesc: '100% синтетическая база с пакетом присадок Infineum. Входной контроль спектрометром каждой бочки. Официальный допуск автопроизводителя.'
     },
     filter: {
-      img: '/images/services/maintenance.jpg',
-      fake: [
-        '• Тонкая промокашка вместо синтетического волокна',
-        '• Заклинивший резиновый противодренажный клапан',
-        '• Разрыв шторы давлением масла на холодном пуске'
-      ],
-      orig: [
-        '• Микропористая бумага Mann / Mahle с пропиткой смолой',
-        '• Силиконовый клапан держит давление до -40°C',
-        '• Оригинальная резьба с заводской лазерной фаской'
-      ]
-    },
-    spark: {
-      img: '/images/hero-car-engine.jpg',
-      fake: [
-        '• Железный наконечник вместо платины / иридия',
-        '• Пропуски зажигания и перегрев катушек ЭБУ',
-        '• Быстрое выгорание зазора через 3 000 км'
-      ],
-      orig: [
-        '• Лазерная пайка иридиевого электрода NGK / Denso',
-        '• Точный искровой зазор по каталогу производителя',
-        '• Ресурс свечей до 100 000 км стабильной работы'
-      ]
+      origImg: '/images/antifake/filter-macro.jpg',
+      fakeImg: '/images/antifake/filter-macro.jpg',
+      fakeDesc: 'Рыхлая бумага без смоляной пропитки и деформированный резиновый клапан. На морозе клапан дубеет, пропуская неочищенный шлам напрямую в масляные каналы.',
+      origDesc: 'Плотное синтетическое микроволокно Mann / Mahle. Эластичный силиконовый обратный клапан сохраняет герметичность до -45°C.'
     }
   };
 
-  labBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      labBtns.forEach((b) => {
-        b.classList.remove('bg-purple-600', 'text-white');
-        b.classList.add('bg-black/50', 'text-slate-400');
-      });
-      btn.classList.add('bg-purple-600', 'text-white');
-      btn.classList.remove('bg-black/50', 'text-slate-400');
+  let isDragging = false;
 
-      const itemKey = btn.dataset.item;
-      const data = LAB_DATA[itemKey];
-      if (!data) return;
+  const updateSplit = (clientX) => {
+    const rect = sliderBox.getBoundingClientRect();
+    let x = clientX - rect.left;
+    let percent = (x / rect.width) * 100;
+    percent = Math.max(0, Math.min(100, percent));
 
-      if (labImg) {
-        gsap.to(labImg, {
-          opacity: 0.2,
-          duration: 0.2,
-          onComplete: () => {
-            labImg.src = data.img;
-            gsap.to(labImg, { opacity: 0.6, duration: 0.3 });
-          }
-        });
-      }
+    fakeLayer.style.clipPath = `polygon(0 0, ${percent}% 0, ${percent}% 100%, 0 100%)`;
+    handle.style.left = `${percent}%`;
+  };
 
-      if (fakePoints) {
-        fakePoints.innerHTML = data.fake.map((txt) => `<div>${txt}</div>`).join('');
-      }
-
-      if (origPoints) {
-        origPoints.innerHTML = data.orig.map((txt) => `<div>${txt}</div>`).join('');
-      }
-    });
+  // Перемещение мыши / касание
+  sliderBox.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    updateSplit(e.clientX);
   });
 
-  // УФ фонарик (курсор мыши над зоной теста)
-  if (labZone && uvFlashlight) {
-    labZone.addEventListener('mousemove', (e) => {
-      const rect = labZone.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      uvFlashlight.style.left = `${x}px`;
-      uvFlashlight.style.top = `${y}px`;
-      uvFlashlight.style.opacity = '1';
-    });
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    updateSplit(e.clientX);
+  });
 
-    labZone.addEventListener('mouseleave', () => {
-      uvFlashlight.style.opacity = '0';
+  window.addEventListener('mouseup', () => {
+    isDragging = false;
+  });
+
+  // Touch события для мобильных устройств
+  sliderBox.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    if (e.touches[0]) updateSplit(e.touches[0].clientX);
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    if (!isDragging || !e.touches[0]) return;
+    updateSplit(e.touches[0].clientX);
+  }, { passive: true });
+
+  window.addEventListener('touchend', () => {
+    isDragging = false;
+  });
+
+  // Переключение вкладок «Масло» vs «Фильтр»
+  tabBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach((b) => {
+        b.classList.remove('bg-orange-500', 'text-white', 'shadow-lg', 'shadow-orange-500/20');
+        b.classList.add('bg-white/5', 'text-slate-400');
+      });
+
+      btn.classList.add('bg-orange-500', 'text-white', 'shadow-lg', 'shadow-orange-500/20');
+      btn.classList.remove('bg-white/5', 'text-slate-400');
+
+      const target = btn.dataset.target;
+      const item = DATA[target];
+      if (!item) return;
+
+      gsap.to([imgOrig, imgFake], {
+        opacity: 0.3,
+        duration: 0.2,
+        onComplete: () => {
+          if (imgOrig) imgOrig.src = item.origImg;
+          if (imgFake) imgFake.src = item.fakeImg;
+          if (fakeDesc) fakeDesc.textContent = item.fakeDesc;
+          if (origDesc) origDesc.textContent = item.origDesc;
+          gsap.to([imgOrig, imgFake], { opacity: 1, duration: 0.3 });
+        }
+      });
     });
-  }
+  });
 }
 
 
