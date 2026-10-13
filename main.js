@@ -320,6 +320,14 @@ function recalculatePrice() {
   });
 
   const total = oilCost + filterCost + laborCost + addonsCost;
+  
+  // Расчет примерной стоимости аналогичного объема у официального дилера
+  // У дилера: завышенная цена масла (+60-80%), оригинальный фильтр (+50%), работа мастера (~3 500 - 5 000 ₽)
+  const dealerLabor = 3800;
+  const dealerOilCost = Math.round(car.volume * (oil.price * 1.55));
+  const dealerFilterCost = Math.round(car.filter * 1.5);
+  const dealerTotal = dealerOilCost + dealerFilterCost + dealerLabor + Math.round(addonsCost * 1.3);
+  const savings = Math.max(0, dealerTotal - total);
 
   const totalEl = document.getElementById('calc-total');
   const summaryCarName = document.getElementById('calc-summary-car');
@@ -327,6 +335,11 @@ function recalculatePrice() {
   const summaryVol = document.getElementById('calc-summary-vol');
   const summaryOilPrice = document.getElementById('calc-summary-oil-price');
   const summaryFilterPrice = document.getElementById('calc-summary-filter-price');
+  const gaugeBar = document.getElementById('calc-oil-gauge-bar');
+  const gaugeVolLabel = document.getElementById('calc-gauge-vol-label');
+  const dealerPriceEl = document.getElementById('calc-dealer-price');
+  const savingsAmountEl = document.getElementById('calc-savings-amount');
+  const promotorsPriceInlineEl = document.getElementById('calc-promotors-price-inline');
 
   if (totalEl) animatePriceNumber(totalEl, total);
   if (summaryCarName) summaryCarName.textContent = `${car.name} (${car.sub})`;
@@ -334,6 +347,20 @@ function recalculatePrice() {
   if (summaryVol) summaryVol.textContent = `${car.volume} л`;
   if (summaryOilPrice) summaryOilPrice.textContent = `${oilCost.toLocaleString('ru-RU')} ₽`;
   if (summaryFilterPrice) summaryFilterPrice.textContent = `${filterCost.toLocaleString('ru-RU')} ₽`;
+
+  // Обновление шкалы заливки канистры (максимум шкалы 8.0 л)
+  if (gaugeBar) {
+    const percent = Math.min(100, Math.round((car.volume / 8.0) * 100));
+    gaugeBar.style.width = `${percent}%`;
+  }
+  if (gaugeVolLabel) {
+    gaugeVolLabel.textContent = `${car.volume} л (${car.recommendation.split(' ')[0]})`;
+  }
+
+  // Обновление сравнения с дилером
+  if (dealerPriceEl) dealerPriceEl.textContent = `${dealerTotal.toLocaleString('ru-RU')} ₽`;
+  if (savingsAmountEl) savingsAmountEl.textContent = `${savings.toLocaleString('ru-RU')} ₽`;
+  if (promotorsPriceInlineEl) promotorsPriceInlineEl.textContent = `${total.toLocaleString('ru-RU')} ₽`;
 }
 
 function animatePriceNumber(element, target) {

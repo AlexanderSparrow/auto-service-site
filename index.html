@@ -304,16 +304,47 @@
         <!-- Левая часть: Выбор масла и доп. услуг (7 колонок) -->
         <div class="lg:col-span-7 glass-card-promotors rounded-2xl p-6 sm:p-8 space-y-6">
           
-          <!-- Превью активного автомобиля -->
-          <div class="flex items-center gap-5 p-4 rounded-xl bg-black/50 border border-white/5">
-            <div class="w-24 sm:w-32 aspect-[16/10] rounded-lg overflow-hidden bg-black shrink-0">
-              <img id="calc-active-car-img" src="/images/cars/toyota.jpg" alt="Выбранный автомобиль" class="w-full h-full object-cover">
+          <!-- Превью активного автомобиля с интерактивной шкалой заливки и допусками -->
+          <div class="p-5 rounded-2xl bg-black/60 border border-white/10 space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-5">
+              <div class="w-28 sm:w-36 aspect-[16/10] rounded-xl overflow-hidden bg-black shrink-0 border border-white/10 shadow-lg">
+                <img id="calc-active-car-img" src="/images/cars/toyota.jpg" alt="Выбранный автомобиль" class="w-full h-full object-cover">
+              </div>
+              <div class="flex-1">
+                <div class="text-[10px] uppercase tracking-widest text-orange-400 font-extrabold">Выбранный автомобиль:</div>
+                <div id="calc-active-car-name" class="text-xl font-black text-white font-['Space_Grotesk']">Toyota Camry</div>
+                <div id="calc-active-car-sub" class="text-xs text-slate-400 mt-0.5">XV70 • 2.5 (A25A / 2AR)</div>
+                <div class="mt-2 flex flex-wrap items-center gap-2">
+                  <span id="calc-active-car-spec" class="px-2.5 py-1 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-[11px] font-bold text-emerald-400">
+                    Допуск: 0W-20 / 5W-30 SP/GF-6
+                  </span>
+                  <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[11px] font-semibold text-slate-300">
+                    Масляный фильтр: Mann HU 7026 z
+                  </span>
+                </div>
+              </div>
             </div>
-            <div>
-              <div class="text-xs uppercase tracking-wider text-orange-400 font-bold">Выбранный автомобиль:</div>
-              <div id="calc-active-car-name" class="text-lg font-black text-white">Toyota Camry</div>
-              <div id="calc-active-car-sub" class="text-xs text-slate-400">XV70 • 2.5 (A25A / 2AR)</div>
-              <div id="calc-active-car-spec" class="text-xs text-emerald-400 font-semibold mt-0.5">Объем: 4.4 л • Допуск: 0W-20 / 5W-30 SP/GF-6</div>
+
+            <!-- Интерактивная шкала объема заливки в двигатель (Oil Canister Gauge) -->
+            <div class="pt-3 border-t border-white/10">
+              <div class="flex justify-between items-center text-xs mb-1.5">
+                <span class="text-slate-400 font-semibold flex items-center gap-1.5">
+                  <i data-lucide="droplet" class="w-3.5 h-3.5 text-amber-400"></i>
+                  Точный объем заливки в картер:
+                </span>
+                <span id="calc-gauge-vol-label" class="font-extrabold text-white text-sm font-mono text-amber-400">4.4 литра</span>
+              </div>
+              <!-- Прогресс-бар заполнения канистры/картера -->
+              <div class="w-full h-3 rounded-full bg-slate-900 border border-white/10 overflow-hidden relative p-0.5">
+                <div id="calc-oil-gauge-bar" class="h-full rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-400 transition-all duration-700 w-[55%] shadow-[0_0_12px_rgba(245,158,11,0.6)]"></div>
+              </div>
+              <div class="flex justify-between text-[10px] text-slate-500 mt-1 font-mono">
+                <span>0.0 л</span>
+                <span>2.0 л</span>
+                <span>4.0 л</span>
+                <span>6.0 л</span>
+                <span>8.0 л max</span>
+              </div>
             </div>
           </div>
 
@@ -403,7 +434,7 @@
 
         </div>
 
-        <!-- Правая часть: Чек и фиксация цены (5 колонок) -->
+        <!-- Правая часть: Чек, экономия vs дилер и фиксация цены (5 колонок) -->
         <div class="lg:col-span-5 glass-card-promotors rounded-2xl p-6 sm:p-8 space-y-5 sticky top-28 border-orange-500/40">
           
           <div class="flex items-center justify-between pb-4 border-b border-white/10">
@@ -437,7 +468,25 @@
             </div>
           </div>
 
-          <div class="pt-4 border-t border-white/10 space-y-1">
+          <!-- Блок наглядного сравнения с официальным дилером -->
+          <div class="p-3.5 rounded-xl bg-black/60 border border-white/10 space-y-2">
+            <div class="text-[10px] font-bold uppercase text-slate-400 flex items-center justify-between">
+              <span>Сравнение с дилером:</span>
+              <span class="text-emerald-400 font-extrabold flex items-center gap-1">
+                <i data-lucide="trending-down" class="w-3 h-3"></i> Ваша выгода: <span id="calc-savings-amount">4 690 ₽</span>
+              </span>
+            </div>
+            <div class="flex justify-between text-xs pt-1 border-t border-white/5">
+              <span class="text-slate-400">Официальный дилер (в среднем):</span>
+              <span id="calc-dealer-price" class="line-through text-slate-500 font-semibold">10 600 ₽</span>
+            </div>
+            <div class="flex justify-between text-xs">
+              <span class="text-white font-bold">В PROMOTORS:</span>
+              <span id="calc-promotors-price-inline" class="text-orange-400 font-extrabold">5 910 ₽</span>
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-white/10 space-y-1">
             <div class="text-xs text-slate-400 font-semibold">Итого к оплате на станции:</div>
             <div id="calc-total" data-val="5910" class="text-4xl font-black text-white font-['Space_Grotesk'] text-orange-500">
               5 910 ₽
