@@ -356,6 +356,29 @@ function recalculatePrice() {
   if (dealerPriceEl) dealerPriceEl.textContent = `${dealerTotal.toLocaleString('ru-RU')} ₽`;
   if (savingsAmountEl) savingsAmountEl.textContent = `${savings.toLocaleString('ru-RU')} ₽`;
   if (promotorsPriceInlineEl) promotorsPriceInlineEl.textContent = `${total.toLocaleString('ru-RU')} ₽`;
+
+  triggerFloatingCalcToast(car.name, total);
+}
+
+let calcToastTimer = null;
+function triggerFloatingCalcToast(carName, total) {
+  const toast = document.getElementById('calc-floating-toast');
+  const toastCar = document.getElementById('toast-car-label');
+  const toastPrice = document.getElementById('toast-price-val');
+  if (!toast) return;
+
+  if (toastCar) toastCar.textContent = carName;
+  if (toastPrice) toastPrice.textContent = `${total.toLocaleString('ru-RU')} ₽`;
+
+  // Показываем плавно
+  toast.classList.remove('opacity-0', '-translate-y-4', 'scale-95');
+  toast.classList.add('opacity-100', 'translate-y-0', 'scale-100');
+
+  if (calcToastTimer) clearTimeout(calcToastTimer);
+  calcToastTimer = setTimeout(() => {
+    toast.classList.remove('opacity-100', 'translate-y-0', 'scale-100');
+    toast.classList.add('opacity-0', '-translate-y-4', 'scale-95');
+  }, 2000);
 }
 
 function animatePriceNumber(element, target) {
