@@ -328,6 +328,7 @@ function recalculatePrice() {
   const summaryVol = document.getElementById('calc-summary-vol');
   const summaryOilPrice = document.getElementById('calc-summary-oil-price');
   const summaryFilterPrice = document.getElementById('calc-summary-filter-price');
+  const mobileQuickTotal = document.getElementById('calc-mobile-quick-total');
   const gaugeBar = document.getElementById('calc-oil-gauge-bar');
   const gaugeVolLabel = document.getElementById('calc-gauge-vol-label');
   const dealerPriceEl = document.getElementById('calc-dealer-price');
@@ -335,6 +336,7 @@ function recalculatePrice() {
   const promotorsPriceInlineEl = document.getElementById('calc-promotors-price-inline');
 
   if (totalEl) animatePriceNumber(totalEl, total);
+  if (mobileQuickTotal) animatePriceNumber(mobileQuickTotal, total);
   if (summaryCarName) summaryCarName.textContent = `${car.name} (${car.sub})`;
   if (summaryOilName) summaryOilName.textContent = oil.name;
   if (summaryVol) summaryVol.textContent = `${car.volume} л`;

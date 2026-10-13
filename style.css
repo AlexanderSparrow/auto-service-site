@@ -197,4 +197,13 @@ html.lenis, html.lenis body {
   animation: hotspot-pulse-blue 2s infinite;
 }
 
+/* Hide scrollbar for mobile swipeable carousels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 

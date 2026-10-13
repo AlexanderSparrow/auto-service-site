@@ -234,64 +234,70 @@
         </p>
       </div>
 
-      <!-- ШАГ 1: Интерактивная галерея карточек автомобилей с картинками -->
-      <div class="mb-10">
-        <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 flex items-center justify-between">
-          <span>1. Выберите модель из каталога:</span>
-          <span class="text-orange-400 font-semibold">Нажмите для выбора ↓</span>
+      <!-- ШАГ 1: Интерактивная галерея карточек автомобилей (Смахиваемая карусель на мобильных, сетка на десктопе) -->
+      <div class="mb-8">
+        <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center justify-between">
+          <span class="flex items-center gap-1.5">
+            <span class="w-5 h-5 rounded-full bg-orange-500/20 text-orange-400 font-black flex items-center justify-center text-[10px]">1</span>
+            Выберите модель:
+          </span>
+          <span class="text-orange-400 text-[11px] font-semibold flex items-center gap-1 lg:hidden">
+            <i data-lucide="chevrons-left-right" class="w-3.5 h-3.5"></i> смахните вправо-влево
+          </span>
         </div>
 
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Смахиваемый контейнер (snap-x на мобильных) -->
+        <div class="flex lg:grid lg:grid-cols-4 gap-3.5 overflow-x-auto no-scrollbar pb-2 pt-1 -mx-4 px-4 sm:mx-0 sm:px-0 snap-x snap-mandatory">
           
           <!-- Car Card: Toyota Camry -->
-          <div class="car-select-card p-4 rounded-2xl border-2 border-orange-500 bg-orange-500/10 glow-orange-sm cursor-pointer transition-all duration-300 group hover:scale-[1.02] flex flex-col justify-between" data-car="toyota">
-            <div class="relative overflow-hidden rounded-xl bg-black/60 mb-3 aspect-[16/10] flex items-center justify-center">
+          <div class="car-select-card w-[65vw] sm:w-[240px] lg:w-auto shrink-0 snap-start p-3.5 sm:p-4 rounded-2xl border-2 border-orange-500 bg-orange-500/10 glow-orange-sm cursor-pointer transition-all duration-300 group hover:scale-[1.02] flex flex-col justify-between" data-car="toyota">
+            <div class="relative overflow-hidden rounded-xl bg-black/60 mb-2.5 aspect-[16/10] flex items-center justify-center">
               <img loading="lazy" decoding="async" src="/images/cars/toyota.webp" alt="Toyota Camry" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-              <span class="absolute top-2 left-2 text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-black/80 text-orange-400 border border-orange-500/30">Седан</span>
+              <span class="absolute top-2 left-2 text-[9px] font-bold uppercase px-2 py-0.5 rounded bg-black/80 text-orange-400 border border-orange-500/30">Седан</span>
             </div>
             <div>
-              <div class="text-base font-bold text-white group-hover:text-orange-400 transition-colors">Toyota Camry</div>
-              <div class="text-xs text-slate-400">XV70 • 2.5 (A25A / 2AR)</div>
-              <div class="text-[11px] text-emerald-400 font-semibold mt-1">Объем масла: 4.4 л</div>
+              <div class="text-sm sm:text-base font-bold text-white group-hover:text-orange-400 transition-colors">Toyota Camry</div>
+              <div class="text-[11px] text-slate-400">XV70 • 2.5 (A25A / 2AR)</div>
+              <div class="text-[10px] text-emerald-400 font-semibold mt-1">Объем масла: 4.4 л</div>
             </div>
           </div>
 
           <!-- Car Card: BMW 5 Series -->
-          <div class="car-select-card p-4 rounded-2xl border-2 border-white/10 bg-black/40 cursor-pointer transition-all duration-300 group hover:scale-[1.02] hover:border-orange-500/40 flex flex-col justify-between" data-car="bmw">
-            <div class="relative overflow-hidden rounded-xl bg-black/60 mb-3 aspect-[16/10] flex items-center justify-center">
+          <div class="car-select-card w-[65vw] sm:w-[240px] lg:w-auto shrink-0 snap-start p-3.5 sm:p-4 rounded-2xl border-2 border-white/10 bg-black/40 cursor-pointer transition-all duration-300 group hover:scale-[1.02] hover:border-orange-500/40 flex flex-col justify-between" data-car="bmw">
+            <div class="relative overflow-hidden rounded-xl bg-black/60 mb-2.5 aspect-[16/10] flex items-center justify-center">
               <img loading="lazy" decoding="async" src="/images/cars/bmw.webp" alt="BMW 5 Series" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-              <span class="absolute top-2 left-2 text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-black/80 text-blue-400 border border-blue-500/30">Премиум</span>
+              <span class="absolute top-2 left-2 text-[9px] font-bold uppercase px-2 py-0.5 rounded bg-black/80 text-blue-400 border border-blue-500/30">Премиум</span>
             </div>
             <div>
-              <div class="text-base font-bold text-white group-hover:text-orange-400 transition-colors">BMW 5 Series</div>
-              <div class="text-xs text-slate-400">G30 • 530d xDrive (B57)</div>
-              <div class="text-[11px] text-emerald-400 font-semibold mt-1">Объем масла: 6.5 л</div>
+              <div class="text-sm sm:text-base font-bold text-white group-hover:text-orange-400 transition-colors">BMW 5 Series</div>
+              <div class="text-[11px] text-slate-400">G30 • 530d xDrive (B57)</div>
+              <div class="text-[10px] text-emerald-400 font-semibold mt-1">Объем масла: 6.5 л</div>
             </div>
           </div>
 
           <!-- Car Card: Audi Q7 / Q5 -->
-          <div class="car-select-card p-4 rounded-2xl border-2 border-white/10 bg-black/40 cursor-pointer transition-all duration-300 group hover:scale-[1.02] hover:border-orange-500/40 flex flex-col justify-between" data-car="audi">
-            <div class="relative overflow-hidden rounded-xl bg-black/60 mb-3 aspect-[16/10] flex items-center justify-center">
+          <div class="car-select-card w-[65vw] sm:w-[240px] lg:w-auto shrink-0 snap-start p-3.5 sm:p-4 rounded-2xl border-2 border-white/10 bg-black/40 cursor-pointer transition-all duration-300 group hover:scale-[1.02] hover:border-orange-500/40 flex flex-col justify-between" data-car="audi">
+            <div class="relative overflow-hidden rounded-xl bg-black/60 mb-2.5 aspect-[16/10] flex items-center justify-center">
               <img loading="lazy" decoding="async" src="/images/cars/audi.webp" alt="Audi Q7" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-              <span class="absolute top-2 left-2 text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-black/80 text-amber-400 border border-amber-500/30">Кроссовер</span>
+              <span class="absolute top-2 left-2 text-[9px] font-bold uppercase px-2 py-0.5 rounded bg-black/80 text-amber-400 border border-amber-500/30">Кроссовер</span>
             </div>
             <div>
-              <div class="text-base font-bold text-white group-hover:text-orange-400 transition-colors">Audi Q7 / Q5</div>
-              <div class="text-xs text-slate-400">4M • 3.0 TDI / 2.0 TFSI</div>
-              <div class="text-[11px] text-emerald-400 font-semibold mt-1">Объем масла: 6.8 л</div>
+              <div class="text-sm sm:text-base font-bold text-white group-hover:text-orange-400 transition-colors">Audi Q7 / Q5</div>
+              <div class="text-[11px] text-slate-400">4M • 3.0 TDI / 2.0 TFSI</div>
+              <div class="text-[10px] text-emerald-400 font-semibold mt-1">Объем масла: 6.8 л</div>
             </div>
           </div>
 
           <!-- Car Card: Kia Sportage -->
-          <div class="car-select-card p-4 rounded-2xl border-2 border-white/10 bg-black/40 cursor-pointer transition-all duration-300 group hover:scale-[1.02] hover:border-orange-500/40 flex flex-col justify-between" data-car="kia">
-            <div class="relative overflow-hidden rounded-xl bg-black/60 mb-3 aspect-[16/10] flex items-center justify-center">
+          <div class="car-select-card w-[65vw] sm:w-[240px] lg:w-auto shrink-0 snap-start p-3.5 sm:p-4 rounded-2xl border-2 border-white/10 bg-black/40 cursor-pointer transition-all duration-300 group hover:scale-[1.02] hover:border-orange-500/40 flex flex-col justify-between" data-car="kia">
+            <div class="relative overflow-hidden rounded-xl bg-black/60 mb-2.5 aspect-[16/10] flex items-center justify-center">
               <img loading="lazy" decoding="async" src="/images/cars/kia.webp" alt="Kia Sportage" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-              <span class="absolute top-2 left-2 text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-black/80 text-purple-400 border border-purple-500/30">SUV</span>
+              <span class="absolute top-2 left-2 text-[9px] font-bold uppercase px-2 py-0.5 rounded bg-black/80 text-purple-400 border border-purple-500/30">SUV</span>
             </div>
             <div>
-              <div class="text-base font-bold text-white group-hover:text-orange-400 transition-colors">Kia Sportage</div>
-              <div class="text-xs text-slate-400">NQ5 • 2.0 (G4NA)</div>
-              <div class="text-[11px] text-emerald-400 font-semibold mt-1">Объем масла: 4.0 л</div>
+              <div class="text-sm sm:text-base font-bold text-white group-hover:text-orange-400 transition-colors">Kia Sportage</div>
+              <div class="text-[11px] text-slate-400">NQ5 • 2.0 (G4NA)</div>
+              <div class="text-[10px] text-emerald-400 font-semibold mt-1">Объем масла: 4.0 л</div>
             </div>
           </div>
 
@@ -311,15 +317,26 @@
                 <img loading="lazy" decoding="async" id="calc-active-car-img" src="/images/cars/toyota.webp" alt="Выбранный автомобиль" class="w-full h-full object-cover">
               </div>
               <div class="flex-1">
-                <div class="text-[10px] uppercase tracking-widest text-orange-400 font-extrabold">Выбранный автомобиль:</div>
-                <div id="calc-active-car-name" class="text-xl font-black text-white font-['Space_Grotesk']">Toyota Camry</div>
-                <div id="calc-active-car-sub" class="text-xs text-slate-400 mt-0.5">XV70 • 2.5 (A25A / 2AR)</div>
-                <div class="mt-2 flex flex-wrap items-center gap-2">
-                  <span id="calc-active-car-spec" class="px-2.5 py-1 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-[11px] font-bold text-emerald-400">
+                <div class="flex items-start justify-between gap-2">
+                  <div>
+                    <div class="text-[10px] uppercase tracking-widest text-orange-400 font-extrabold">Выбранный автомобиль:</div>
+                    <div id="calc-active-car-name" class="text-lg sm:text-xl font-black text-white font-['Space_Grotesk']">Toyota Camry</div>
+                    <div id="calc-active-car-sub" class="text-xs text-slate-400 mt-0.5">XV70 • 2.5 (A25A / 2AR)</div>
+                  </div>
+                  <!-- Мгновенный индикатор расчета на мобильном (всегда виден без скролла вниз) -->
+                  <div class="text-right shrink-0 lg:hidden bg-orange-500/10 border border-orange-500/30 rounded-xl px-2.5 py-1.5">
+                    <div class="text-[9px] uppercase font-bold text-slate-400">Итого:</div>
+                    <div id="calc-mobile-quick-total" class="text-base font-black text-orange-400 font-mono">5 910 ₽</div>
+                    <div class="text-[9px] text-emerald-400 font-bold">работа 0 ₽</div>
+                  </div>
+                </div>
+
+                <div class="mt-2.5 flex flex-wrap items-center gap-2">
+                  <span id="calc-active-car-spec" class="px-2.5 py-1 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-[10px] sm:text-[11px] font-bold text-emerald-400">
                     Допуск: 0W-20 / 5W-30 SP/GF-6
                   </span>
-                  <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[11px] font-semibold text-slate-300">
-                    Масляный фильтр: Mann HU 7026 z
+                  <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[10px] sm:text-[11px] font-semibold text-slate-300">
+                    Фильтр: Mann HU 7026 z
                   </span>
                 </div>
               </div>
@@ -701,12 +718,17 @@
         <p class="text-sm text-slate-400">
           Узкоспециализированные посты с оригинальным немецким оборудованием, сертифицированными материалами и фиксированными ценами.
         </p>
-      </div>
+        <div class="flex items-center justify-between mb-4 lg:hidden">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Направления сервиса:</span>
+          <span class="text-orange-400 text-[11px] font-semibold flex items-center gap-1">
+            <i data-lucide="chevrons-left-right" class="w-3.5 h-3.5"></i> смахните карточки
+          </span>
+        </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="flex lg:grid lg:grid-cols-4 gap-5 sm:gap-6 overflow-x-auto no-scrollbar pb-3 pt-1 -mx-4 px-4 sm:mx-0 sm:px-0 snap-x snap-mandatory">
         
         <!-- Карточка 1: Экспресс-замена масла -->
-        <div class="glass-card-promotors rounded-3xl overflow-hidden flex flex-col justify-between reveal-card group hover:border-orange-500/50 transition-all duration-500 bg-black/50 border border-white/10">
+        <div class="glass-card-promotors rounded-3xl overflow-hidden flex flex-col justify-between reveal-card group hover:border-orange-500/50 transition-all duration-500 bg-black/50 border border-white/10 w-[82vw] sm:w-[320px] lg:w-auto shrink-0 snap-start">
           <div>
             <!-- Изображение с эффектом зума -->
             <div class="relative aspect-[16/11] overflow-hidden bg-black">
@@ -773,7 +795,7 @@
         </div>
 
         <!-- Карточка 2: Регламентное ТО -->
-        <div class="glass-card-promotors rounded-3xl overflow-hidden flex flex-col justify-between reveal-card group hover:border-blue-500/50 transition-all duration-500 bg-black/50 border border-white/10">
+        <div class="glass-card-promotors rounded-3xl overflow-hidden flex flex-col justify-between reveal-card group hover:border-blue-500/50 transition-all duration-500 bg-black/50 border border-white/10 w-[82vw] sm:w-[320px] lg:w-auto shrink-0 snap-start">
           <div>
             <!-- Изображение с эффектом зума -->
             <div class="relative aspect-[16/11] overflow-hidden bg-black">
@@ -840,7 +862,7 @@
         </div>
 
         <!-- Карточка 3: 3D-Шиномонтаж -->
-        <div class="glass-card-promotors rounded-3xl overflow-hidden flex flex-col justify-between reveal-card group hover:border-purple-500/50 transition-all duration-500 bg-black/50 border border-white/10">
+        <div class="glass-card-promotors rounded-3xl overflow-hidden flex flex-col justify-between reveal-card group hover:border-purple-500/50 transition-all duration-500 bg-black/50 border border-white/10 w-[82vw] sm:w-[320px] lg:w-auto shrink-0 snap-start">
           <div>
             <!-- Изображение с эффектом зума -->
             <div class="relative aspect-[16/11] overflow-hidden bg-black">
@@ -907,7 +929,7 @@
         </div>
 
         <!-- Карточка 4: Сезонный сервис & Хранение -->
-        <div class="glass-card-promotors rounded-3xl overflow-hidden flex flex-col justify-between reveal-card group hover:border-amber-500/50 transition-all duration-500 bg-black/50 border border-white/10">
+        <div class="glass-card-promotors rounded-3xl overflow-hidden flex flex-col justify-between reveal-card group hover:border-amber-500/50 transition-all duration-500 bg-black/50 border border-white/10 w-[82vw] sm:w-[320px] lg:w-auto shrink-0 snap-start">
           <div>
             <!-- Изображение с эффектом зума -->
             <div class="relative aspect-[16/11] overflow-hidden bg-black">
