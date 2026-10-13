@@ -1,0 +1,200 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-orange-brand: #ff5722;
+    --color-orange-glow: rgba(255, 87, 34, 0.35);
+    --bg-dark-base: #07090e;
+    --bg-dark-card: #0d111a;
+  }
+
+  html {
+    background-color: var(--bg-dark-base);
+    color: #f1f5f9;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: var(--bg-dark-base);
+    overflow-x: hidden;
+  }
+}
+
+/* Custom Lenis Smooth Scroll styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #07090e;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e2638;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff5722;
+}
+
+/* Promotors Reference Styling */
+.promotors-btn-orange {
+  background: #ff5722;
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 8px;
+  padding: 14px 28px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px -2px rgba(255, 87, 34, 0.4);
+}
+
+.promotors-btn-orange:hover {
+  background: #f4511e;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px 0 rgba(255, 87, 34, 0.6);
+}
+
+.promotors-nav-pill {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(13, 17, 26, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 9999px;
+  padding: 6px 16px;
+}
+
+.glass-card-promotors {
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.04) 0%, rgba(13, 17, 26, 0.8) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card-promotors:hover {
+  border-color: rgba(255, 87, 34, 0.35);
+  box-shadow: 0 20px 40px -15px rgba(255, 87, 34, 0.15);
+  transform: translateY(-4px);
+}
+
+/* Watermark typography in background like reference */
+.watermark-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.02);
+  user-select: none;
+  pointer-events: none;
+  text-transform: uppercase;
+}
+
+/* Infinite Rotating Parts Ring */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 40s linear infinite;
+}
+
+/* Floating animation */
+@keyframes float-subtle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float-subtle {
+  animation: float-subtle 6s ease-in-out infinite;
+}
+
+/* Modern Input */
+.modern-input {
+  background: rgba(13, 17, 26, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  transition: all 0.25s ease;
+}
+
+.modern-input:focus {
+  outline: none;
+  border-color: #ff5722;
+  box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.25);
+  background: rgba(13, 17, 26, 0.95);
+}
+
+/* Season Split Panel Styles */
+.season-split-pane {
+  transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1), flex 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: width;
+}
+
+/* Season Forest Background Overlays */
+.bg-forest-summer {
+  background-image: url('/images/seasons/summer-forest.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-forest-winter {
+  background-image: url('/images/seasons/winter-forest.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Hotspot Pulse animations */
+@keyframes hotspot-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 87, 34, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(255, 87, 34, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 87, 34, 0);
+  }
+}
+
+@keyframes hotspot-pulse-blue {
+  0% {
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(56, 189, 248, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
+  }
+}
+
+.hotspot-glow-summer {
+  animation: hotspot-pulse 2s infinite;
+}
+
+.hotspot-glow-winter {
+  animation: hotspot-pulse-blue 2s infinite;
+}
+
+

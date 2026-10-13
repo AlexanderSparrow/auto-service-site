@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth bg-[#07090e]">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PROMOTORS | Премиальное техническое обслуживание и ремонт авто</title>
+  <meta name="description" content="Премиальный автосервис PROMOTORS: экспресс-замена масла за 25 минут (работа 0 ₽), регламентное ТО, сезонная подготовка и высокоточный шиномонтаж.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body class="bg-[#07090e] text-slate-100 antialiased selection:bg-orange-600 selection:text-white overflow-x-hidden">
+
+  <!-- Background Watermark (как в референсе PROMOTORS) -->
+  <div class="fixed top-24 left-1/2 -translate-x-1/2 text-[14vw] font-black watermark-text tracking-tighter whitespace-nowrap z-0">
+    PROMOTORS
+  </div>
+
+  <!-- Мягкое свечение на фоне -->
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[500px] bg-gradient-to-b from-orange-600/10 via-transparent to-transparent blur-[140px] pointer-events-none -z-10"></div>
+
+  <!-- Шапка сайта (в стиле капсул / Pill Navbar из референса) -->
+  <header class="fixed top-0 left-0 right-0 z-50 pt-5 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- Логотип -->
+      <a href="#" class="flex items-center gap-2.5 group">
+        <div class="w-9 h-9 rounded-full border border-orange-500/50 flex items-center justify-center bg-orange-500/10 text-orange-500 group-hover:scale-105 transition-transform">
+          <i data-lucide="compass" class="w-5 h-5"></i>
+        </div>
+        <span class="text-xl font-extrabold tracking-wider uppercase font-['Space_Grotesk'] text-white">
+          PRO<span class="text-orange-500">MOTORS</span>
+        </span>
+      </a>
+
+      <!-- Меню-капсула на десктопе -->
+      <nav class="hidden md:flex items-center gap-6 promotors-nav-pill text-xs font-semibold uppercase tracking-wider text-slate-300">
+        <a href="#hero-section" class="text-orange-400 hover:text-white transition-colors">Главная</a>
+        <a href="#services" class="hover:text-orange-400 transition-colors">Услуги</a>
+        <a href="#calculator" class="hover:text-orange-400 transition-colors flex items-center gap-1.5">
+          Калькулятор <span class="text-[9px] bg-orange-500/20 text-orange-400 px-1.5 py-0.5 rounded font-bold">0 ₽ работа</span>
+        </a>
+        <a href="#parts-section" class="hover:text-orange-400 transition-colors">Расходники</a>
+        <a href="#seasons" class="hover:text-orange-400 transition-colors">Сезонный сервис</a>
+        <a href="#contacts" class="hover:text-orange-400 transition-colors">Контакты</a>
+      </nav>
+
+      <!-- Телефон и кнопка онлайн-записи -->
+      <div class="flex items-center gap-3">
+        <a href="tel:+78126034480" class="hidden sm:inline-flex items-center gap-2 promotors-nav-pill text-xs font-bold text-white hover:border-orange-500/50 transition-colors">
+          <i data-lucide="phone" class="w-3.5 h-3.5 text-orange-500"></i>
+          +7 (812) 603-44-80
+        </a>
+        <button class="open-modal-trigger promotors-btn-orange text-xs py-2.5 px-5 cursor-pointer" data-service="Быстрая запись">
+          Записаться
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Первый экран Hero (в точности по композиции референса PROMOTORS) -->
+  <section id="hero-section" class="relative pt-36 pb-16 md:pt-48 md:pb-28 overflow-hidden z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Левая часть: заголовок, описание, кнопки -->
+        <div class="lg:col-span-5 space-y-7 hero-reveal">
+          
+          <div class="inline-flex items-center gap-2 text-xs font-bold text-orange-400 uppercase tracking-widest">
+            <span class="w-2 h-2 rounded-full bg-orange-500 animate-ping"></span>
+            Культурный автосервис с 2013 года
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-[1.05] font-['Space_Grotesk'] text-white">
+            Техническое обслуживание <br>
+            <span class="text-orange-500">И Ремонт Автомобилей</span>
+          </h1>
+
+          <p class="text-sm sm:text-base text-slate-400 leading-relaxed max-w-md font-normal">
+            Работа мастера по замене масла — <span class="text-white font-bold">0 ₽</span> при покупке масла и фильтра у нас. Заехал, поменял, уехал: среднее время на посту всего <span class="text-white font-bold">25 минут</span> на современном оборудовании без очередей.
+          </p>
+
+          <div class="pt-2 flex items-center gap-4">
+            <button class="open-modal-trigger promotors-btn-orange cursor-pointer" data-service="Замена масла за 0 ₽">
+              Получить сервис
+            </button>
+            <a href="#calculator" class="promotors-nav-pill text-xs font-bold uppercase tracking-wider text-slate-300 hover:text-white transition-colors py-3.5 px-6 flex items-center gap-2">
+              <i data-lucide="calculator" class="w-4 h-4 text-orange-500"></i>
+              Подобрать авто
+            </a>
+          </div>
+
+          <!-- Буллеты под кнопкой -->
+          <div class="grid grid-cols-3 gap-3 pt-6 border-t border-white/5 text-[11px] text-slate-400">
+            <div>
+              <div class="text-white font-bold">25 минут</div>
+              <div>Экспресс-замена</div>
+            </div>
+            <div>
+              <div class="text-white font-bold">12 месяцев</div>
+              <div>Гарантия на работы</div>
+            </div>
+            <div>
+              <div class="text-white font-bold">Без очереди</div>
+              <div>Свободные посты</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Правая часть: автомобиль с экспозицией двигателя и подвески -->
+        <div class="lg:col-span-7 relative hero-reveal">
+          <div class="relative w-full flex items-center justify-center">
+            
+            <div class="absolute inset-0 bg-gradient-to-tr from-orange-500/20 via-transparent to-transparent blur-3xl pointer-events-none"></div>
+
+            <img 
+              id="hero-car-img"
+              src="/images/hero-car-engine.jpg" 
+              alt="Рентген-вид автомобиля и двигателя" 
+              class="w-full h-auto object-contain rounded-2xl drop-shadow-[0_25px_35px_rgba(0,0,0,0.85)] relative z-10 transition-transform duration-700 hover:scale-[1.02]"
+            />
+
+            <!-- Интерактивная точка маячка на двигателе -->
+            <div class="absolute top-[38%] left-[34%] z-20 group cursor-pointer">
+              <div class="relative flex items-center justify-center">
+                <span class="animate-ping absolute inline-flex h-8 w-8 rounded-full bg-orange-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-4 w-4 bg-orange-500 border-2 border-white shadow-lg"></span>
+              </div>
+              <div class="absolute bottom-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900/95 text-[10px] text-white px-2.5 py-1 rounded-md border border-orange-500/40 whitespace-nowrap backdrop-blur-md pointer-events-none">
+                Экспресс-замена моторного масла (Работа 0 ₽)
+              </div>
+            </div>
+
+            <!-- Интерактивная точка маячка на тормозном диске -->
+            <div class="absolute top-[60%] left-[58%] z-20 group cursor-pointer">
+              <div class="relative flex items-center justify-center">
+                <span class="animate-ping absolute inline-flex h-8 w-8 rounded-full bg-orange-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-4 w-4 bg-orange-500 border-2 border-white shadow-lg"></span>
+              </div>
+              <div class="absolute bottom-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900/95 text-[10px] text-white px-2.5 py-1 rounded-md border border-orange-500/40 whitespace-nowrap backdrop-blur-md pointer-events-none">
+                3D-Шиномонтаж Hofmann R14–R24
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Строка статистики (8K+, 22+, 500K+, 99%) -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 pt-16 mt-8 border-t border-white/10 text-center md:text-left">
+        <div>
+          <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-white font-['Space_Grotesk'] stat-number" data-target="8" data-suffix="K+">
+            8K+
+          </div>
+          <div class="text-xs uppercase tracking-wider text-slate-400 mt-1 font-semibold">
+            Постоянных клиентов
+          </div>
+        </div>
+        <div>
+          <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-white font-['Space_Grotesk'] stat-number" data-target="22" data-suffix="+">
+            22+
+          </div>
+          <div class="text-xs uppercase tracking-wider text-slate-400 mt-1 font-semibold">
+            Постов обслуживания
+          </div>
+        </div>
+        <div>
+          <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-white font-['Space_Grotesk'] stat-number" data-target="500" data-suffix="K+">
+            500K+
+          </div>
+          <div class="text-xs uppercase tracking-wider text-slate-400 mt-1 font-semibold">
+            Успешных замен масла
+          </div>
+        </div>
+        <div>
+          <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-orange-500 font-['Space_Grotesk'] stat-number" data-target="99" data-suffix="%">
+            99%
+          </div>
+          <div class="text-xs uppercase tracking-wider text-slate-400 mt-1 font-semibold">
+            Рекомендуют сервис
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Интерактивный визуальный калькулятор с выбором авто по картинкам -->
+  <section id="calculator" class="py-24 relative bg-[#07090e] border-t border-white/5 z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+        <div class="inline-flex items-center gap-2 promotors-nav-pill text-xs font-bold text-orange-400">
+          <i data-lucide="calculator" class="w-3.5 h-3.5"></i>
+          Интерактивный калькулятор стоимости
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight font-['Space_Grotesk'] text-white">
+          Выберите свой автомобиль
+        </h2>
+        <p class="text-sm text-slate-400">
+          Кликните по модели вашего авто: калькулятор рассчитает точный объем масла, артикул фильтра и итоговую сумму с учетом бесплатной работы мастера.
+        </p>
+      </div>
+
+      <!-- ШАГ 1: Интерактивная галерея карточек автомобилей с картинками -->
+      <div class="mb-10">
+        <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 flex items-center justify-between">
+          <span>1. Выберите модель из каталога:</span>
+          <span class="text-orange-400 font-semibold">Нажмите для выбора ↓</span>
+        </div>
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <!-- Car Card: Toyota Camry -->
+          <div class="car-select-card p-4 rounded-2xl border-2 border-orange-500 bg-orange-500/10 glow-orange-sm cursor-pointer transition-all duration-300 group hover:scale-[1.02] flex flex-col justify-between" data-car="toyota">
+            <div class="relative overflow-hidden rounded-xl bg-black/60 mb-3 aspect-[16/10] flex items-center justify-center">
+              <img src="/images/cars/toyota.jpg" alt="Toyota Camry" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <span class="absolute top-2 left-2 text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-black/80 text-orange-400 border border-orange-500/30">Седан</span>
+            </div>
+            <div>
+              <div class="text-base font-bold text-white group-hover:text-orange-400 transition-colors">Toyota Camry</div>
+              <div class="text-xs text-slate-400">XV70 • 2.5 (A25A / 2AR)</div>
+              <div class="text-[11px] text-emerald-400 font-semibold mt-1">Объем масла: 4.4 л</div>
+            </div>
+          </div>
+
+          <!-- Car Card: BMW 5 Series -->
+          <div class="car-select-card p-4 rounded-2xl border-2 border-white/10 bg-black/40 cursor-pointer transition-all duration-300 group hover:scale-[1.02] hover:border-orange-500/40 flex flex-col justify-between" data-car="bmw">
+            <div class="relative overflow-hidden rounded-xl bg-black/60 mb-3 aspect-[16/10] flex items-center justify-center">
+              <img src="/images/cars/bmw.jpg" alt="BMW 5 Series" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <span class="absolute top-2 left-2 text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-black/80 text-blue-400 border border-blue-500/30">Премиум</span>
+            </div>
+            <div>
+              <div class="text-base font-bold text-white group-hover:text-orange-400 transition-colors">BMW 5 Series</div>
+              <div class="text-xs text-slate-400">G30 • 530d xDrive (B57)</div>
+              <div class="text-[11px] text-emerald-400 font-semibold mt-1">Объем масла: 6.5 л</div>
+            </div>
+          </div>
+
+          <!-- Car Card: Audi Q7 / Q5 -->
+          <div class="car-select-card p-4 rounded-2xl border-2 border-white/10 bg-black/40 cursor-pointer transition-all duration-300 group hover:scale-[1.02] hover:border-orange-500/40 flex flex-col justify-between" data-car="audi">
+            <div class="relative overflow-hidden rounded-xl bg-black/60 mb-3 aspect-[16/10] flex items-center justify-center">
+              <img src="/images/cars/audi.jpg" alt="Audi Q7" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <span class="absolute top-2 left-2 text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-black/80 text-amber-400 border border-amber-500/30">Кроссовер</span>
+            </div>
+            <div>
+              <div class="text-base font-bold text-white group-hover:text-orange-400 transition-colors">Audi Q7 / Q5</div>
+              <div class="text-xs text-slate-400">4M • 3.0 TDI / 2.0 TFSI</div>
+              <div class="text-[11px] text-emerald-400 font-semibold mt-1">Объем масла: 6.8 л</div>
+            </div>
+          </div>
+
+          <!-- Car Card: Kia Sportage -->
+          <div class="car-select-card p-4 rounded-2xl border-2 border-white/10 bg-black/40 cursor-pointer transition-all duration-300 group hover:scale-[1.02] hover:border-orange-500/40 flex flex-col justify-between" data-car="kia">
+            <div class="relative overflow-hidden rounded-xl bg-black/60 mb-3 aspect-[16/10] flex items-center justify-center">
+              <img src="/images/cars/kia.jpg" alt="Kia Sportage" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <span class="absolute top-2 left-2 text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-black/80 text-purple-400 border border-purple-500/30">SUV</span>
+            </div>
+            <div>
+              <div class="text-base font-bold text-white group-hover:text-orange-400 transition-colors">Kia Sportage</div>
+              <div class="text-xs text-slate-400">NQ5 • 2.0 (G4NA)</div>
+              <div class="text-[11px] text-emerald-400 font-semibold mt-1">Объем масла: 4.0 л</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ДЕТАЛИ И РАСЧЕТ ВЫБРАННОГО АВТОМОБИЛЯ -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Левая часть: Выбор масла и доп. услуг (7 колонок) -->
+        <div class="lg:col-span-7 glass-card-promotors rounded-2xl p-6 sm:p-8 space-y-6">
+          
+          <!-- Превью активного автомобиля -->
+          <div class="flex items-center gap-5 p-4 rounded-xl bg-black/50 border border-white/5">
+            <div class="w-24 sm:w-32 aspect-[16/10] rounded-lg overflow-hidden bg-black shrink-0">
+              <img id="calc-active-car-img" src="/images/cars/toyota.jpg" alt="Выбранный автомобиль" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <div class="text-xs uppercase tracking-wider text-orange-400 font-bold">Выбранный автомобиль:</div>
+              <div id="calc-active-car-name" class="text-lg font-black text-white">Toyota Camry</div>
+              <div id="calc-active-car-sub" class="text-xs text-slate-400">XV70 • 2.5 (A25A / 2AR)</div>
+              <div id="calc-active-car-spec" class="text-xs text-emerald-400 font-semibold mt-0.5">Объем: 4.4 л • Допуск: 0W-20 / 5W-30 SP/GF-6</div>
+            </div>
+          </div>
+
+          <!-- ШАГ 2: Выбор масла (карточками) -->
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-3">
+              2. Выберите моторное масло из бочки:
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              
+              <div class="oil-select-card p-3.5 rounded-xl border-2 border-orange-500 bg-orange-500/10 cursor-pointer transition-all flex items-center justify-between" data-oil="motul">
+                <div>
+                  <div class="text-xs font-bold text-white">Motul 8100 X-cess Gen2</div>
+                  <div class="text-[11px] text-slate-400">100% синтетика (Франция)</div>
+                </div>
+                <div class="text-xs font-bold text-orange-400">1 150 ₽/л</div>
+              </div>
+
+              <div class="oil-select-card p-3.5 rounded-xl border-2 border-white/10 bg-black/40 hover:border-orange-500/30 cursor-pointer transition-all flex items-center justify-between" data-oil="liquimoly">
+                <div>
+                  <div class="text-xs font-bold text-white">Liqui Moly Molygen NG</div>
+                  <div class="text-[11px] text-slate-400">С молибденом (Германия)</div>
+                </div>
+                <div class="text-xs font-bold text-orange-400">1 250 ₽/л</div>
+              </div>
+
+              <div class="oil-select-card p-3.5 rounded-xl border-2 border-white/10 bg-black/40 hover:border-orange-500/30 cursor-pointer transition-all flex items-center justify-between" data-oil="mobil">
+                <div>
+                  <div class="text-xs font-bold text-white">Mobil 1 ESP Formula</div>
+                  <div class="text-[11px] text-slate-400">PAO + Эстеры (Финляндия)</div>
+                </div>
+                <div class="text-xs font-bold text-orange-400">1 300 ₽/л</div>
+              </div>
+
+              <div class="oil-select-card p-3.5 rounded-xl border-2 border-white/10 bg-black/40 hover:border-orange-500/30 cursor-pointer transition-all flex items-center justify-between" data-oil="lukoil">
+                <div>
+                  <div class="text-xs font-bold text-white">Лукойл Genesis Armortech</div>
+                  <div class="text-[11px] text-slate-400">Официальный допуск (РФ)</div>
+                </div>
+                <div class="text-xs font-bold text-orange-400">750 ₽/л</div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ШАГ 3: Дополнительные работы -->
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-3">
+              3. Дополнительные работы (по желанию):
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              
+              <label class="flex items-center gap-3 p-3 rounded-xl bg-black/40 border border-white/5 hover:border-orange-500/30 transition-all cursor-pointer">
+                <input type="checkbox" class="calc-addon accent-orange-500 w-4 h-4 rounded" data-price="950">
+                <div class="text-xs">
+                  <div class="font-bold text-white">Воздушный фильтр ДВС</div>
+                  <div class="text-slate-400">+950 ₽ (фильтр + установка)</div>
+                </div>
+              </label>
+
+              <label class="flex items-center gap-3 p-3 rounded-xl bg-black/40 border border-white/5 hover:border-orange-500/30 transition-all cursor-pointer">
+                <input type="checkbox" class="calc-addon accent-orange-500 w-4 h-4 rounded" data-price="1100">
+                <div class="text-xs">
+                  <div class="font-bold text-white">Салонный угольный фильтр</div>
+                  <div class="text-slate-400">+1 100 ₽ (фильтр + установка)</div>
+                </div>
+              </label>
+
+              <label class="flex items-center gap-3 p-3 rounded-xl bg-black/40 border border-white/5 hover:border-orange-500/30 transition-all cursor-pointer">
+                <input type="checkbox" class="calc-addon accent-orange-500 w-4 h-4 rounded" data-price="1490">
+                <div class="text-xs">
+                  <div class="font-bold text-white">Инспекция ТО (36 точек)</div>
+                  <div class="text-slate-400">+1 490 ₽ (ходовая, жидкости, тормоза)</div>
+                </div>
+              </label>
+
+              <label class="flex items-center gap-3 p-3 rounded-xl bg-black/40 border border-white/5 hover:border-orange-500/30 transition-all cursor-pointer">
+                <input type="checkbox" class="calc-addon accent-orange-500 w-4 h-4 rounded" data-price="2400">
+                <div class="text-xs">
+                  <div class="font-bold text-white">Комплекс шиномонтажа (4 шт)</div>
+                  <div class="text-slate-400">+2 400 ₽ (3D балансировка Hofmann)</div>
+                </div>
+              </label>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Правая часть: Чек и фиксация цены (5 колонок) -->
+        <div class="lg:col-span-5 glass-card-promotors rounded-2xl p-6 sm:p-8 space-y-5 sticky top-28 border-orange-500/40">
+          
+          <div class="flex items-center justify-between pb-4 border-b border-white/10">
+            <div>
+              <div class="text-[10px] uppercase font-bold text-orange-400 tracking-wider">Калькуляция заказа</div>
+              <h3 id="calc-summary-car" class="text-base font-bold text-white">Toyota Camry (XV70)</h3>
+            </div>
+            <span class="text-xs bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full font-bold">Окончательная цена</span>
+          </div>
+
+          <div class="space-y-3 text-xs">
+            <div class="flex justify-between">
+              <span class="text-slate-400">Выбранное масло:</span>
+              <span id="calc-summary-oil" class="font-bold text-white">Motul 8100 X-cess Gen2</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-400">Заправочный объем:</span>
+              <span id="calc-summary-vol" class="font-bold text-white">4.4 л</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-400">Стоимость масла:</span>
+              <span id="calc-summary-oil-price" class="font-bold text-white">5 060 ₽</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-400">Масляный фильтр (Mann/Mahle):</span>
+              <span id="calc-summary-filter-price" class="font-bold text-white">850 ₽</span>
+            </div>
+            <div class="flex justify-between p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+              <span class="font-bold">Работа мастера по замене:</span>
+              <span class="font-black">0 ₽ (Бесплатно)</span>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-white/10 space-y-1">
+            <div class="text-xs text-slate-400 font-semibold">Итого к оплате на станции:</div>
+            <div id="calc-total" data-val="5910" class="text-4xl font-black text-white font-['Space_Grotesk'] text-orange-500">
+              5 910 ₽
+            </div>
+            <p class="text-[11px] text-slate-400">
+              *Включает заправочный объем масла, оригинальный фильтр и работу за 25 минут.
+            </p>
+          </div>
+
+          <button id="calc-book-btn" class="promotors-btn-orange w-full text-xs text-center cursor-pointer">
+            Зафиксировать эту цену и забронировать
+          </button>
+          
+          <div class="text-center text-[10px] text-slate-500">
+            Оплата после завершения работ и личной проверки уровня масла щупом.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Блок деталей и запчастей (как 2-й экран в референсе PROMOTORS) -->
+  <section id="parts-section" class="py-24 relative overflow-hidden bg-[#05070a] border-t border-white/5 z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Левая колонка: Типографика как на скриншоте -->
+        <div class="lg:col-span-5 space-y-7">
+          <div class="text-xs font-bold text-orange-400 uppercase tracking-widest">
+            Оригинальные расходники & запчасти
+          </div>
+
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight leading-[1.1] font-['Space_Grotesk'] text-white">
+            Оригинальные детали <br>
+            <span class="text-orange-500">И Уход За Авто</span>
+          </h2>
+
+          <p class="text-sm text-slate-400 leading-relaxed">
+            В наличии более 15 000 оригинальных фильтров (Mann, Mahle, Filtron), тормозных колодок, свечей зажигания и бочковых масел ведущих брендов. Прямые поставки с заводов-изготовителей с сертификатами качества и лабораторным контролем.
+          </p>
+
+          <div class="pt-2">
+            <a href="#calculator" class="promotors-btn-orange inline-block cursor-pointer">
+              Каталог и цены
+            </a>
+          </div>
+
+          <!-- Ссылки внизу блока как в референсе -->
+          <div class="flex items-center gap-6 pt-6 border-t border-white/5 text-xs text-slate-400">
+            <a href="#calculator" class="hover:text-white transition-colors">Онлайн-запись</a>
+            <span>•</span>
+            <a href="#calculator" class="hover:text-white transition-colors">Экономия (Работа 0 ₽)</a>
+            <span>•</span>
+            <a href="#contacts" class="hover:text-white transition-colors">Контакты</a>
+          </div>
+        </div>
+
+        <!-- Правая колонка: Вращающееся колесо запчастей -->
+        <div class="lg:col-span-7 relative flex items-center justify-center">
+          <div class="absolute w-[450px] h-[450px] rounded-full bg-gradient-to-tr from-orange-500/10 to-amber-500/5 blur-3xl pointer-events-none"></div>
+
+          <div class="relative w-full max-w-[540px]">
+            <img 
+              id="parts-wheel-img"
+              src="/images/parts-disc-circle.jpg" 
+              alt="Круговая композиция автозапчастей и тормозного диска" 
+              class="w-full h-auto object-contain rounded-full shadow-[0_0_60px_rgba(0,0,0,0.9)] hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 Основных направления сервиса с кинематографичными изображениями и анимациями -->
+  <section id="services" class="py-24 relative bg-[#05070a] border-t border-white/5 z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <div class="inline-flex items-center gap-2 promotors-nav-pill text-xs font-bold text-orange-400">
+          <i data-lucide="wrench" class="w-3.5 h-3.5"></i>
+          Специализация техцентра
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight font-['Space_Grotesk'] text-white">
+          4 Ключевых направления сервиса
+        </h2>
+        <p class="text-sm text-slate-400">
+          Узкоспециализированные посты с оригинальным немецким оборудованием, сертифицированными материалами и фиксированными ценами.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Карточка 1: Экспресс-замена масла -->
+        <div class="glass-card-promotors rounded-3xl overflow-hidden flex flex-col justify-between reveal-card group hover:border-orange-500/50 transition-all duration-500">
+          <div>
+            <!-- Изображение с эффектом зума -->
+            <div class="relative aspect-[16/11] overflow-hidden bg-black">
+              <img 
+                src="/images/services/oil.jpg" 
+                alt="Экспресс-замена масла в двигателе" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 brightness-90 group-hover:brightness-100"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0d111a] via-[#0d111a]/30 to-transparent"></div>
+              <span class="absolute top-3 left-3 text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-emerald-500/90 text-black shadow-lg">
+                Работа 0 ₽
+              </span>
+              <span class="absolute top-3 right-3 text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-black/80 text-orange-400 border border-orange-500/30">
+                25 минут
+              </span>
+            </div>
+
+            <div class="p-6 pt-3">
+              <div class="flex items-center gap-2 mb-2 text-orange-400 text-xs font-bold uppercase tracking-wider">
+                <i data-lucide="droplets" class="w-4 h-4"></i>
+                <span>Флагман сети</span>
+              </div>
+              <h3 class="text-xl font-black uppercase text-white mb-2 group-hover:text-orange-400 transition-colors">
+                Экспресс-замена масла
+              </h3>
+              <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                Слив или вакуумная откачка за 25 мин. Оригинальные масла из бочек с сертификатами (Motul, Liqui Moly, Mobil, Лукойл).
+              </p>
+              
+              <ul class="text-xs space-y-1.5 text-slate-300 py-3 border-y border-white/5">
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i> Замена масляного фильтра включена
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i> Снятие защиты картера — 0 ₽
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i> Сброс интервала ТО в ЭБУ
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="p-6 pt-0">
+            <div class="flex items-center justify-between mb-3 text-xs">
+              <span class="text-slate-400">Стоимость работы:</span>
+              <span class="text-emerald-400 font-extrabold text-sm">0 ₽ (Бесплатно)</span>
+            </div>
+            <button class="open-modal-trigger promotors-btn-orange w-full text-xs text-center cursor-pointer" data-service="Экспресс-замена масла за 0 ₽">
+              Записаться за 0 ₽
+            </button>
+          </div>
+        </div>
+
+        <!-- Карточка 2: Регламентное ТО -->
+        <div class="glass-card-promotors rounded-3xl overflow-hidden flex flex-col justify-between reveal-card group hover:border-blue-500/50 transition-all duration-500">
+          <div>
+            <!-- Изображение с эффектом зума -->
+            <div class="relative aspect-[16/11] overflow-hidden bg-black">
+              <img 
+                src="/images/services/maintenance.jpg" 
+                alt="Регламентное ТО и компьютерная диагностика" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 brightness-90 group-hover:brightness-100"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0d111a] via-[#0d111a]/30 to-transparent"></div>
+              <span class="absolute top-3 left-3 text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-blue-500/90 text-white shadow-lg">
+                36 точек ГОСТ
+              </span>
+              <span class="absolute top-3 right-3 text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-black/80 text-blue-400 border border-blue-500/30">
+                Гарантия дилера
+              </span>
+            </div>
+
+            <div class="p-6 pt-3">
+              <div class="flex items-center gap-2 mb-2 text-blue-400 text-xs font-bold uppercase tracking-wider">
+                <i data-lucide="clipboard-check" class="w-4 h-4"></i>
+                <span>Комплекс</span>
+              </div>
+              <h3 class="text-xl font-black uppercase text-white mb-2 group-hover:text-blue-400 transition-colors">
+                Регламентное ТО
+              </h3>
+              <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                Техническое обслуживание по картам завода-изготовителя. Компьютерный опрос ЭБУ, проверка подвески, свечей и тормозов.
+              </p>
+              
+              <ul class="text-xs space-y-1.5 text-slate-300 py-3 border-y border-white/5">
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-blue-400"></i> Сканирование ошибок OBD2
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-blue-400"></i> Проверка износа колодок и дисков
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-blue-400"></i> Тестирование плотности жидкостей
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="p-6 pt-0">
+            <div class="flex items-center justify-between mb-3 text-xs">
+              <span class="text-slate-400">Инспекция от:</span>
+              <span class="text-white font-extrabold text-sm">1 490 ₽</span>
+            </div>
+            <button class="open-modal-trigger promotors-btn-orange w-full text-xs text-center cursor-pointer !bg-blue-600 hover:!bg-blue-500 shadow-blue-500/30" data-service="Регламентное ТО по ГОСТ">
+              Записаться на ТО
+            </button>
+          </div>
+        </div>
+
+        <!-- Карточка 3: 3D-Шиномонтаж -->
+        <div class="glass-card-promotors rounded-3xl overflow-hidden flex flex-col justify-between reveal-card group hover:border-purple-500/50 transition-all duration-500">
+          <div>
+            <!-- Изображение с эффектом зума -->
+            <div class="relative aspect-[16/11] overflow-hidden bg-black">
+              <img 
+                src="/images/services/tires.jpg" 
+                alt="3D лазерный шиномонтаж и балансировка" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 brightness-90 group-hover:brightness-100"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0d111a] via-[#0d111a]/30 to-transparent"></div>
+              <span class="absolute top-3 left-3 text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-purple-500/90 text-white shadow-lg">
+                Hofmann 3D
+              </span>
+              <span class="absolute top-3 right-3 text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-black/80 text-purple-400 border border-purple-500/30">
+                R14 – R24
+              </span>
+            </div>
+
+            <div class="p-6 pt-3">
+              <div class="flex items-center gap-2 mb-2 text-purple-400 text-xs font-bold uppercase tracking-wider">
+                <i data-lucide="disc-3" class="w-4 h-4"></i>
+                <span>Колесный пост</span>
+              </div>
+              <h3 class="text-xl font-black uppercase text-white mb-2 group-hover:text-purple-400 transition-colors">
+                3D-Шиномонтаж
+              </h3>
+              <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                Лазерная юстировка дисбаланса, пластиковые накладки станков без царапин на дисках, работа с низким профилем и RunFlat.
+              </p>
+              
+              <ul class="text-xs space-y-1.5 text-slate-300 py-3 border-y border-white/5">
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-purple-400"></i> Автоматическая мойка колес
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-purple-400"></i> Протяжка динамометрическим ключом
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-purple-400"></i> Фирменные пакеты в подарок
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="p-6 pt-0">
+            <div class="flex items-center justify-between mb-3 text-xs">
+              <span class="text-slate-400">Комплекс от:</span>
+              <span class="text-white font-extrabold text-sm">2 200 ₽ (4 шт)</span>
+            </div>
+            <button class="open-modal-trigger promotors-btn-orange w-full text-xs text-center cursor-pointer !bg-purple-600 hover:!bg-purple-500 shadow-purple-500/30" data-service="3D-Шиномонтаж Hofmann">
+              Выбрать шиномонтаж
+            </button>
+          </div>
+        </div>
+
+        <!-- Карточка 4: Сезонный сервис & Хранение -->
+        <div class="glass-card-promotors rounded-3xl overflow-hidden flex flex-col justify-between reveal-card group hover:border-amber-500/50 transition-all duration-500">
+          <div>
+            <!-- Изображение с эффектом зума -->
+            <div class="relative aspect-[16/11] overflow-hidden bg-black">
+              <img 
+                src="/images/services/season.jpg" 
+                alt="Сезонный сервис и отель для шин" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 brightness-90 group-hover:brightness-100"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0d111a] via-[#0d111a]/30 to-transparent"></div>
+              <span class="absolute top-3 left-3 text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-amber-500/90 text-black font-extrabold shadow-lg">
+                Отель для шин
+              </span>
+              <span class="absolute top-3 right-3 text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-black/80 text-amber-400 border border-amber-500/30">
+                Пакет -20%
+              </span>
+            </div>
+
+            <div class="p-6 pt-3">
+              <div class="flex items-center gap-2 mb-2 text-amber-400 text-xs font-bold uppercase tracking-wider">
+                <i data-lucide="sun-snow" class="w-4 h-4"></i>
+                <span>Сезон 2026</span>
+              </div>
+              <h3 class="text-xl font-black uppercase text-white mb-2 group-hover:text-amber-400 transition-colors">
+                Сезонный сервис
+              </h3>
+              <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                Хранение колес в теплом складе, ультразвуковая дезинфекция кондиционера, проверка АКБ и регулировка сход-развала Hunter.
+              </p>
+              
+              <ul class="text-xs space-y-1.5 text-slate-300 py-3 border-y border-white/5">
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-amber-400"></i> Хранение с климат-контролем и QR
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-amber-400"></i> Антибактериальная чистка климата
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-amber-400"></i> Стенд сход-развала Hunter 3D
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="p-6 pt-0">
+            <div class="flex items-center justify-between mb-3 text-xs">
+              <span class="text-slate-400">Хранение от:</span>
+              <span class="text-white font-extrabold text-sm">2 500 ₽ (6 мес)</span>
+            </div>
+            <button class="open-modal-trigger promotors-btn-orange w-full text-xs text-center cursor-pointer !bg-amber-600 hover:!bg-amber-500 shadow-amber-500/30" data-service="Сезонный сервис и хранение">
+              Сезонный пакет
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Интерактивный горизонтальный Pin-скролл: Путь клиента в PROMOTORS (Вариант 2) -->
+  <section id="journey-pin-section" class="relative bg-[#04060a] border-t border-white/5 overflow-hidden z-20">
+    
+    <!-- Верхний sticky-заголовок с прогресс-баром (Компактный отступ) -->
+    <div class="pt-8 pb-3 px-4 sm:px-8 max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 promotors-nav-pill text-[11px] font-bold text-orange-400 mb-1.5 py-1 px-3">
+          <span class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
+          Культурный регламент визита
+        </div>
+        <h2 class="text-2xl sm:text-4xl font-black uppercase tracking-tight font-['Space_Grotesk'] text-white">
+          Как проходит визит в <span class="text-orange-500">PROMOTORS</span>
+        </h2>
+        <p class="text-xs text-slate-400 mt-1 max-w-xl">
+          Крутите страницу вниз — виртуальный тур проведет вас через все 4 этапа обслуживания от заезда до выдачи ключей.
+        </p>
+      </div>
+
+      <!-- Визуальный индикатор прогресса -->
+      <div class="flex items-center gap-3 promotors-nav-pill px-4 py-1.5">
+        <span class="text-[11px] uppercase font-bold text-slate-400 tracking-wider">Прогресс:</span>
+        <div class="w-28 h-1.5 rounded-full bg-slate-800 overflow-hidden relative">
+          <div id="journey-progress-bar" class="absolute top-0 left-0 bottom-0 bg-gradient-to-r from-orange-500 to-amber-500 w-0 transition-all duration-75"></div>
+        </div>
+        <span id="journey-step-counter" class="text-xs font-extrabold text-orange-400 font-mono">01 / 04</span>
+      </div>
+    </div>
+
+    <!-- Pinned Viewport Container (Оптимизированная высота для полного обзора) -->
+    <div id="journey-viewport" class="w-full h-[580px] sm:h-[600px] relative overflow-hidden flex items-center">
+      
+      <!-- Горизонтальная движущаяся лента (Track) -->
+      <div id="journey-track" class="flex gap-6 px-6 sm:px-12 w-max items-center">
+        
+        <!-- КАДР 1: Бесконтактный заезд и защита салона -->
+        <div class="journey-slide w-[84vw] max-w-[700px] h-[450px] rounded-3xl glass-card-promotors border border-white/10 overflow-hidden flex flex-col sm:flex-row shadow-2xl relative shrink-0 group">
+          <div class="sm:w-7/12 h-52 sm:h-full relative overflow-hidden bg-black shrink-0">
+            <img 
+              src="/images/journey/journey_01.jpg" 
+              alt="Защитные чехлы на руль и сиденье" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-transparent to-[#0d111a]/80"></div>
+            <span class="absolute top-3 left-3 text-3xl font-black text-white/20 font-['Space_Grotesk']">01</span>
+          </div>
+          <div class="p-6 sm:p-7 flex flex-col justify-between sm:w-5/12 space-y-3">
+            <div>
+              <div class="text-[10px] font-bold text-orange-400 uppercase tracking-widest mb-1.5">Этап 1 • Приемка авто</div>
+              <h3 class="text-xl sm:text-2xl font-black uppercase text-white leading-tight">
+                Бесконтактный заезд & Защита салона
+              </h3>
+              <p class="text-xs text-slate-400 leading-relaxed mt-2">
+                Перед тем как коснуться автомобиля, мастер надевает фирменные защитные чехлы на руль, селектор КПП и водительское кресло. Проводится фотофиксация кузова и электронная диагностика.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-white/5 space-y-1">
+              <div class="text-[11px] text-emerald-400 font-bold flex items-center gap-1.5">
+                <i data-lucide="shield-check" class="w-4 h-4"></i> Салон защищен на 100%
+              </div>
+              <div class="text-[10px] text-slate-400">Время этапа: 3 минуты</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- КАДР 2: Прозрачный процесс и видеотрансляция -->
+        <div class="journey-slide w-[84vw] max-w-[700px] h-[450px] rounded-3xl glass-card-promotors border border-white/10 overflow-hidden flex flex-col sm:flex-row shadow-2xl relative shrink-0 group">
+          <div class="sm:w-7/12 h-52 sm:h-full relative overflow-hidden bg-black shrink-0">
+            <img 
+              src="/images/journey/journey_02.jpg" 
+              alt="Прямая трансляция из ремзоны в смартфон" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-transparent to-[#0d111a]/80"></div>
+            <span class="absolute top-3 left-3 text-3xl font-black text-white/20 font-['Space_Grotesk']">02</span>
+          </div>
+          <div class="p-6 sm:p-7 flex flex-col justify-between sm:w-5/12 space-y-3">
+            <div>
+              <div class="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-1.5">Этап 2 • Открытый процесс</div>
+              <h3 class="text-xl sm:text-2xl font-black uppercase text-white leading-tight">
+                Прямая трансляция в смартфон & Лаундж
+              </h3>
+              <p class="text-xs text-slate-400 leading-relaxed mt-2">
+                Вы можете находиться рядом в боксе или отдыхать в лаундже с кофе, наблюдая за аппаратной заменой масла через онлайн-камеру прямо в телефоне.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-white/5 space-y-1">
+              <div class="text-[11px] text-blue-400 font-bold flex items-center gap-1.5">
+                <i data-lucide="video" class="w-4 h-4"></i> HD Видеоконтроль процесса
+              </div>
+              <div class="text-[10px] text-slate-400">Слив отработки и заправка из бочки</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- КАДР 3: Лазерный контроль и точная протяжка -->
+        <div class="journey-slide w-[84vw] max-w-[700px] h-[450px] rounded-3xl glass-card-promotors border border-white/10 overflow-hidden flex flex-col sm:flex-row shadow-2xl relative shrink-0 group">
+          <div class="sm:w-7/12 h-52 sm:h-full relative overflow-hidden bg-black shrink-0">
+            <img 
+              src="/images/journey/journey_03.jpg" 
+              alt="3D лазерная балансировка и динамометрический ключ" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-transparent to-[#0d111a]/80"></div>
+            <span class="absolute top-3 left-3 text-3xl font-black text-white/20 font-['Space_Grotesk']">03</span>
+          </div>
+          <div class="p-6 sm:p-7 flex flex-col justify-between sm:w-5/12 space-y-3">
+            <div>
+              <div class="text-[10px] font-bold text-purple-400 uppercase tracking-widest mb-1.5">Этап 3 • Высокая точность</div>
+              <h3 class="text-xl sm:text-2xl font-black uppercase text-white leading-tight">
+                Лазерная калибровка & Динамометрический ключ
+              </h3>
+              <p class="text-xs text-slate-400 leading-relaxed mt-2">
+                Никаких перетянутых гаек. Колесные болты и сливные пробки затягиваются строго динамометрическим ключом по моменту в Нм для вашей марки.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-white/5 space-y-1">
+              <div class="text-[11px] text-purple-400 font-bold flex items-center gap-1.5">
+                <i data-lucide="disc" class="w-4 h-4"></i> Балансировка с точностью 0.0 г
+              </div>
+              <div class="text-[10px] text-slate-400">Стенд Hofmann с лазерным сканером</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- КАДР 4: Выдача, сервисная книжка и гарантия -->
+        <div class="journey-slide w-[84vw] max-w-[700px] h-[450px] rounded-3xl glass-card-promotors border border-white/10 overflow-hidden flex flex-col sm:flex-row shadow-2xl relative shrink-0 group">
+          <div class="sm:w-7/12 h-52 sm:h-full relative overflow-hidden bg-black shrink-0">
+            <img 
+              src="/images/journey/journey_04.jpg" 
+              alt="Выдача ключей и паспорт гарантии" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-transparent to-[#0d111a]/80"></div>
+            <span class="absolute top-3 left-3 text-3xl font-black text-white/20 font-['Space_Grotesk']">04</span>
+          </div>
+          <div class="p-6 sm:p-7 flex flex-col justify-between sm:w-5/12 space-y-3">
+            <div>
+              <div class="text-[10px] font-bold text-emerald-400 uppercase tracking-widest mb-1.5">Этап 4 • Финал визита</div>
+              <h3 class="text-xl sm:text-2xl font-black uppercase text-white leading-tight">
+                Паспорт гарантии & Сервисная книжка
+              </h3>
+              <p class="text-xs text-slate-400 leading-relaxed mt-2">
+                Мастер демонстрирует уровень масла щупом, отдает остаток в канистре, вносит отметку в сервисную историю и выдает гарантию на 12 месяцев.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-white/5 space-y-2">
+              <div class="text-[11px] text-emerald-400 font-bold flex items-center gap-1.5">
+                <i data-lucide="badge-check" class="w-4 h-4"></i> Официальная гарантия 1 год
+              </div>
+              <button class="open-modal-trigger promotors-btn-orange w-full text-xs text-center cursor-pointer py-2.5 px-4" data-service="Запись на культурное ТО">
+                Записаться на такой визит
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Интерактивный Сплит-сервис «Весна / Лето» vs «Осень / Зима» с 3D Hotspots -->
+  <section id="seasons" class="py-24 relative bg-[#06080d] border-t border-white/5 z-10 overflow-hidden">
+    <!-- Атмосферный фоновый свет -->
+    <div class="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-orange-500/10 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="absolute top-1/2 right-1/4 -translate-y-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      
+      <!-- Заголовок секции -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+        <div>
+          <div class="inline-flex items-center gap-2 promotors-nav-pill text-xs font-bold text-orange-400 mb-2">
+            <i data-lucide="sun-snow" class="w-3.5 h-3.5"></i>
+            Интерактивный сплит & диагностика узлов
+          </div>
+          <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight font-['Space_Grotesk'] text-white">
+            Сезонный сервис <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-300 to-cyan-400">365 Дней</span>
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-400 mt-2 max-w-xl">
+            Наведите курсор или переключите сезон: створки раскроют состав работ, а интерактивные пульсирующие хотспоты покажут узлы автомобиля, подлежащие проверке.
+          </p>
+        </div>
+
+        <!-- Кнопки быстрого переключения сезонов -->
+        <div class="flex items-center bg-black/60 p-1.5 rounded-2xl border border-white/10 backdrop-blur-md self-start md:self-auto shrink-0 shadow-xl">
+          <button id="btn-select-summer" class="season-switcher-btn px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-gradient-to-r from-orange-600 to-amber-600 text-white shadow-lg shadow-orange-600/30">
+            <i data-lucide="sun" class="w-4 h-4 text-amber-200"></i>
+            <span>Весна / Лето</span>
+          </button>
+          <button id="btn-select-winter" class="season-switcher-btn px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 text-slate-400 hover:text-white">
+            <i data-lucide="snowflake" class="w-4 h-4 text-cyan-400"></i>
+            <span>Осень / Зима</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Главный интерактивный Split-контейнер с фиксированной высотой (предотвращает прыжки) -->
+      <div id="season-split-container" class="relative rounded-3xl overflow-hidden border border-white/10 bg-[#0a0d14] shadow-2xl flex flex-col lg:flex-row h-auto lg:h-[660px]">
+        
+        <!-- ================= ЛЕВАЯ ПАНЕЛЬ: ВЕСНА / ЛЕТО ================= -->
+        <div id="summer-panel" class="season-split-pane lg:w-[65%] w-full h-full relative flex flex-col justify-between p-6 sm:p-10 border-b lg:border-b-0 lg:border-r border-white/10 overflow-hidden cursor-pointer group bg-gradient-to-br from-black/85 via-[#0b140f]/80 to-black/95">
+          
+          <!-- Фоновая подсветка и текстура темного зеленого леса -->
+          <div class="absolute inset-0 bg-forest-summer opacity-40 group-hover:opacity-50 transition-opacity duration-700 pointer-events-none scale-105 group-hover:scale-100 transition-transform duration-1000"></div>
+          <!-- Затемняющий градиент под стиль сайта -->
+          <div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-[#060a08]/95 via-[#060a08]/80 to-transparent pointer-events-none"></div>
+
+          <!-- Верхняя шапка стороны лета -->
+          <div class="relative z-10 flex items-start justify-between shrink-0">
+            <div>
+              <div class="flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase tracking-widest mb-1">
+                <i data-lucide="sun" class="w-4 h-4 text-amber-400"></i>
+                <span class="text-orange-400">Теплый сезон • Зеленый массив</span>
+              </div>
+              <h3 class="text-2xl sm:text-3xl font-black uppercase text-white font-['Space_Grotesk']">
+                Весна & Лето
+              </h3>
+              <p class="text-xs text-slate-300 mt-1 max-w-md leading-relaxed">
+                Комплексная подготовка к жаре, скоростным трассам и загородным поездкам:
+              </p>
+            </div>
+            <span class="px-3 py-1 rounded-full text-[11px] font-extrabold uppercase bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shrink-0">
+              Скидка 20% пакетом
+            </span>
+          </div>
+
+          <!-- Интерактивная зона узлов (Hotspots) на схеме автомобиля -->
+          <div class="relative z-10 my-4 py-2 flex-1 flex flex-col justify-center">
+            <div class="text-[11px] uppercase font-bold text-slate-400 tracking-wider mb-2.5 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-orange-500"></span>
+              Нажмите или наведите на точки проверки:
+            </div>
+
+            <!-- Контейнер с силуэтом и хотспотами -->
+            <div class="relative w-full max-w-lg aspect-[21/9] rounded-2xl bg-black/60 border border-white/10 p-2 sm:p-3 flex items-center justify-center overflow-hidden">
+              <img src="/images/hero-car-engine.jpg" alt="Схема летней проверки" class="w-full h-full object-cover rounded-xl opacity-40 brightness-75">
+              
+              <!-- Hotspot 1: Климат-контроль (лобовое/капот) -->
+              <div class="absolute top-[35%] left-[45%] group/spot cursor-pointer" data-spot="ac">
+                <div class="w-6 h-6 rounded-full bg-orange-500 text-black flex items-center justify-center font-bold text-xs hotspot-glow-summer">
+                  <i data-lucide="wind" class="w-3.5 h-3.5"></i>
+                </div>
+                <!-- Всплывающий тултип узла -->
+                <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2.5 rounded-xl bg-black/95 border border-orange-500/40 text-[11px] text-white opacity-0 group-hover/spot:opacity-100 transition-opacity pointer-events-none z-30 shadow-2xl backdrop-blur-md">
+                  <div class="font-bold text-orange-400 flex items-center gap-1">Климат-контроль</div>
+                  <div class="text-slate-300 text-[10px] mt-0.5">Ультразвук испарителя + заправка фреона R134a/1234yf</div>
+                </div>
+              </div>
+
+              <!-- Hotspot 2: Сход-развал колес -->
+              <div class="absolute bottom-[22%] left-[25%] group/spot cursor-pointer" data-spot="alignment">
+                <div class="w-6 h-6 rounded-full bg-orange-500 text-black flex items-center justify-center font-bold text-xs hotspot-glow-summer">
+                  <i data-lucide="compass" class="w-3.5 h-3.5"></i>
+                </div>
+                <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2.5 rounded-xl bg-black/95 border border-orange-500/40 text-[11px] text-white opacity-0 group-hover/spot:opacity-100 transition-opacity pointer-events-none z-30 shadow-2xl backdrop-blur-md">
+                  <div class="font-bold text-orange-400">Стенд Hunter 3D</div>
+                  <div class="text-slate-300 text-[10px] mt-0.5">Юстировка углов колес до 0.01° после смены резины</div>
+                </div>
+              </div>
+
+              <!-- Hotspot 3: Отель шин & балансировка -->
+              <div class="absolute bottom-[22%] right-[22%] group/spot cursor-pointer" data-spot="tires">
+                <div class="w-6 h-6 rounded-full bg-orange-500 text-black flex items-center justify-center font-bold text-xs hotspot-glow-summer">
+                  <i data-lucide="warehouse" class="w-3.5 h-3.5"></i>
+                </div>
+                <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2.5 rounded-xl bg-black/95 border border-orange-500/40 text-[11px] text-white opacity-0 group-hover/spot:opacity-100 transition-opacity pointer-events-none z-30 shadow-2xl backdrop-blur-md">
+                  <div class="font-bold text-orange-400">Отель шин с климатом</div>
+                  <div class="text-slate-300 text-[10px] mt-0.5">Мойка, консервация и теплое хранение с QR-паспортом</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Список включенных услуг лета -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mt-3">
+              <div class="p-2.5 rounded-xl bg-black/50 border border-white/5 text-xs">
+                <div class="font-bold text-white flex items-center gap-1.5">
+                  <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400"></i> Климат
+                </div>
+                <div class="text-[11px] text-slate-400 mt-0.5">Антибактериальная чистка</div>
+              </div>
+              <div class="p-2.5 rounded-xl bg-black/50 border border-white/5 text-xs">
+                <div class="font-bold text-white flex items-center gap-1.5">
+                  <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400"></i> Hunter 3D
+                </div>
+                <div class="text-[11px] text-slate-400 mt-0.5">Калибровка углов схода</div>
+              </div>
+              <div class="p-2.5 rounded-xl bg-black/50 border border-white/5 text-xs">
+                <div class="font-bold text-white flex items-center gap-1.5">
+                  <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400"></i> Отель шин
+                </div>
+                <div class="text-[11px] text-slate-400 mt-0.5">Теплый склад 6 месяцев</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Нижняя панель с кнопкой записи -->
+          <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-3 border-t border-white/10 shrink-0">
+            <div>
+              <span class="text-[11px] text-slate-400">Пакет «Летний Старт»:</span>
+              <div class="text-xl font-black text-white">4 800 ₽ <span class="text-xs line-through text-slate-500 font-normal">6 000 ₽</span></div>
+            </div>
+            <button class="open-modal-trigger promotors-btn-orange text-xs py-2.5 px-6 cursor-pointer" data-service="Пакет Весна / Лето (4 800 ₽)">
+              Записаться на летний комплекс
+            </button>
+          </div>
+        </div>
+
+        <!-- ================= ПРАВАЯ ПАНЕЛЬ: ОСЕНЬ / ЗИМА ================= -->
+        <div id="winter-panel" class="season-split-pane lg:w-[35%] w-full h-full relative flex flex-col justify-between p-6 sm:p-10 overflow-hidden cursor-pointer group bg-gradient-to-br from-black/85 via-[#08111a]/80 to-black/95">
+          
+          <!-- Фоновая подсветка и текстура заснеженного зимнего леса -->
+          <div class="absolute inset-0 bg-forest-winter opacity-40 group-hover:opacity-50 transition-opacity duration-700 pointer-events-none scale-105 group-hover:scale-100 transition-transform duration-1000"></div>
+          <!-- Затемняющий градиент под стиль сайта -->
+          <div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-l from-[#050b12]/95 via-[#050b12]/80 to-transparent pointer-events-none"></div>
+
+          <!-- Верхняя шапка стороны зимы -->
+          <div class="relative z-10 flex items-start justify-between shrink-0">
+            <div>
+              <div class="flex items-center gap-2 text-cyan-400 text-xs font-bold uppercase tracking-widest mb-1">
+                <i data-lucide="snowflake" class="w-4 h-4 text-cyan-300"></i>
+                <span>Холодный сезон • Заснеженный лес</span>
+              </div>
+              <h3 class="text-2xl sm:text-3xl font-black uppercase text-white font-['Space_Grotesk']">
+                Осень & Зима
+              </h3>
+              <p class="text-xs text-slate-300 mt-1 max-w-md leading-relaxed">
+                Безотказный запуск в мороз -30°C и безопасность на обледенелых дорогах:
+              </p>
+            </div>
+            <span class="px-3 py-1 rounded-full text-[11px] font-extrabold uppercase bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 shrink-0">
+              Гарантия старта
+            </span>
+          </div>
+
+          <!-- Интерактивная зона узлов (Hotspots) на схеме автомобиля -->
+          <div class="relative z-10 my-4 py-2 flex-1 flex flex-col justify-center">
+            <div class="text-[11px] uppercase font-bold text-slate-400 tracking-wider mb-2.5 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+              Нажмите или наведите на точки проверки:
+            </div>
+
+            <!-- Контейнер с силуэтом и хотспотами -->
+            <div class="relative w-full max-w-lg aspect-[21/9] rounded-2xl bg-black/60 border border-white/10 p-2 sm:p-3 flex items-center justify-center overflow-hidden">
+              <img src="/images/hero-car-engine.jpg" alt="Схема зимней проверки" class="w-full h-full object-cover rounded-xl opacity-40 brightness-75 hue-rotate-180">
+              
+              <!-- Hotspot 1: АКБ и стартер (подкапотное) -->
+              <div class="absolute top-[38%] left-[30%] group/spot cursor-pointer" data-spot="battery">
+                <div class="w-6 h-6 rounded-full bg-cyan-400 text-black flex items-center justify-center font-bold text-xs hotspot-glow-winter">
+                  <i data-lucide="battery-charging" class="w-3.5 h-3.5"></i>
+                </div>
+                <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2.5 rounded-xl bg-black/95 border border-cyan-400/40 text-[11px] text-white opacity-0 group-hover/spot:opacity-100 transition-opacity pointer-events-none z-30 shadow-2xl backdrop-blur-md">
+                  <div class="font-bold text-cyan-400">Тест АКБ и генератора</div>
+                  <div class="text-slate-300 text-[10px] mt-0.5">Замер пускового тока под нагрузочной вилкой и плотности электролита</div>
+                </div>
+              </div>
+
+              <!-- Hotspot 2: Рефрактометр антифриза -->
+              <div class="absolute top-[32%] right-[38%] group/spot cursor-pointer" data-spot="coolant">
+                <div class="w-6 h-6 rounded-full bg-cyan-400 text-black flex items-center justify-center font-bold text-xs hotspot-glow-winter">
+                  <i data-lucide="thermometer-snowflake" class="w-3.5 h-3.5"></i>
+                </div>
+                <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2.5 rounded-xl bg-black/95 border border-cyan-400/40 text-[11px] text-white opacity-0 group-hover/spot:opacity-100 transition-opacity pointer-events-none z-30 shadow-2xl backdrop-blur-md">
+                  <div class="font-bold text-cyan-400">Оптический рефрактометр</div>
+                  <div class="text-slate-300 text-[10px] mt-0.5">Точная точка замерзания антифриза и тормозной жидкости</div>
+                </div>
+              </div>
+
+              <!-- Hotspot 3: Дошиповка и балансировка -->
+              <div class="absolute bottom-[22%] right-[22%] group/spot cursor-pointer" data-spot="studs">
+                <div class="w-6 h-6 rounded-full bg-cyan-400 text-black flex items-center justify-center font-bold text-xs hotspot-glow-winter">
+                  <i data-lucide="snowflake" class="w-3.5 h-3.5"></i>
+                </div>
+                <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2.5 rounded-xl bg-black/95 border border-cyan-400/40 text-[11px] text-white opacity-0 group-hover/spot:opacity-100 transition-opacity pointer-events-none z-30 shadow-2xl backdrop-blur-md">
+                  <div class="font-bold text-cyan-400">Дошиповка шипов «Теком»</div>
+                  <div class="text-slate-300 text-[10px] mt-0.5">Пневмопистолет, восстановление сцепления на льду</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Список включенных услуг зимы -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mt-3">
+              <div class="p-2.5 rounded-xl bg-black/50 border border-white/5 text-xs">
+                <div class="font-bold text-white flex items-center gap-1.5">
+                  <i data-lucide="check-circle" class="w-3.5 h-3.5 text-cyan-400"></i> АКБ тест
+                </div>
+                <div class="text-[11px] text-slate-400 mt-0.5">Нагрузка и пусковой ток</div>
+              </div>
+              <div class="p-2.5 rounded-xl bg-black/50 border border-white/5 text-xs">
+                <div class="font-bold text-white flex items-center gap-1.5">
+                  <i data-lucide="check-circle" class="w-3.5 h-3.5 text-cyan-400"></i> Рефрактометр
+                </div>
+                <div class="text-[11px] text-slate-400 mt-0.5">Антифриз до -45°C</div>
+              </div>
+              <div class="p-2.5 rounded-xl bg-black/50 border border-white/5 text-xs">
+                <div class="font-bold text-white flex items-center gap-1.5">
+                  <i data-lucide="check-circle" class="w-3.5 h-3.5 text-cyan-400"></i> Дошиповка
+                </div>
+                <div class="text-[11px] text-slate-400 mt-0.5">Ремонтные шипы Теком</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Нижняя панель с кнопкой записи -->
+          <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-3 border-t border-white/10 shrink-0">
+            <div>
+              <span class="text-[11px] text-slate-400">Пакет «Зимний Рубеж»:</span>
+              <div class="text-xl font-black text-white">4 200 ₽ <span class="text-xs line-through text-slate-500 font-normal">5 500 ₽</span></div>
+            </div>
+            <button class="open-modal-trigger promotors-btn-orange !bg-cyan-600 hover:!bg-cyan-500 shadow-cyan-600/30 text-xs py-2.5 px-6 cursor-pointer" data-service="Пакет Осень / Зима (4 200 ₽)">
+              Записаться на зимний комплекс
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- Подвал и контакты -->
+  <footer id="contacts" class="py-16 bg-[#040508] border-t border-white/5 z-10 relative text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div class="space-y-3">
+          <div class="text-lg font-black uppercase text-white font-['Space_Grotesk']">
+            PRO<span class="text-orange-500">MOTORS</span>
+          </div>
+          <p class="text-xs text-slate-400">
+            Сеть специализированных станций экспресс-замены масла, регламентного ТО и шиномонтажа.
+          </p>
+        </div>
+        <div>
+          <div class="text-white font-bold uppercase tracking-wider mb-3">Услуги</div>
+          <div class="space-y-2">
+            <div><a href="#calculator" class="hover:text-white">Экспресс-замена масла (Работа 0 ₽)</a></div>
+            <div><a href="#services" class="hover:text-white">Регламентное ТО по ГОСТ</a></div>
+            <div><a href="#services" class="hover:text-white">Шиномонтаж и балансировка</a></div>
+            <div><a href="#seasons" class="hover:text-white">Сезонное хранение колес</a></div>
+          </div>
+        </div>
+        <div>
+          <div class="text-white font-bold uppercase tracking-wider mb-3">График работы</div>
+          <div class="space-y-2">
+            <div>Ежедневно: с 08:00 до 21:00</div>
+            <div>Без обеда и выходных</div>
+            <div>Живая очередь и онлайн-запись</div>
+          </div>
+        </div>
+        <div>
+          <div class="text-white font-bold uppercase tracking-wider mb-3">Контакты</div>
+          <div class="space-y-2">
+            <div><a href="tel:+78126034480" class="text-white font-bold text-sm hover:text-orange-400">+7 (812) 603-44-80</a></div>
+            <div>г. Москва, ул. Автозаводская, 23, стр. 7</div>
+            <div>info@promotors-service.ru</div>
+          </div>
+        </div>
+      </div>
+      <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>PROMOTORS AUTO SERVICE © 2026. Все права защищены.</div>
+        <div>Культурная замена масла: работа мастера 0 ₽ при покупке масла у нас</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Модальное окно быстрой записи -->
+  <div id="booking-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+    <div id="modal-backdrop" class="fixed inset-0 bg-black/80 backdrop-blur-md"></div>
+    <div class="relative w-full max-w-lg rounded-2xl glass-card-promotors p-6 sm:p-8 border border-white/15 shadow-2xl z-10 bg-[#0d111a]">
+      <button id="close-modal-btn" class="absolute top-5 right-5 p-2 text-slate-400 hover:text-white cursor-pointer" aria-label="Закрыть">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <form id="booking-form" class="space-y-4">
+        <div>
+          <div class="text-[10px] uppercase font-bold text-orange-400 tracking-wider">Онлайн бронирование поста</div>
+          <h3 class="text-2xl font-black uppercase text-white font-['Space_Grotesk'] mt-1">Забронировать время</h3>
+          <p class="text-xs text-slate-400 mt-1">Работа мастера по замене масла — 0 ₽ при покупке масла у нас.</p>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Выбранная услуга / расчет</label>
+          <input type="text" id="modal-service-input" class="w-full px-4 py-2.5 rounded-xl modern-input text-xs" value="Экспресс-замена масла" readonly>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Марка и модель авто *</label>
+            <input type="text" required placeholder="Например: Toyota Camry" class="w-full px-4 py-2.5 rounded-xl modern-input text-xs">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Телефон для связи *</label>
+            <input type="tel" required placeholder="+7 (999) 000-00-00" class="w-full px-4 py-2.5 rounded-xl modern-input text-xs">
+          </div>
+        </div>
+
+        <button type="submit" class="promotors-btn-orange w-full text-xs text-center cursor-pointer mt-2">
+          Подтвердить запись
+        </button>
+      </form>
+
+      <div id="booking-success" class="hidden text-center py-6 space-y-3">
+        <div class="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center">
+          <i data-lucide="check-circle" class="w-8 h-8"></i>
+        </div>
+        <h3 class="text-xl font-bold text-white uppercase">Пост забронирован!</h3>
+        <p class="text-xs text-slate-300">Ждем вас на станции. Мастер подготовит материалы к вашему приезду.</p>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

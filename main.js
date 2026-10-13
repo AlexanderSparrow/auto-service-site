@@ -1,0 +1,485 @@
+import { createIcons, icons } from 'lucide';
+import Lenis from 'lenis';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
+// Visual Car Catalog with high quality generated renders & specs
+const CAR_DATA = {
+  toyota: {
+    name: 'Toyota Camry',
+    sub: 'XV70 • 2.5 (A25A / 2AR)',
+    tag: 'Седан',
+    volume: 4.4,
+    filter: 850,
+    img: '/images/cars/toyota.jpg',
+    recommendation: '0W-20 / 5W-30 SP/GF-6'
+  },
+  bmw: {
+    name: 'BMW 5 Series',
+    sub: 'G30 • 530d xDrive (B57)',
+    tag: 'Премиум',
+    volume: 6.5,
+    filter: 1300,
+    img: '/images/cars/bmw.jpg',
+    recommendation: '5W-30 BMW Longlife-04'
+  },
+  audi: {
+    name: 'Audi Q7 / Q5',
+    sub: '4M • 3.0 TDI / 2.0 TFSI',
+    tag: 'Кроссовер',
+    volume: 6.8,
+    filter: 1400,
+    img: '/images/cars/audi.jpg',
+    recommendation: '5W-30 VW 504.00 / 507.00'
+  },
+  kia: {
+    name: 'Kia Sportage',
+    sub: 'NQ5 • 2.0 (G4NA / Smartstream)',
+    tag: 'Кроссовер',
+    volume: 4.0,
+    filter: 750,
+    img: '/images/cars/kia.jpg',
+    recommendation: '5W-30 ACEA A5/B5 / C2'
+  }
+};
+
+const OIL_DATA = {
+  motul: { name: 'Motul 8100 X-cess Gen2', brand: 'Motul', price: 1150, desc: '100% синтетика (Франция)' },
+  liquimoly: { name: 'Liqui Moly Molygen NG', brand: 'Liqui Moly', price: 1250, desc: 'С молибденом (Германия)' },
+  mobil: { name: 'Mobil 1 ESP Formula', brand: 'Mobil 1', price: 1300, desc: 'PAO + Эстеры (Финляндия)' },
+  lukoil: { name: 'Lukoil Genesis Armortech', brand: 'Лукойл', price: 750, desc: 'Официальные допуски (РФ)' }
+};
+
+let currentSelectedCar = 'toyota';
+let currentSelectedOil = 'motul';
+
+export function initApp() {
+  createIcons({ icons });
+
+  initSmoothScroll();
+  initScrollAnimations();
+  initCounters();
+
+  setupVisualCarSelector();
+  setupVisualOilSelector();
+  setupAddonCheckboxes();
+  setupSeasonTabs();
+  setupBookingModal();
+
+  recalculatePrice();
+}
+
+function initSmoothScroll() {
+  const lenis = new Lenis({
+    duration: 1.1,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true,
+  });
+
+  lenis.on('scroll', ScrollTrigger.update);
+
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+  });
+  gsap.ticker.lagSmoothing(0);
+}
+
+function initScrollAnimations() {
+  gsap.from('.hero-reveal', {
+    y: 30,
+    opacity: 0,
+    duration: 0.9,
+    stagger: 0.15,
+    ease: 'power3.out',
+  });
+
+  gsap.to('#hero-car-img', {
+    scrollTrigger: {
+      trigger: '#hero-section',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: true,
+    },
+    y: 70,
+    scale: 1.05,
+  });
+
+  gsap.to('#parts-wheel-img', {
+    scrollTrigger: {
+      trigger: '#parts-section',
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: 1,
+    },
+    rotation: 90,
+  });
+
+  gsap.utils.toArray('.reveal-card').forEach((card) => {
+    gsap.from(card, {
+      scrollTrigger: {
+        trigger: card,
+        start: 'top 85%',
+      },
+      y: 40,
+      opacity: 0,
+      duration: 0.7,
+      ease: 'power3.out',
+    });
+  });
+
+  // Горизонтальный Pin-Scroll для пути клиента (Вариант 2)
+  const journeySection = document.getElementById('journey-pin-section');
+  const journeyTrack = document.getElementById('journey-track');
+  const progressBar = document.getElementById('journey-progress-bar');
+  const stepCounter = document.getElementById('journey-step-counter');
+
+  if (journeySection && journeyTrack) {
+    const getScrollAmount = () => {
+      const trackWidth = journeyTrack.scrollWidth;
+      const viewportWidth = window.innerWidth;
+      return Math.max(0, trackWidth - viewportWidth + 140);
+    };
+
+    gsap.to(journeyTrack, {
+      x: () => -getScrollAmount(),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: journeySection,
+        start: 'top top',
+        end: () => `+=${Math.max(2000, getScrollAmount() * 1.8)}`,
+        pin: true,
+        scrub: 1,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          if (progressBar) {
+            progressBar.style.width = `${Math.round(self.progress * 100)}%`;
+          }
+          if (stepCounter) {
+            const step = Math.min(4, Math.floor(self.progress * 3.99) + 1);
+            stepCounter.textContent = `0${step} / 04`;
+          }
+        },
+      },
+    });
+
+    window.addEventListener('load', () => {
+      ScrollTrigger.refresh();
+    });
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 400);
+  }
+}
+
+function initCounters() {
+  const statNumbers = document.querySelectorAll('.stat-number');
+  statNumbers.forEach((stat) => {
+    const target = parseInt(stat.dataset.target || '0', 10);
+    const suffix = stat.dataset.suffix || '';
+
+    ScrollTrigger.create({
+      trigger: stat,
+      start: 'top 90%',
+      onEnter: () => {
+        let current = 0;
+        const duration = 1400;
+        const stepTime = 20;
+        const totalSteps = duration / stepTime;
+        const increment = target / totalSteps;
+
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            stat.textContent = target + suffix;
+            clearInterval(timer);
+          } else {
+            stat.textContent = Math.floor(current) + suffix;
+          }
+        }, stepTime);
+      },
+      once: true,
+    });
+  });
+}
+
+function setupVisualCarSelector() {
+  const carCards = document.querySelectorAll('.car-select-card');
+  const previewImg = document.getElementById('calc-active-car-img');
+  const previewName = document.getElementById('calc-active-car-name');
+  const previewSub = document.getElementById('calc-active-car-sub');
+  const previewSpec = document.getElementById('calc-active-car-spec');
+
+  carCards.forEach((card) => {
+    card.addEventListener('click', () => {
+      carCards.forEach((c) => {
+        c.classList.remove('border-orange-500', 'bg-orange-500/10', 'glow-orange-sm');
+        c.classList.add('border-white/10', 'bg-black/40');
+      });
+
+      card.classList.add('border-orange-500', 'bg-orange-500/10', 'glow-orange-sm');
+      card.classList.remove('border-white/10', 'bg-black/40');
+
+      currentSelectedCar = card.dataset.car;
+      const data = CAR_DATA[currentSelectedCar];
+
+      if (previewImg) {
+        gsap.to(previewImg, {
+          opacity: 0,
+          scale: 0.95,
+          duration: 0.2,
+          onComplete: () => {
+            previewImg.src = data.img;
+            gsap.to(previewImg, { opacity: 1, scale: 1, duration: 0.3 });
+          }
+        });
+      }
+
+      if (previewName) previewName.textContent = data.name;
+      if (previewSub) previewSub.textContent = data.sub;
+      if (previewSpec) previewSpec.textContent = `Объем: ${data.volume} л • Допуск: ${data.recommendation}`;
+
+      recalculatePrice();
+    });
+  });
+}
+
+function setupVisualOilSelector() {
+  const oilCards = document.querySelectorAll('.oil-select-card');
+
+  oilCards.forEach((card) => {
+    card.addEventListener('click', () => {
+      oilCards.forEach((c) => {
+        c.classList.remove('border-orange-500', 'bg-orange-500/10');
+        c.classList.add('border-white/10', 'bg-black/40');
+      });
+
+      card.classList.add('border-orange-500', 'bg-orange-500/10');
+      card.classList.remove('border-white/10', 'bg-black/40');
+
+      currentSelectedOil = card.dataset.oil;
+      recalculatePrice();
+    });
+  });
+}
+
+function setupAddonCheckboxes() {
+  document.querySelectorAll('.calc-addon').forEach((cb) => {
+    cb.addEventListener('change', recalculatePrice);
+  });
+}
+
+function recalculatePrice() {
+  const car = CAR_DATA[currentSelectedCar] || CAR_DATA.toyota;
+  const oil = OIL_DATA[currentSelectedOil] || OIL_DATA.motul;
+
+  const oilCost = Math.round(car.volume * oil.price);
+  const filterCost = car.filter;
+  const laborCost = 0; // 0 ₽ при покупке у нас!
+
+  let addonsCost = 0;
+  document.querySelectorAll('.calc-addon:checked').forEach((cb) => {
+    addonsCost += parseInt(cb.dataset.price || '0', 10);
+  });
+
+  const total = oilCost + filterCost + laborCost + addonsCost;
+
+  const totalEl = document.getElementById('calc-total');
+  const summaryCarName = document.getElementById('calc-summary-car');
+  const summaryOilName = document.getElementById('calc-summary-oil');
+  const summaryVol = document.getElementById('calc-summary-vol');
+  const summaryOilPrice = document.getElementById('calc-summary-oil-price');
+  const summaryFilterPrice = document.getElementById('calc-summary-filter-price');
+
+  if (totalEl) animatePriceNumber(totalEl, total);
+  if (summaryCarName) summaryCarName.textContent = `${car.name} (${car.sub})`;
+  if (summaryOilName) summaryOilName.textContent = oil.name;
+  if (summaryVol) summaryVol.textContent = `${car.volume} л`;
+  if (summaryOilPrice) summaryOilPrice.textContent = `${oilCost.toLocaleString('ru-RU')} ₽`;
+  if (summaryFilterPrice) summaryFilterPrice.textContent = `${filterCost.toLocaleString('ru-RU')} ₽`;
+}
+
+function animatePriceNumber(element, target) {
+  const start = parseInt(element.dataset.val || '0', 10);
+  const duration = 300;
+  const startTime = performance.now();
+
+  function step(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const val = Math.round(start + (target - start) * (1 - Math.pow(1 - progress, 3)));
+    element.textContent = `${val.toLocaleString('ru-RU')} ₽`;
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      element.dataset.val = target;
+    }
+  }
+  requestAnimationFrame(step);
+}
+
+function setupSeasonTabs() {
+  const summerPanel = document.getElementById('summer-panel');
+  const winterPanel = document.getElementById('winter-panel');
+  const btnSummer = document.getElementById('btn-select-summer');
+  const btnWinter = document.getElementById('btn-select-winter');
+
+  if (!summerPanel || !winterPanel) return;
+
+  let currentActive = 'summer';
+
+  function activateSummer(animate = true) {
+    if (currentActive === 'summer' && animate) return;
+    currentActive = 'summer';
+
+    if (window.innerWidth >= 1024) {
+      if (animate && window.gsap) {
+        gsap.to(summerPanel, { width: '67%', duration: 0.65, ease: 'power3.out' });
+        gsap.to(winterPanel, { width: '33%', duration: 0.65, ease: 'power3.out' });
+      } else {
+        summerPanel.style.width = '67%';
+        winterPanel.style.width = '33%';
+      }
+    }
+
+    // Active button styling
+    btnSummer?.classList.add('bg-gradient-to-r', 'from-orange-600', 'to-amber-600', 'text-white', 'shadow-lg', 'shadow-orange-600/30');
+    btnSummer?.classList.remove('text-slate-400');
+    btnWinter?.classList.remove('bg-gradient-to-r', 'from-cyan-600', 'to-blue-600', 'text-white', 'shadow-lg', 'shadow-cyan-600/30');
+    btnWinter?.classList.add('text-slate-400');
+  }
+
+  function activateWinter(animate = true) {
+    if (currentActive === 'winter' && animate) return;
+    currentActive = 'winter';
+
+    if (window.innerWidth >= 1024) {
+      if (animate && window.gsap) {
+        gsap.to(summerPanel, { width: '33%', duration: 0.65, ease: 'power3.out' });
+        gsap.to(winterPanel, { width: '67%', duration: 0.65, ease: 'power3.out' });
+      } else {
+        summerPanel.style.width = '33%';
+        winterPanel.style.width = '67%';
+      }
+    }
+
+    // Active button styling
+    btnWinter?.classList.add('bg-gradient-to-r', 'from-cyan-600', 'to-blue-600', 'text-white', 'shadow-lg', 'shadow-cyan-600/30');
+    btnWinter?.classList.remove('text-slate-400');
+    btnSummer?.classList.remove('bg-gradient-to-r', 'from-orange-600', 'to-amber-600', 'text-white', 'shadow-lg', 'shadow-orange-600/30');
+    btnSummer?.classList.add('text-slate-400');
+  }
+
+  summerPanel.addEventListener('mouseenter', () => {
+    activateSummer(true);
+  });
+
+  winterPanel.addEventListener('mouseenter', () => {
+    activateWinter(true);
+  });
+
+  btnSummer?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    activateSummer(true);
+  });
+
+  btnWinter?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    activateWinter(true);
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth < 1024) {
+      summerPanel.style.width = '100%';
+      winterPanel.style.width = '100%';
+    } else {
+      if (currentActive === 'summer') {
+        summerPanel.style.width = '67%';
+        winterPanel.style.width = '33%';
+      } else {
+        summerPanel.style.width = '33%';
+        winterPanel.style.width = '67%';
+      }
+    }
+  });
+
+  activateSummer(false);
+}
+
+function setupBookingModal() {
+  const modal = document.getElementById('booking-modal');
+  const closeBtn = document.getElementById('close-modal-btn');
+  const backdrop = document.getElementById('modal-backdrop');
+  const form = document.getElementById('booking-form');
+  const successBox = document.getElementById('booking-success');
+  const srvInput = document.getElementById('modal-service-input');
+  const bookCalcBtn = document.getElementById('calc-book-btn');
+
+  window.openBooking = function (serviceName = 'Экспресс-замена масла') {
+    if (!modal) return;
+    if (srvInput) srvInput.value = serviceName;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  };
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = '';
+    if (successBox && form) {
+      setTimeout(() => {
+        form.classList.remove('hidden');
+        successBox.classList.add('hidden');
+        form.reset();
+      }, 300);
+    }
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (backdrop) backdrop.addEventListener('click', closeModal);
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal?.classList.contains('hidden')) closeModal();
+  });
+
+  document.querySelectorAll('.open-modal-trigger').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const srv = btn.dataset.service || 'Быстрая запись на СТО';
+      window.openBooking(srv);
+    });
+  });
+
+  if (bookCalcBtn) {
+    bookCalcBtn.addEventListener('click', () => {
+      const car = CAR_DATA[currentSelectedCar];
+      const total = document.getElementById('calc-total')?.textContent || '';
+      window.openBooking(`Расчет: ${car.name} (${car.sub}) — ${total} (Работа 0 ₽)`);
+    });
+  }
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const orig = submitBtn.innerHTML;
+      submitBtn.innerHTML = 'Бронирование...';
+      submitBtn.disabled = true;
+
+      setTimeout(() => {
+        submitBtn.innerHTML = orig;
+        submitBtn.disabled = false;
+        form.classList.add('hidden');
+        if (successBox) successBox.classList.remove('hidden');
+      }, 600);
+    });
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
