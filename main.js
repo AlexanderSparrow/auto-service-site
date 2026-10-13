@@ -141,15 +141,7 @@ function initScrollAnimations() {
   }
 
 
-  gsap.to('#parts-wheel-img', {
-    scrollTrigger: {
-      trigger: '#parts-section',
-      start: 'top bottom',
-      end: 'bottom top',
-      scrub: 1,
-    },
-    rotation: 90,
-  });
+  setupAntiFakeLaboratory();
 
   gsap.utils.toArray('.reveal-card').forEach((card) => {
     gsap.from(card, {
@@ -163,6 +155,7 @@ function initScrollAnimations() {
       ease: 'power3.out',
     });
   });
+
 
   // Горизонтальный Pin-Scroll для пути клиента (Вариант 2)
   const journeySection = document.getElementById('journey-pin-section');
@@ -539,6 +532,108 @@ function setupBookingModal() {
     });
   }
 }
+
+function setupAntiFakeLaboratory() {
+  const labBtns = document.querySelectorAll('.lab-item-btn');
+  const labImg = document.getElementById('lab-visual-img');
+  const fakePoints = document.getElementById('lab-fake-points');
+  const origPoints = document.getElementById('lab-orig-points');
+  const uvFlashlight = document.getElementById('lab-uv-flashlight');
+  const labZone = labImg?.closest('.group\\/lab');
+
+  const LAB_DATA = {
+    oil: {
+      img: '/images/oil-service-bay.jpg',
+      fake: [
+        '• Нестабильная вязкость (разжижение при 90°C)',
+        '• Отсутствие люминесцентной маркировки на бочке',
+        '• Риск масляного голодания и заклинивания ДВС'
+      ],
+      orig: [
+        '• Прямые оптовые поставки из ЕС и заводов с паспортами',
+        '• Лазерная гравировка партии и светящийся QR в УФ',
+        '• Гарантия 12 месяцев на двигатель при замене у нас'
+      ]
+    },
+    filter: {
+      img: '/images/services/maintenance.jpg',
+      fake: [
+        '• Тонкая промокашка вместо синтетического волокна',
+        '• Заклинивший резиновый противодренажный клапан',
+        '• Разрыв шторы давлением масла на холодном пуске'
+      ],
+      orig: [
+        '• Микропористая бумага Mann / Mahle с пропиткой смолой',
+        '• Силиконовый клапан держит давление до -40°C',
+        '• Оригинальная резьба с заводской лазерной фаской'
+      ]
+    },
+    spark: {
+      img: '/images/hero-car-engine.jpg',
+      fake: [
+        '• Железный наконечник вместо платины / иридия',
+        '• Пропуски зажигания и перегрев катушек ЭБУ',
+        '• Быстрое выгорание зазора через 3 000 км'
+      ],
+      orig: [
+        '• Лазерная пайка иридиевого электрода NGK / Denso',
+        '• Точный искровой зазор по каталогу производителя',
+        '• Ресурс свечей до 100 000 км стабильной работы'
+      ]
+    }
+  };
+
+  labBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      labBtns.forEach((b) => {
+        b.classList.remove('bg-purple-600', 'text-white');
+        b.classList.add('bg-black/50', 'text-slate-400');
+      });
+      btn.classList.add('bg-purple-600', 'text-white');
+      btn.classList.remove('bg-black/50', 'text-slate-400');
+
+      const itemKey = btn.dataset.item;
+      const data = LAB_DATA[itemKey];
+      if (!data) return;
+
+      if (labImg) {
+        gsap.to(labImg, {
+          opacity: 0.2,
+          duration: 0.2,
+          onComplete: () => {
+            labImg.src = data.img;
+            gsap.to(labImg, { opacity: 0.6, duration: 0.3 });
+          }
+        });
+      }
+
+      if (fakePoints) {
+        fakePoints.innerHTML = data.fake.map((txt) => `<div>${txt}</div>`).join('');
+      }
+
+      if (origPoints) {
+        origPoints.innerHTML = data.orig.map((txt) => `<div>${txt}</div>`).join('');
+      }
+    });
+  });
+
+  // УФ фонарик (курсор мыши над зоной теста)
+  if (labZone && uvFlashlight) {
+    labZone.addEventListener('mousemove', (e) => {
+      const rect = labZone.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      uvFlashlight.style.left = `${x}px`;
+      uvFlashlight.style.top = `${y}px`;
+      uvFlashlight.style.opacity = '1';
+    });
+
+    labZone.addEventListener('mouseleave', () => {
+      uvFlashlight.style.opacity = '0';
+    });
+  }
+}
+
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initApp);
