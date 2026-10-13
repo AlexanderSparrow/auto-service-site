@@ -106,6 +106,41 @@ function initScrollAnimations() {
     scale: 1.05,
   });
 
+  // Интерактивный 3D Tilt и Spotlight Laser Scanner в Hero
+  const stage = document.getElementById('hero-car-stage');
+  const wrapper = document.getElementById('hero-car-wrapper');
+  const spotlight = document.getElementById('hero-spotlight');
+
+  if (stage && wrapper && spotlight) {
+    stage.addEventListener('mouseenter', () => {
+      spotlight.style.opacity = '1';
+    });
+
+    stage.addEventListener('mouseleave', () => {
+      spotlight.style.opacity = '0';
+      wrapper.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    });
+
+    stage.addEventListener('mousemove', (e) => {
+      const rect = stage.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Позиционирование лазерного прицела / спотлайта
+      spotlight.style.left = `${x}px`;
+      spotlight.style.top = `${y}px`;
+
+      // 3D Гироскоп/Tilt эффект кузова
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -7;
+      const rotateY = ((x - centerX) / centerX) * 7;
+
+      wrapper.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+    });
+  }
+
+
   gsap.to('#parts-wheel-img', {
     scrollTrigger: {
       trigger: '#parts-section',
