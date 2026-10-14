@@ -1482,56 +1482,391 @@
     </div>
   </footer>
 
-  <!-- Модальное окно быстрой записи -->
-  <div id="booking-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
-    <div id="modal-backdrop" class="fixed inset-0 bg-black/80 backdrop-blur-md"></div>
-    <div class="relative w-full max-w-lg rounded-2xl glass-card-promotors p-6 sm:p-8 border border-white/15 shadow-2xl z-10 bg-[#0d111a]">
-      <button id="close-modal-btn" class="absolute top-5 right-5 p-2 text-slate-400 hover:text-white cursor-pointer" aria-label="Закрыть">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
-
-      <form id="booking-form" class="space-y-4">
+  <!-- Полноценный Интерактивный Терминал Управления Записью (Live Service Bay Terminal) -->
+  <div id="booking-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-2 sm:p-4 md:p-6 overflow-y-auto">
+    <div id="modal-backdrop" class="fixed inset-0 bg-black/85 backdrop-blur-xl transition-opacity"></div>
+    
+    <div class="relative w-full max-w-5xl rounded-3xl glass-card-promotors border border-white/15 shadow-[0_20px_70px_rgba(0,0,0,0.8)] z-10 bg-[#090c13] my-auto overflow-hidden flex flex-col max-h-[95vh]">
+      
+      <!-- Шапка терминала -->
+      <div class="p-5 sm:p-7 border-b border-white/10 flex items-start justify-between gap-4 bg-gradient-to-r from-orange-500/10 via-transparent to-transparent shrink-0">
         <div>
-          <div class="text-[10px] uppercase font-bold text-orange-400 tracking-wider">Онлайн бронирование поста</div>
-          <h3 class="text-2xl font-black uppercase text-white font-['Space_Grotesk'] mt-1">Забронировать время</h3>
-          <p class="text-xs text-slate-400 mt-1">Работа мастера по замене масла — 0 ₽ при покупке масла у нас.</p>
+          <div class="flex items-center gap-2 text-[10px] uppercase font-bold tracking-widest text-orange-400">
+            <span class="inline-flex w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            PROMOTORS LIVE TERMINAL • ОНЛАЙН-СИСТЕМА БРОНИРОВАНИЯ
+          </div>
+          <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase text-white font-['Space_Grotesk'] mt-1">
+            Выбор поста и времени обслуживания
+          </h3>
+          <p class="text-xs text-slate-400 mt-1 max-w-xl">
+            Выберите удобный день и рабочий пост. Живая индикация загрузки, видеоконтроль спецоборудования и фиксация слота без очередей.
+          </p>
         </div>
 
-        <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">Выбранная услуга и слот</label>
-          <input type="text" id="modal-service-input" class="w-full px-4 py-2.5 rounded-xl modern-input text-xs font-medium text-white" value="Экспресс-замена масла" readonly>
-          <div id="modal-slot-info" class="mt-2 flex items-center justify-between text-[11px] bg-white/5 border border-white/10 rounded-lg px-3 py-1.5">
-            <span class="flex items-center gap-1.5 text-emerald-400 font-semibold">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span id="modal-slot-post">Пост №1 свободен</span>
-            </span>
-            <span class="text-orange-400 font-bold" id="modal-slot-time">Время работы: ~25 минут</span>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">Марка и модель авто *</label>
-            <input type="text" required placeholder="Например: Toyota Camry" class="w-full px-4 py-2.5 rounded-xl modern-input text-xs">
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">Телефон для связи *</label>
-            <input type="tel" required placeholder="+7 (999) 000-00-00" class="w-full px-4 py-2.5 rounded-xl modern-input text-xs">
-          </div>
-        </div>
-
-        <button type="submit" class="promotors-btn-orange w-full text-xs text-center cursor-pointer mt-2">
-          Подтвердить запись
+        <button id="close-modal-btn" class="p-2.5 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors cursor-pointer border border-white/10 shrink-0" aria-label="Закрыть">
+          <i data-lucide="x" class="w-5 h-5"></i>
         </button>
-      </form>
-
-      <div id="booking-success" class="hidden text-center py-6 space-y-3">
-        <div class="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center">
-          <i data-lucide="check-circle" class="w-8 h-8"></i>
-        </div>
-        <h3 class="text-xl font-bold text-white uppercase">Пост забронирован!</h3>
-        <p class="text-xs text-slate-300">Ждем вас на станции. Мастер подготовит материалы к вашему приезду.</p>
       </div>
+
+      <!-- Лента дат (Календарный переключатель) -->
+      <div class="px-5 sm:px-7 py-3 bg-black/40 border-b border-white/5 flex items-center justify-between gap-3 overflow-x-auto no-scrollbar shrink-0">
+        <div class="flex items-center gap-2 shrink-0 text-xs font-semibold text-slate-400 mr-2">
+          <i data-lucide="calendar" class="w-4 h-4 text-orange-400"></i> Дата:
+        </div>
+        <div class="flex items-center gap-2 shrink-0" id="terminal-date-selector">
+          <button type="button" class="terminal-date-btn active-date px-3.5 py-1.5 rounded-xl text-xs font-bold bg-orange-500 text-white transition-all shadow-md shadow-orange-500/20 cursor-pointer" data-date="today">
+            Сегодня, 14 окт <span class="ml-1 text-[10px] opacity-80">(4 слота)</span>
+          </button>
+          <button type="button" class="terminal-date-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white/5 hover:bg-white/10 text-slate-300 transition-all border border-white/5 cursor-pointer" data-date="tomorrow">
+            Завтра, 15 окт <span class="ml-1 text-[10px] text-emerald-400">(8 слотов)</span>
+          </button>
+          <button type="button" class="terminal-date-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white/5 hover:bg-white/10 text-slate-300 transition-all border border-white/5 cursor-pointer" data-date="day3">
+            Пятница, 16 окт <span class="ml-1 text-[10px] text-emerald-400">(6 слотов)</span>
+          </button>
+          <button type="button" class="terminal-date-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white/5 hover:bg-white/10 text-slate-300 transition-all border border-white/5 cursor-pointer" data-date="day4">
+            Суббота, 17 окт <span class="ml-1 text-[10px] text-orange-400">(2 слота)</span>
+          </button>
+        </div>
+        <div class="hidden lg:flex items-center gap-1.5 text-[11px] text-slate-400 shrink-0">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i>
+          Гарантия закрепления мастера
+        </div>
+      </div>
+
+      <!-- Основная зона: Сетка 4-х рабочих постов с живыми микролупами -->
+      <div class="p-4 sm:p-7 overflow-y-auto space-y-6">
+        
+        <!-- Заголовок сетки постов -->
+        <div class="flex items-center justify-between">
+          <div class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+            <i data-lucide="cpu" class="w-4 h-4 text-orange-400"></i> Рабочие посты техцентра:
+          </div>
+          <span class="text-[11px] text-slate-400 hidden sm:inline">Кликните по посту или сразу выберите свободное время</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="terminal-bays-grid">
+          
+          <!-- ПОСТ №1: Экспресс-масло -->
+          <div class="terminal-bay-card active-bay rounded-2xl p-3.5 bg-black/60 border-2 border-orange-500 transition-all duration-300 flex flex-col justify-between group cursor-pointer" data-bay="1" data-service="Экспресс-замена масла" data-time="25 мин">
+            <div>
+              <!-- Видео-микролуп поста -->
+              <div class="relative aspect-video rounded-xl overflow-hidden bg-black mb-3 border border-white/10">
+                <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                  <source src="/videos/bays/bay1-oil.webm" type="video/webm">
+                  <source src="/videos/bays/bay1-oil.mp4" type="video/mp4">
+                  <img src="/images/services/oil.webp" alt="Пост №1: Замена масла" class="w-full h-full object-cover">
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none"></div>
+                
+                <!-- Бейджи статуса -->
+                <div class="absolute top-2 left-2 flex items-center gap-1 px-2 py-0.5 rounded-md bg-black/80 border border-emerald-500/40 text-[9px] font-bold text-emerald-400 backdrop-blur-md">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  ПОСТ СВОБОДЕН
+                </div>
+                <div class="absolute bottom-2 left-2 text-[10px] font-black text-white uppercase tracking-wider">
+                  Raasm Vacuum • 25 мин
+                </div>
+              </div>
+
+              <!-- Описание поста -->
+              <div class="space-y-1 mb-3">
+                <div class="text-[10px] font-bold uppercase tracking-wider text-orange-400">Пост №1 • Спецпост</div>
+                <h4 class="text-sm font-black uppercase text-white group-hover:text-orange-400 transition-colors">
+                  Экспресс-масло & фильтры
+                </h4>
+                <p class="text-[11px] text-slate-400 leading-snug">
+                  Вакуумный экспресс-отсос + слив через картер. Работа 0 ₽ при нашем масле.
+                </p>
+              </div>
+            </div>
+
+            <!-- Слоты времени для поста 1 -->
+            <div class="pt-2 border-t border-white/10">
+              <div class="text-[10px] font-semibold text-slate-400 mb-1.5">Свободные окна:</div>
+              <div class="grid grid-cols-3 gap-1.5 bay-slots-container">
+                <button type="button" class="bay-time-slot active-slot px-2 py-1.5 rounded-lg text-xs font-bold text-center bg-orange-500 text-white transition-all cursor-pointer shadow" data-time="16:30">
+                  16:30
+                </button>
+                <button type="button" class="bay-time-slot px-2 py-1.5 rounded-lg text-xs font-bold text-center bg-white/5 hover:bg-white/15 text-slate-200 transition-all cursor-pointer border border-white/5" data-time="17:00">
+                  17:00
+                </button>
+                <button type="button" class="bay-time-slot px-2 py-1.5 rounded-lg text-xs font-bold text-center bg-white/5 hover:bg-white/15 text-slate-200 transition-all cursor-pointer border border-white/5" data-time="18:00">
+                  18:00
+                </button>
+                <button type="button" class="bay-time-slot px-2 py-1.5 rounded-lg text-xs font-bold text-center bg-white/5 hover:bg-white/15 text-slate-200 transition-all cursor-pointer border border-white/5" data-time="19:15">
+                  19:15
+                </button>
+                <span class="px-2 py-1.5 rounded-lg text-[10px] font-medium text-center bg-black/40 text-slate-600 border border-white/5 line-through">
+                  17:30
+                </span>
+                <span class="px-2 py-1.5 rounded-lg text-[10px] font-medium text-center bg-black/40 text-slate-600 border border-white/5 line-through">
+                  18:30
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ПОСТ №2: Регламентное ТО & Диагностика -->
+          <div class="terminal-bay-card rounded-2xl p-3.5 bg-black/60 border border-white/10 hover:border-blue-500/50 transition-all duration-300 flex flex-col justify-between group cursor-pointer" data-bay="2" data-service="Регламентное ТО (36 точек)" data-time="45 мин">
+            <div>
+              <!-- Видео-микролуп поста -->
+              <div class="relative aspect-video rounded-xl overflow-hidden bg-black mb-3 border border-white/10">
+                <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                  <source src="/videos/bays/bay2-maintenance.webm" type="video/webm">
+                  <source src="/videos/bays/bay2-maintenance.mp4" type="video/mp4">
+                  <img src="/images/services/maintenance.webp" alt="Пост №2: ТО" class="w-full h-full object-cover">
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none"></div>
+                
+                <!-- Бейджи статуса -->
+                <div class="absolute top-2 left-2 flex items-center gap-1 px-2 py-0.5 rounded-md bg-black/80 border border-blue-500/40 text-[9px] font-bold text-blue-400 backdrop-blur-md">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
+                  В РАБОТЕ (до 16:50)
+                </div>
+                <div class="absolute bottom-2 left-2 text-[10px] font-black text-white uppercase tracking-wider">
+                  Autel MaxiSys • 45 мин
+                </div>
+              </div>
+
+              <!-- Описание поста -->
+              <div class="space-y-1 mb-3">
+                <div class="text-[10px] font-bold uppercase tracking-wider text-blue-400">Пост №2 • Диагностика</div>
+                <h4 class="text-sm font-black uppercase text-white group-hover:text-blue-400 transition-colors">
+                  Регламентное ТО & ЭБУ
+                </h4>
+                <p class="text-[11px] text-slate-400 leading-snug">
+                  Чек-лист 36 точек, лазерный осмотр тормозов, компьютерный опрос блоков.
+                </p>
+              </div>
+            </div>
+
+            <!-- Слоты времени для поста 2 -->
+            <div class="pt-2 border-t border-white/10">
+              <div class="text-[10px] font-semibold text-slate-400 mb-1.5">Свободные окна:</div>
+              <div class="grid grid-cols-3 gap-1.5 bay-slots-container">
+                <button type="button" class="bay-time-slot px-2 py-1.5 rounded-lg text-xs font-bold text-center bg-white/5 hover:bg-white/15 text-slate-200 transition-all cursor-pointer border border-white/5" data-time="17:15">
+                  17:15
+                </button>
+                <button type="button" class="bay-time-slot px-2 py-1.5 rounded-lg text-xs font-bold text-center bg-white/5 hover:bg-white/15 text-slate-200 transition-all cursor-pointer border border-white/5" data-time="18:15">
+                  18:15
+                </button>
+                <button type="button" class="bay-time-slot px-2 py-1.5 rounded-lg text-xs font-bold text-center bg-white/5 hover:bg-white/15 text-slate-200 transition-all cursor-pointer border border-white/5" data-time="19:30">
+                  19:30
+                </button>
+                <span class="px-2 py-1.5 rounded-lg text-[10px] font-medium text-center bg-black/40 text-slate-600 border border-white/5 line-through">
+                  16:00
+                </span>
+                <span class="px-2 py-1.5 rounded-lg text-[10px] font-medium text-center bg-black/40 text-slate-600 border border-white/5 line-through">
+                  16:45
+                </span>
+                <span class="px-2 py-1.5 rounded-lg text-[10px] font-medium text-center bg-black/40 text-slate-600 border border-white/5 line-through">
+                  20:00
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ПОСТ №3: 3D-Шиномонтаж -->
+          <div class="terminal-bay-card rounded-2xl p-3.5 bg-black/60 border border-white/10 hover:border-purple-500/50 transition-all duration-300 flex flex-col justify-between group cursor-pointer" data-bay="3" data-service="3D-Шиномонтаж Hofmann" data-time="35 мин">
+            <div>
+              <!-- Видео-микролуп поста -->
+              <div class="relative aspect-video rounded-xl overflow-hidden bg-black mb-3 border border-white/10">
+                <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                  <source src="/videos/bays/bay3-tires.webm" type="video/webm">
+                  <source src="/videos/bays/bay3-tires.mp4" type="video/mp4">
+                  <img src="/images/services/tires.webp" alt="Пост №3: Шиномонтаж" class="w-full h-full object-cover">
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none"></div>
+                
+                <!-- Бейджи статуса -->
+                <div class="absolute top-2 left-2 flex items-center gap-1 px-2 py-0.5 rounded-md bg-black/80 border border-purple-500/40 text-[9px] font-bold text-purple-400 backdrop-blur-md">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  ПОСТ СВОБОДЕН
+                </div>
+                <div class="absolute bottom-2 left-2 text-[10px] font-black text-white uppercase tracking-wider">
+                  Hofmann Laser • 35 мин
+                </div>
+              </div>
+
+              <!-- Описание поста -->
+              <div class="space-y-1 mb-3">
+                <div class="text-[10px] font-bold uppercase tracking-wider text-purple-400">Пост №3 • Колесный цех</div>
+                <h4 class="text-sm font-black uppercase text-white group-hover:text-purple-400 transition-colors">
+                  3D-Шиномонтаж Hofmann
+                </h4>
+                <p class="text-[11px] text-slate-400 leading-snug">
+                  Лазерное устранение биения дисков до 1 г, мойка колес, бережный зажим.
+                </p>
+              </div>
+            </div>
+
+            <!-- Слоты времени для поста 3 -->
+            <div class="pt-2 border-t border-white/10">
+              <div class="text-[10px] font-semibold text-slate-400 mb-1.5">Свободные окна:</div>
+              <div class="grid grid-cols-3 gap-1.5 bay-slots-container">
+                <button type="button" class="bay-time-slot px-2 py-1.5 rounded-lg text-xs font-bold text-center bg-white/5 hover:bg-white/15 text-slate-200 transition-all cursor-pointer border border-white/5" data-time="16:45">
+                  16:45
+                </button>
+                <button type="button" class="bay-time-slot px-2 py-1.5 rounded-lg text-xs font-bold text-center bg-white/5 hover:bg-white/15 text-slate-200 transition-all cursor-pointer border border-white/5" data-time="17:45">
+                  17:45
+                </button>
+                <button type="button" class="bay-time-slot px-2 py-1.5 rounded-lg text-xs font-bold text-center bg-white/5 hover:bg-white/15 text-slate-200 transition-all cursor-pointer border border-white/5" data-time="18:30">
+                  18:30
+                </button>
+                <button type="button" class="bay-time-slot px-2 py-1.5 rounded-lg text-xs font-bold text-center bg-white/5 hover:bg-white/15 text-slate-200 transition-all cursor-pointer border border-white/5" data-time="19:15">
+                  19:15
+                </button>
+                <span class="px-2 py-1.5 rounded-lg text-[10px] font-medium text-center bg-black/40 text-slate-600 border border-white/5 line-through">
+                  16:00
+                </span>
+                <span class="px-2 py-1.5 rounded-lg text-[10px] font-medium text-center bg-black/40 text-slate-600 border border-white/5 line-through">
+                  17:15
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ПОСТ №4: Сезонный сервис & Сход-развал -->
+          <div class="terminal-bay-card rounded-2xl p-3.5 bg-black/60 border border-white/10 hover:border-amber-500/50 transition-all duration-300 flex flex-col justify-between group cursor-pointer" data-bay="4" data-service="Сезонный сервис & Hunter 3D" data-time="40 мин">
+            <div>
+              <!-- Видео-микролуп поста -->
+              <div class="relative aspect-video rounded-xl overflow-hidden bg-black mb-3 border border-white/10">
+                <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                  <source src="/videos/bays/bay4-season.webm" type="video/webm">
+                  <source src="/videos/bays/bay4-season.mp4" type="video/mp4">
+                  <img src="/images/services/season.webp" alt="Пост №4: Сезонный" class="w-full h-full object-cover">
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none"></div>
+                
+                <!-- Бейджи статуса -->
+                <div class="absolute top-2 left-2 flex items-center gap-1 px-2 py-0.5 rounded-md bg-black/80 border border-amber-500/40 text-[9px] font-bold text-amber-400 backdrop-blur-md">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  СКЛАД И ПОСТ АКТИВНЫ
+                </div>
+                <div class="absolute bottom-2 left-2 text-[10px] font-black text-white uppercase tracking-wider">
+                  Hunter HawkEye • 40 мин
+                </div>
+              </div>
+
+              <!-- Описание поста -->
+              <div class="space-y-1 mb-3">
+                <div class="text-[10px] font-bold uppercase tracking-wider text-amber-400">Пост №4 • Сход-развал</div>
+                <h4 class="text-sm font-black uppercase text-white group-hover:text-amber-400 transition-colors">
+                  Сезонный сервис & Сход
+                </h4>
+                <p class="text-[11px] text-slate-400 leading-snug">
+                  Отель для шин с QR-маркировкой, 3D калибровка углов колес Hunter.
+                </p>
+              </div>
+            </div>
+
+            <!-- Слоты времени для поста 4 -->
+            <div class="pt-2 border-t border-white/10">
+              <div class="text-[10px] font-semibold text-slate-400 mb-1.5">Свободные окна:</div>
+              <div class="grid grid-cols-3 gap-1.5 bay-slots-container">
+                <button type="button" class="bay-time-slot px-2 py-1.5 rounded-lg text-xs font-bold text-center bg-white/5 hover:bg-white/15 text-slate-200 transition-all cursor-pointer border border-white/5" data-time="18:45">
+                  18:45
+                </button>
+                <button type="button" class="bay-time-slot px-2 py-1.5 rounded-lg text-xs font-bold text-center bg-white/5 hover:bg-white/15 text-slate-200 transition-all cursor-pointer border border-white/5" data-time="19:45">
+                  19:45
+                </button>
+                <span class="px-2 py-1.5 rounded-lg text-[10px] font-medium text-center bg-black/40 text-slate-600 border border-white/5 line-through">
+                  16:15
+                </span>
+                <span class="px-2 py-1.5 rounded-lg text-[10px] font-medium text-center bg-black/40 text-slate-600 border border-white/5 line-through">
+                  17:00
+                </span>
+                <span class="px-2 py-1.5 rounded-lg text-[10px] font-medium text-center bg-black/40 text-slate-600 border border-white/5 line-through">
+                  17:45
+                </span>
+                <span class="px-2 py-1.5 rounded-lg text-[10px] font-medium text-center bg-black/40 text-slate-600 border border-white/5 line-through">
+                  20:15
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Нижняя панель подтверждения и бронирования -->
+        <form id="booking-form" class="p-4 sm:p-6 rounded-2xl bg-black/70 border border-white/10 space-y-4">
+          
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-white/10">
+            <div>
+              <div class="text-[10px] uppercase font-bold text-orange-400 tracking-wider">Выбранный слот обслуживания</div>
+              <div class="text-base font-bold text-white flex items-center gap-2 flex-wrap mt-0.5">
+                <span id="terminal-selected-bay-name" class="text-white">Пост №1: Экспресс-масло & фильтры</span>
+                <span class="text-slate-500">•</span>
+                <span id="terminal-selected-date-str" class="text-orange-400 font-extrabold">Сегодня (14 окт)</span>
+                <span class="text-slate-500">•</span>
+                <span id="terminal-selected-time-str" class="px-2.5 py-0.5 rounded-md bg-orange-500/20 text-orange-400 border border-orange-500/40 text-xs font-black">16:30</span>
+              </div>
+            </div>
+
+            <!-- Бейдж стоимости/акции -->
+            <div class="flex items-center gap-3">
+              <div class="text-right">
+                <div class="text-[10px] text-slate-400">Работа мастера:</div>
+                <div class="text-emerald-400 font-black text-sm">0 ₽ (Бесплатно)</div>
+              </div>
+              <div class="h-8 w-[1px] bg-white/10 hidden sm:block"></div>
+              <div class="text-right">
+                <div class="text-[10px] text-slate-400">Время на посту:</div>
+                <div id="terminal-selected-duration" class="text-white font-bold text-sm">~25 минут</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Скрытые технические инпуты для формы -->
+          <input type="hidden" id="modal-service-input" value="Экспресс-замена масла">
+          <input type="hidden" id="modal-post-input" value="Пост №1">
+          <input type="hidden" id="modal-time-input" value="16:30">
+
+          <!-- Поля ввода пользователя -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Ваш автомобиль *</label>
+              <input type="text" id="terminal-car-input" required placeholder="Например: Toyota Camry" class="w-full px-4 py-2.5 rounded-xl modern-input text-xs">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Имя *</label>
+              <input type="text" id="terminal-name-input" required placeholder="Как к вам обращаться" class="w-full px-4 py-2.5 rounded-xl modern-input text-xs">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Телефон для SMS-подтверждения *</label>
+              <input type="tel" id="terminal-phone-input" required placeholder="+7 (999) 000-00-00" class="w-full px-4 py-2.5 rounded-xl modern-input text-xs">
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+            <div class="text-[11px] text-slate-400 flex items-center gap-1.5">
+              <i data-lucide="lock" class="w-3.5 h-3.5 text-emerald-400"></i>
+              Слот блокируется за вами на 15 минут без предоплаты
+            </div>
+            <button type="submit" class="promotors-btn-orange w-full sm:w-auto px-8 text-xs font-bold text-center cursor-pointer flex items-center justify-center gap-2">
+              <i data-lucide="check-circle" class="w-4 h-4"></i>
+              Подтвердить бронь слота
+            </button>
+          </div>
+        </form>
+
+        <div id="booking-success" class="hidden text-center py-8 space-y-3 bg-black/60 rounded-2xl border border-emerald-500/30">
+          <div class="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center border border-emerald-500/40">
+            <i data-lucide="check-circle" class="w-9 h-9"></i>
+          </div>
+          <h3 class="text-2xl font-black text-white uppercase font-['Space_Grotesk']">Слот успешно забронирован!</h3>
+          <p class="text-xs text-slate-300 max-w-md mx-auto">
+            Мы закрепили пост за вашим автомобилем. SMS с кодом въезда и схемой проезда отправлена на указанный номер.
+          </p>
+          <div class="pt-2">
+            <button type="button" id="terminal-finish-btn" class="px-6 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold text-white transition-colors cursor-pointer border border-white/10">
+              Закрыть окно
+            </button>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </div>
 

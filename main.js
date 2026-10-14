@@ -511,20 +511,173 @@ function setupBookingModal() {
   const backdrop = document.getElementById('modal-backdrop');
   const form = document.getElementById('booking-form');
   const successBox = document.getElementById('booking-success');
-  const srvInput = document.getElementById('modal-service-input');
+  const finishBtn = document.getElementById('terminal-finish-btn');
   const bookCalcBtn = document.getElementById('calc-book-btn');
 
-  const slotPost = document.getElementById('modal-slot-post');
-  const slotTime = document.getElementById('modal-slot-time');
+  // Terminal UI elements
+  const dateBtns = document.querySelectorAll('.terminal-date-btn');
+  const bayCards = document.querySelectorAll('.terminal-bay-card');
+  const selectedBayNameEl = document.getElementById('terminal-selected-bay-name');
+  const selectedDateStrEl = document.getElementById('terminal-selected-date-str');
+  const selectedTimeStrEl = document.getElementById('terminal-selected-time-str');
+  const selectedDurationEl = document.getElementById('terminal-selected-duration');
 
-  window.openBooking = function (serviceName = 'Экспресс-замена масла', timeEstimate = '25 мин', postStatus = 'Пост №1 (Свободен)') {
+  const srvInput = document.getElementById('modal-service-input');
+  const postInput = document.getElementById('modal-post-input');
+  const timeInput = document.getElementById('modal-time-input');
+  const carInput = document.getElementById('terminal-car-input');
+
+  const BAY_DATA = {
+    '1': {
+      title: 'Пост №1: Экспресс-масло & фильтры',
+      service: 'Экспресс-замена масла',
+      duration: '~25 минут',
+      borderColor: 'border-orange-500',
+      activeColor: 'bg-orange-500',
+    },
+    '2': {
+      title: 'Пост №2: Регламентное ТО & Диагностика',
+      service: 'Регламентное ТО (36 точек)',
+      duration: '~45 минут',
+      borderColor: 'border-blue-500',
+      activeColor: 'bg-blue-500',
+    },
+    '3': {
+      title: 'Пост №3: 3D-Шиномонтаж Hofmann',
+      service: '3D-Шиномонтаж Hofmann',
+      duration: '~35 минут',
+      borderColor: 'border-purple-500',
+      activeColor: 'bg-purple-600',
+    },
+    '4': {
+      title: 'Пост №4: Сезонный сервис & Hunter 3D',
+      service: 'Сезонный сервис & Hunter 3D',
+      duration: '~40 минут',
+      borderColor: 'border-amber-500',
+      activeColor: 'bg-amber-600',
+    }
+  };
+
+  let activeBayId = '1';
+
+  function updateTerminalSummary(bayId, timeVal, dateText) {
+    activeBayId = bayId || activeBayId;
+    const info = BAY_DATA[activeBayId] || BAY_DATA['1'];
+
+    if (selectedBayNameEl) selectedBayNameEl.textContent = info.title;
+    if (selectedDurationEl) selectedDurationEl.textContent = info.duration;
+    if (srvInput) srvInput.value = info.service;
+    if (postInput) postInput.value = `Пост №${activeBayId}`;
+
+    if (timeVal) {
+      if (selectedTimeStrEl) selectedTimeStrEl.textContent = timeVal;
+      if (timeInput) timeInput.value = timeVal;
+    }
+
+    if (dateText && selectedDateStrEl) {
+      selectedDateStrEl.textContent = dateText;
+    }
+
+    // Обновляем видео внутри активного поста (чтобы видео играло гарантированно)
+    bayCards.forEach(card => {
+      const vid = card.querySelector('video');
+      if (card.dataset.bay === activeBayId) {
+        card.classList.remove('border-white/10');
+        card.classList.add(info.borderColor, 'border-2');
+        if (vid && vid.paused) vid.play().catch(() => {});
+      } else {
+        card.classList.remove('border-orange-500', 'border-blue-500', 'border-purple-500', 'border-amber-500', 'border-2');
+        card.classList.add('border-white/10');
+      }
+    });
+  }
+
+  // Переключение дней
+  dateBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      dateBtns.forEach(b => {
+        b.classList.remove('active-date', 'bg-orange-500', 'text-white', 'shadow-md');
+        b.classList.add('bg-white/5', 'text-slate-300');
+      });
+      btn.classList.add('active-date', 'bg-orange-500', 'text-white', 'shadow-md');
+      btn.classList.remove('bg-white/5', 'text-slate-300');
+
+      const rawText = btn.childNodes[0]?.textContent?.trim() || 'Сегодня';
+      updateTerminalSummary(activeBayId, null, rawText);
+    });
+  });
+
+  // Клик по карточке поста
+  bayCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      // Если кликнули не по слоту времени, активируем первый свободный слот поста
+      const clickedSlot = e.target.closest('.bay-time-slot');
+      const bayId = card.dataset.bay;
+      
+      if (!clickedSlot) {
+        const firstFreeSlot = card.querySelector('.bay-time-slot');
+        const timeVal = firstFreeSlot ? firstFreeSlot.dataset.time : '17:00';
+        if (firstFreeSlot) {
+          card.querySelectorAll('.bay-time-slot').forEach(s => s.classList.remove('active-slot', 'bg-orange-500', 'text-white'));
+          firstFreeSlot.classList.add('active-slot', 'bg-orange-500', 'text-white');
+        }
+        updateTerminalSummary(bayId, timeVal);
+      }
+    });
+  });
+
+  // Клик по конкретному слоту времени
+  document.querySelectorAll('.bay-time-slot').forEach(slot => {
+    slot.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const parentCard = slot.closest('.terminal-bay-card');
+      const bayId = parentCard ? parentCard.dataset.bay : '1';
+      const timeVal = slot.dataset.time;
+
+      // Снимаем активность со всех слотов во всех постах
+      document.querySelectorAll('.bay-time-slot').forEach(s => {
+        s.classList.remove('active-slot', 'bg-orange-500', 'text-white', 'shadow');
+        s.classList.add('bg-white/5', 'text-slate-200');
+      });
+
+      // Активируем выбранный
+      slot.classList.remove('bg-white/5', 'text-slate-200');
+      slot.classList.add('active-slot', 'bg-orange-500', 'text-white', 'shadow');
+
+      updateTerminalSummary(bayId, timeVal);
+    });
+  });
+
+  window.openBooking = function (serviceName = 'Экспресс-замена масла', timeEstimate = '25 мин', postStatus = 'Пост №1') {
     if (!modal) return;
-    if (srvInput) srvInput.value = serviceName;
-    if (slotPost) slotPost.textContent = postStatus;
-    if (slotTime) slotTime.textContent = `Время работы: ~${timeEstimate}`;
+    
+    // Подставляем авто из калькулятора если выбрано
+    if (carInput && typeof CAR_DATA !== 'undefined' && currentSelectedCar) {
+      const car = CAR_DATA[currentSelectedCar];
+      carInput.value = `${car.name} (${car.sub})`;
+    }
+
+    // Определяем пост по переданным параметрам
+    let targetBay = '1';
+    if (serviceName.includes('ТО') || serviceName.includes('Диагностика') || postStatus.includes('№2')) {
+      targetBay = '2';
+    } else if (serviceName.includes('Шиномонтаж') || postStatus.includes('№3') || postStatus.includes('№4')) {
+      targetBay = '3';
+    } else if (serviceName.includes('Сезон') || serviceName.includes('Зим') || serviceName.includes('Лет')) {
+      targetBay = '4';
+    }
+
+    updateTerminalSummary(targetBay, null, 'Сегодня (14 окт)');
+
     modal.classList.remove('hidden');
     modal.classList.add('flex');
     document.body.style.overflow = 'hidden';
+
+    // Запускаем видео на всех постах
+    bayCards.forEach(card => {
+      const v = card.querySelector('video');
+      if (v) v.play().catch(() => {});
+    });
   };
 
   function closeModal() {
@@ -532,6 +685,13 @@ function setupBookingModal() {
     modal.classList.add('hidden');
     modal.classList.remove('flex');
     document.body.style.overflow = '';
+    
+    // Ставим видео на паузу при закрытии модалки для экономии ресурсов
+    bayCards.forEach(card => {
+      const v = card.querySelector('video');
+      if (v) v.pause();
+    });
+
     if (successBox && form) {
       setTimeout(() => {
         form.classList.remove('hidden');
@@ -543,15 +703,17 @@ function setupBookingModal() {
 
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
   if (backdrop) backdrop.addEventListener('click', closeModal);
+  if (finishBtn) finishBtn.addEventListener('click', closeModal);
+
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !modal?.classList.contains('hidden')) closeModal();
   });
 
   document.querySelectorAll('.open-modal-trigger').forEach((btn) => {
     btn.addEventListener('click', () => {
-      const srv = btn.dataset.service || 'Быстрая запись на СТО';
-      const timeEst = btn.dataset.time || '30 мин';
-      const postSt = btn.dataset.post || 'Пост свободен';
+      const srv = btn.dataset.service || 'Экспресс-замена масла';
+      const timeEst = btn.dataset.time || '25 мин';
+      const postSt = btn.dataset.post || 'Пост №1';
       window.openBooking(srv, timeEst, postSt);
     });
   });
@@ -560,7 +722,7 @@ function setupBookingModal() {
     bookCalcBtn.addEventListener('click', () => {
       const car = CAR_DATA[currentSelectedCar];
       const total = document.getElementById('calc-total')?.textContent || '';
-      window.openBooking(`Расчет: ${car.name} (${car.sub}) — ${total} (Работа 0 ₽)`, '25 мин', 'Пост №1 (Экспресс-замена масла)');
+      window.openBooking(`Калькулятор: ${car.name} — ${total}`, '25 мин', 'Пост №1 (Экспресс-масло)');
     });
   }
 
@@ -569,7 +731,7 @@ function setupBookingModal() {
       e.preventDefault();
       const submitBtn = form.querySelector('button[type="submit"]');
       const orig = submitBtn.innerHTML;
-      submitBtn.innerHTML = 'Бронирование...';
+      submitBtn.innerHTML = '<span class="inline-flex w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span> Бронирование слота...';
       submitBtn.disabled = true;
 
       setTimeout(() => {
@@ -577,7 +739,7 @@ function setupBookingModal() {
         submitBtn.disabled = false;
         form.classList.add('hidden');
         if (successBox) successBox.classList.remove('hidden');
-      }, 600);
+      }, 700);
     });
   }
 }
