@@ -1549,9 +1549,9 @@
           <!-- ПОСТ №1: Экспресс-масло -->
           <div class="terminal-bay-card active-bay rounded-2xl p-3.5 bg-black/60 border-2 border-orange-500 transition-all duration-300 flex flex-col justify-between group cursor-pointer" data-bay="1" data-service="Экспресс-замена масла" data-time="25 мин">
             <div>
-              <!-- Видео-микролуп поста -->
+              <!-- Видео-микролуп поста (preload="none" чтобы не качать 4 видео при первой загрузке страницы) -->
               <div class="relative aspect-video rounded-xl overflow-hidden bg-black mb-3 border border-white/10">
-                <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <video loop muted playsinline preload="none" poster="/images/services/oil.webp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                   <source src="/videos/bays/bay1-oil.webm" type="video/webm">
                   <source src="/videos/bays/bay1-oil.mp4" type="video/mp4">
                   <img src="/images/services/oil.webp" alt="Пост №1: Замена масла" class="w-full h-full object-cover">
@@ -1611,7 +1611,7 @@
             <div>
               <!-- Видео-микролуп поста -->
               <div class="relative aspect-video rounded-xl overflow-hidden bg-black mb-3 border border-white/10">
-                <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <video loop muted playsinline preload="none" poster="/images/services/maintenance.webp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                   <source src="/videos/bays/bay2-maintenance.webm" type="video/webm">
                   <source src="/videos/bays/bay2-maintenance.mp4" type="video/mp4">
                   <img src="/images/services/maintenance.webp" alt="Пост №2: ТО" class="w-full h-full object-cover">
@@ -1671,7 +1671,7 @@
             <div>
               <!-- Видео-микролуп поста -->
               <div class="relative aspect-video rounded-xl overflow-hidden bg-black mb-3 border border-white/10">
-                <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <video loop muted playsinline preload="none" poster="/images/services/tires.webp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                   <source src="/videos/bays/bay3-tires.webm" type="video/webm">
                   <source src="/videos/bays/bay3-tires.mp4" type="video/mp4">
                   <img src="/images/services/tires.webp" alt="Пост №3: Шиномонтаж" class="w-full h-full object-cover">
@@ -1731,7 +1731,7 @@
             <div>
               <!-- Видео-микролуп поста -->
               <div class="relative aspect-video rounded-xl overflow-hidden bg-black mb-3 border border-white/10">
-                <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <video loop muted playsinline preload="none" poster="/images/services/season.webp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                   <source src="/videos/bays/bay4-season.webm" type="video/webm">
                   <source src="/videos/bays/bay4-season.mp4" type="video/mp4">
                   <img src="/images/services/season.webp" alt="Пост №4: Сезонный" class="w-full h-full object-cover">
