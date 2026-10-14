@@ -1483,13 +1483,13 @@
   </footer>
 
   <!-- Полноценный Интерактивный Терминал Управления Записью (Live Service Bay Terminal) -->
-  <div id="booking-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-2 sm:p-4 md:p-6 overflow-y-auto">
+  <div id="booking-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-2 sm:p-4 md:p-6 overflow-hidden">
     <div id="modal-backdrop" class="fixed inset-0 bg-black/85 backdrop-blur-xl transition-opacity"></div>
     
-    <div class="relative w-full max-w-5xl rounded-3xl glass-card-promotors border border-white/15 shadow-[0_20px_70px_rgba(0,0,0,0.8)] z-10 bg-[#090c13] my-auto overflow-hidden flex flex-col max-h-[95vh]">
+    <div class="relative w-full max-w-5xl rounded-3xl glass-card-promotors border border-white/15 shadow-[0_20px_70px_rgba(0,0,0,0.8)] z-10 bg-[#090c13] my-auto overflow-hidden flex flex-col h-[94vh] max-h-[94vh]">
       
       <!-- Шапка терминала -->
-      <div class="p-5 sm:p-7 border-b border-white/10 flex items-start justify-between gap-4 bg-gradient-to-r from-orange-500/10 via-transparent to-transparent shrink-0">
+      <div class="p-4 sm:p-6 border-b border-white/10 flex items-start justify-between gap-4 bg-gradient-to-r from-orange-500/10 via-transparent to-transparent shrink-0">
         <div>
           <div class="flex items-center gap-2 text-[10px] uppercase font-bold tracking-widest text-orange-400">
             <span class="inline-flex w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -1509,7 +1509,7 @@
       </div>
 
       <!-- Лента дат (Календарный переключатель) -->
-      <div class="px-5 sm:px-7 py-3 bg-black/40 border-b border-white/5 flex items-center justify-between gap-3 overflow-x-auto no-scrollbar shrink-0">
+      <div class="px-4 sm:px-6 py-2.5 bg-black/40 border-b border-white/5 flex items-center justify-between gap-3 overflow-x-auto no-scrollbar shrink-0">
         <div class="flex items-center gap-2 shrink-0 text-xs font-semibold text-slate-400 mr-2">
           <i data-lucide="calendar" class="w-4 h-4 text-orange-400"></i> Дата:
         </div>
@@ -1533,8 +1533,8 @@
         </div>
       </div>
 
-      <!-- Основная зона: Сетка 4-х рабочих постов с живыми микролупами -->
-      <div class="p-4 sm:p-7 overflow-y-auto space-y-6">
+      <!-- Основная зона: Сетка 4-х рабочих постов с живыми микролупами (Плавный вертикальный скролл) -->
+      <div class="p-4 sm:p-6 overflow-y-auto overscroll-contain flex-1 space-y-6">
         
         <!-- Заголовок сетки постов -->
         <div class="flex items-center justify-between">

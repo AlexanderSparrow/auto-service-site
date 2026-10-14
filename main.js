@@ -558,7 +558,218 @@ function setupBookingModal() {
     }
   };
 
+  // Расписание слотов по дням и постам
+  const SLOTS_SCHEDULE = {
+    today: {
+      dateText: 'Сегодня (14 окт)',
+      bays: {
+        '1': {
+          free: ['16:30', '17:00', '18:00', '19:15'],
+          busy: ['17:30', '18:30'],
+          status: 'ПОСТ СВОБОДЕН',
+          statusColor: 'text-emerald-400',
+          statusBadge: 'border-emerald-500/40',
+        },
+        '2': {
+          free: ['17:15', '18:15', '19:30'],
+          busy: ['16:00', '16:45', '20:00'],
+          status: 'В РАБОТЕ (до 16:50)',
+          statusColor: 'text-blue-400',
+          statusBadge: 'border-blue-500/40',
+        },
+        '3': {
+          free: ['16:45', '17:45', '18:30', '19:15'],
+          busy: ['16:00', '17:15'],
+          status: 'ПОСТ СВОБОДЕН',
+          statusColor: 'text-purple-400',
+          statusBadge: 'border-purple-500/40',
+        },
+        '4': {
+          free: ['18:45', '19:45'],
+          busy: ['16:15', '17:00', '17:45', '20:15'],
+          status: 'СКЛАД И ПОСТ АКТИВНЫ',
+          statusColor: 'text-amber-400',
+          statusBadge: 'border-amber-500/40',
+        }
+      }
+    },
+    tomorrow: {
+      dateText: 'Завтра (15 окт)',
+      bays: {
+        '1': {
+          free: ['09:00', '10:30', '12:00', '14:30', '16:00', '17:30', '19:00'],
+          busy: ['11:15', '13:00'],
+          status: 'ДОСТУПНО 7 СЛОТОВ',
+          statusColor: 'text-emerald-400',
+          statusBadge: 'border-emerald-500/40',
+        },
+        '2': {
+          free: ['09:30', '11:00', '13:30', '15:15', '17:00', '18:45'],
+          busy: ['12:15', '14:30'],
+          status: 'ДОСТУПНО 6 СЛОТОВ',
+          statusColor: 'text-blue-400',
+          statusBadge: 'border-blue-500/40',
+        },
+        '3': {
+          free: ['10:00', '11:30', '13:00', '14:45', '16:30', '18:00', '19:30'],
+          busy: ['09:15'],
+          status: 'ДОСТУПНО 7 СЛОТОВ',
+          statusColor: 'text-purple-400',
+          statusBadge: 'border-purple-500/40',
+        },
+        '4': {
+          free: ['10:15', '12:00', '14:00', '16:00', '18:00'],
+          busy: ['11:00', '15:00'],
+          status: 'ДОСТУПНО 5 СЛОТОВ',
+          statusColor: 'text-amber-400',
+          statusBadge: 'border-amber-500/40',
+        }
+      }
+    },
+    day3: {
+      dateText: 'Пятница (16 окт)',
+      bays: {
+        '1': {
+          free: ['10:00', '11:30', '13:30', '15:00', '17:00', '18:30'],
+          busy: ['09:00', '12:00', '16:30'],
+          status: 'ДОСТУПНО 6 СЛОТОВ',
+          statusColor: 'text-emerald-400',
+          statusBadge: 'border-emerald-500/40',
+        },
+        '2': {
+          free: ['10:45', '12:30', '14:15', '16:45', '18:15'],
+          busy: ['09:15', '11:00'],
+          status: 'ДОСТУПНО 5 СЛОТОВ',
+          statusColor: 'text-blue-400',
+          statusBadge: 'border-blue-500/40',
+        },
+        '3': {
+          free: ['09:45', '11:15', '13:45', '15:30', '17:15', '19:00'],
+          busy: ['12:30'],
+          status: 'ДОСТУПНО 6 СЛОТОВ',
+          statusColor: 'text-purple-400',
+          statusBadge: 'border-purple-500/40',
+        },
+        '4': {
+          free: ['11:00', '13:00', '15:00', '17:30'],
+          busy: ['10:00', '12:00', '14:00'],
+          status: 'ДОСТУПНО 4 СЛОТА',
+          statusColor: 'text-amber-400',
+          statusBadge: 'border-amber-500/40',
+        }
+      }
+    },
+    day4: {
+      dateText: 'Суббота (17 окт)',
+      bays: {
+        '1': {
+          free: ['14:00', '17:30'],
+          busy: ['10:00', '11:30', '13:00', '15:30', '16:30', '18:30'],
+          status: 'ВЫСОКИЙ СПРОС (2 слота)',
+          statusColor: 'text-orange-400',
+          statusBadge: 'border-orange-500/40',
+        },
+        '2': {
+          free: ['11:45', '15:15'],
+          busy: ['09:30', '10:30', '13:00', '14:00', '16:30', '18:00'],
+          status: 'ВЫСОКИЙ СПРОС (2 слота)',
+          statusColor: 'text-orange-400',
+          statusBadge: 'border-orange-500/40',
+        },
+        '3': {
+          free: ['12:00', '16:45', '19:00'],
+          busy: ['09:00', '10:30', '13:30', '15:00', '18:00'],
+          status: 'ОСТАЛОСЬ 3 СЛОТА',
+          statusColor: 'text-purple-400',
+          statusBadge: 'border-purple-500/40',
+        },
+        '4': {
+          free: ['15:30'],
+          busy: ['10:00', '11:30', '13:00', '14:15', '17:00', '18:30'],
+          status: 'ПОСЛЕДНИЙ СЛОТ',
+          statusColor: 'text-red-400',
+          statusBadge: 'border-red-500/40',
+        }
+      }
+    }
+  };
+
+  let currentDateKey = 'today';
   let activeBayId = '1';
+
+  function renderSlotsForCurrentDate() {
+    const dayData = SLOTS_SCHEDULE[currentDateKey] || SLOTS_SCHEDULE.today;
+
+    bayCards.forEach(card => {
+      const bayId = card.dataset.bay;
+      const baySlots = dayData.bays[bayId];
+      if (!baySlots) return;
+
+      // Обновляем бейдж статуса в превью
+      const statusBadgeEl = card.querySelector('.absolute.top-2.left-2');
+      if (statusBadgeEl) {
+        statusBadgeEl.innerHTML = `
+          <span class="w-1.5 h-1.5 rounded-full ${baySlots.free.length > 2 ? 'bg-emerald-400 animate-pulse' : 'bg-orange-400'}"></span>
+          ${baySlots.status}
+        `;
+      }
+
+      // Перерисовываем контейнер слотов
+      const container = card.querySelector('.bay-slots-container');
+      if (container) {
+        let html = '';
+        baySlots.free.forEach((time, idx) => {
+          const isSelected = (bayId === activeBayId && idx === 0);
+          html += `
+            <button type="button" class="bay-time-slot ${isSelected ? 'active-slot bg-orange-500 text-white shadow' : 'bg-white/5 hover:bg-white/15 text-slate-200'} px-2 py-1.5 rounded-lg text-xs font-bold text-center transition-all cursor-pointer border border-white/5" data-time="${time}">
+              ${time}
+            </button>
+          `;
+        });
+        baySlots.busy.forEach(time => {
+          html += `
+            <span class="px-2 py-1.5 rounded-lg text-[10px] font-medium text-center bg-black/40 text-slate-600 border border-white/5 line-through">
+              ${time}
+            </span>
+          `;
+        });
+        container.innerHTML = html;
+      }
+    });
+
+    // Навешиваем обработчики на новые слоты
+    attachSlotListeners();
+
+    // Автоматически выбираем первый свободный слот активного поста
+    const activeCard = document.querySelector(`.terminal-bay-card[data-bay="${activeBayId}"]`);
+    const firstFreeSlot = activeCard ? activeCard.querySelector('.bay-time-slot') : null;
+    const timeVal = firstFreeSlot ? firstFreeSlot.dataset.time : '16:30';
+    
+    updateTerminalSummary(activeBayId, timeVal, dayData.dateText);
+  }
+
+  function attachSlotListeners() {
+    document.querySelectorAll('.bay-time-slot').forEach(slot => {
+      slot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const parentCard = slot.closest('.terminal-bay-card');
+        const bayId = parentCard ? parentCard.dataset.bay : '1';
+        const timeVal = slot.dataset.time;
+
+        // Снимаем активность со всех слотов во всех постах
+        document.querySelectorAll('.bay-time-slot').forEach(s => {
+          s.classList.remove('active-slot', 'bg-orange-500', 'text-white', 'shadow');
+          s.classList.add('bg-white/5', 'text-slate-200');
+        });
+
+        // Активируем выбранный
+        slot.classList.remove('bg-white/5', 'text-slate-200');
+        slot.classList.add('active-slot', 'bg-orange-500', 'text-white', 'shadow');
+
+        updateTerminalSummary(bayId, timeVal);
+      });
+    });
+  }
 
   function updateTerminalSummary(bayId, timeVal, dateText) {
     activeBayId = bayId || activeBayId;
@@ -578,7 +789,7 @@ function setupBookingModal() {
       selectedDateStrEl.textContent = dateText;
     }
 
-    // Обновляем видео внутри активного поста (чтобы видео играло гарантированно)
+    // Обновляем видео внутри активного поста
     bayCards.forEach(card => {
       const vid = card.querySelector('video');
       if (card.dataset.bay === activeBayId) {
@@ -602,15 +813,14 @@ function setupBookingModal() {
       btn.classList.add('active-date', 'bg-orange-500', 'text-white', 'shadow-md');
       btn.classList.remove('bg-white/5', 'text-slate-300');
 
-      const rawText = btn.childNodes[0]?.textContent?.trim() || 'Сегодня';
-      updateTerminalSummary(activeBayId, null, rawText);
+      currentDateKey = btn.dataset.date || 'today';
+      renderSlotsForCurrentDate();
     });
   });
 
   // Клик по карточке поста
   bayCards.forEach(card => {
     card.addEventListener('click', (e) => {
-      // Если кликнули не по слоту времени, активируем первый свободный слот поста
       const clickedSlot = e.target.closest('.bay-time-slot');
       const bayId = card.dataset.bay;
       
@@ -618,35 +828,16 @@ function setupBookingModal() {
         const firstFreeSlot = card.querySelector('.bay-time-slot');
         const timeVal = firstFreeSlot ? firstFreeSlot.dataset.time : '17:00';
         if (firstFreeSlot) {
-          card.querySelectorAll('.bay-time-slot').forEach(s => s.classList.remove('active-slot', 'bg-orange-500', 'text-white'));
-          firstFreeSlot.classList.add('active-slot', 'bg-orange-500', 'text-white');
+          document.querySelectorAll('.bay-time-slot').forEach(s => s.classList.remove('active-slot', 'bg-orange-500', 'text-white', 'shadow'));
+          firstFreeSlot.classList.add('active-slot', 'bg-orange-500', 'text-white', 'shadow');
         }
         updateTerminalSummary(bayId, timeVal);
       }
     });
   });
 
-  // Клик по конкретному слоту времени
-  document.querySelectorAll('.bay-time-slot').forEach(slot => {
-    slot.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const parentCard = slot.closest('.terminal-bay-card');
-      const bayId = parentCard ? parentCard.dataset.bay : '1';
-      const timeVal = slot.dataset.time;
-
-      // Снимаем активность со всех слотов во всех постах
-      document.querySelectorAll('.bay-time-slot').forEach(s => {
-        s.classList.remove('active-slot', 'bg-orange-500', 'text-white', 'shadow');
-        s.classList.add('bg-white/5', 'text-slate-200');
-      });
-
-      // Активируем выбранный
-      slot.classList.remove('bg-white/5', 'text-slate-200');
-      slot.classList.add('active-slot', 'bg-orange-500', 'text-white', 'shadow');
-
-      updateTerminalSummary(bayId, timeVal);
-    });
-  });
+  // Первичная инициализация слушателей слотов
+  attachSlotListeners();
 
   window.openBooking = function (serviceName = 'Экспресс-замена масла', timeEstimate = '25 мин', postStatus = 'Пост №1') {
     if (!modal) return;
